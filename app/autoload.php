@@ -16,5 +16,6 @@ require __DIR__.'/functions.php';
 // Get the global config array
 $config = require __DIR__.'/config.php';
 
+
 // Setup the database connection
-$pdo = new PDO($config{'database_path'});
+$pdo = new PDO($config['database_path']);
