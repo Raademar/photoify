@@ -1,5 +1,7 @@
 const photoURI = '/app/posts/index.php'
 const photoHolder = document.querySelector('.photo-container')
+const searchButton = document.querySelector('.search-button')
+const searchModal = document.querySelector('.search-modal-holder')
 
 const getAllPosts = () => {
 	fetch(photoURI)
@@ -26,3 +28,21 @@ const renderPhotos = (posts) => {
 }
 
 getAllPosts()
+
+const toggleSearchModal = () => {
+	searchModal.classList.remove('is-hidden')
+	searchModal.classList.remove('is-visuallyHidden')
+	searchModal.style.zIndex = '9999'
+}
+
+window.onclick = function(event) {
+	if (event.target == searchModal) {
+		searchModal.classList.add('is-hidden')
+		searchModal.classList.add('is-visuallyHidden')
+		searchModal.style.zIndex = '0'
+	}
+}
+
+searchButton.addEventListener('click', () => {
+	toggleSearchModal()
+})
