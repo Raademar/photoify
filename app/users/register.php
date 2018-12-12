@@ -11,13 +11,24 @@ if(isset($_POST['name'], $_POST['username'], $_POST['email'], $_POST['password']
 
 	if($password === $repeatPassword) {
 		$password = password_hash($password, PASSWORD_DEFAULT);
-		$statement = $pdo->prepare('INSERT INTO users (name, username, email, password) 
-			VALUES (:name, :username, :email, :password)');
-		$statement->bindParam(':name', $name, PDO::PARAM_STR);
-		$statement->bindParam(':username', $username, PDO::PARAM_STR);
-		$statement->bindParam(':email', $email, PDO::PARAM_STR);
-		$statement->bindParam(':password', $password, PDO::PARAM_STR);
-		$statement->execute();
+	} else {
+		echo "Passwords do not match!";
 	}
-
+	$statement = $pdo->prepare('INSERT INTO users (name, username, email, password) 
+	VALUES (:name, :username, :email, :password)');
+	$statement->bindParam(':name', $name, PDO::PARAM_STR);
+	$statement->bindParam(':username', $username, PDO::PARAM_STR);
+	$statement->bindParam(':email', $email, PDO::PARAM_STR);
+	$statement->bindParam(':password', $password, PDO::PARAM_STR);
+	$statement->execute();
+	
+	if(!$statement) {
+		die(var_dump($pdo->errorInfo()));
+	}
+	$_SESSION['user_authenticated'] = [
+		'name' => $name,
+		'username' => $username,
+		'email' => $username,
+	];
+	redirect('/');
 }

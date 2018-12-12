@@ -13,3 +13,7 @@ if (!function_exists('redirect')) {
     exit;
   }
 }
+
+function contains($needle, $haystack) {
+    return strpos($haystack, $needle) !== false;
+}
