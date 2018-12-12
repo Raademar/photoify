@@ -16,7 +16,7 @@ require __DIR__.'/views/header.php';
 		</div>
 	</form>
 	<div class="alt-link-container">
-		<a href="/login.php">Login</a>
+		<a href="/login.php" class="login-register-swap">Login</a>
 	</div>
 <!-- outer-container ends in footer. -->
 
