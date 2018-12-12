@@ -13,7 +13,7 @@ require __DIR__.'/views/header.php';
 			<div class="alt-link-container">
 		</div>
 	</form>
-		<a href="/register.php">Register</a>
+	<a href="/register.php" class="login-register-swap">Register</a>
 	</div>
 	<!-- outer-container ends in footer. -->
 
