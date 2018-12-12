@@ -5,6 +5,7 @@ require __DIR__.'/views/header.php';
 if(!isset($_SESSION['user_authenticated'])) {
 	redirect('/login.php');
 }
+// die(var_dump($_SESSION['user_authenticated']));
 ?>
 
 <div class="outer-container">
