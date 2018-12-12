@@ -18,6 +18,7 @@ const renderPhotos = (posts) => {
 		img.src = item.image
 		photoHolder.appendChild(img)
 	})
+	// Assign a descending z-index to each rendered image to display them in order.
 	const rederedImages = [...document.querySelectorAll('img')]
 	rederedImages.map(x => {
 		x.style.zIndex = --postLength
