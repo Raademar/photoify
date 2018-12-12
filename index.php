@@ -2,7 +2,9 @@
 declare(strict_types=1);
 require __DIR__.'/views/header.php';
 
-
+if(!isset($_SESSION['user_authenticated'])) {
+	redirect('/login.php');
+}
 ?>
 
 <div class="outer-container">
@@ -17,12 +19,7 @@ require __DIR__.'/views/header.php';
 		</div>
 	</div>
 	<div class="photo-container"></div>
-	<div class="button-nav-container">
-		<a href="profile.php"><button class="navigation-button"><i class="fas fa-user fa-2x"></i></button></a>
-		<a href="new-post.php"><button class="floating-action-button"><i class="fas fa-plus fa-2x"></i></button></a>
-		<button class="navigation-button search-button"><i class="fas fa-search fa-2x"></i></button>
-	</div>
-</div>
+	<!-- outer-container ends in footer. -->
 
 <?php 
 require __DIR__.'/views/footer.php';
