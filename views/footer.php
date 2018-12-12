@@ -18,6 +18,6 @@ declare(strict_types=1);
 <?php else: ?>
 </div>
 <?php endif; ?>
-	<script src="assets/scripts/main.js"></script>
+	<script src="assets/scripts/<?= contains('/index.php',$_SERVER['SCRIPT_NAME'])? 'main.js' : 'post.js'; ?>"></script>
 </body>
 </html>

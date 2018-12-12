@@ -3,6 +3,7 @@ const photoHolder = document.querySelector('.photo-container')
 const searchButton = document.querySelector('.search-button')
 const searchModal = document.querySelector('.search-modal-holder')
 
+
 const getAllPosts = () => {
 	fetch(photoURI)
 		.then(res => {
@@ -27,8 +28,6 @@ const renderPhotos = (posts) => {
 	})
 }
 
-getAllPosts()
-
 const toggleSearchModal = () => {
 	searchModal.classList.remove('is-hidden')
 	searchModal.classList.remove('is-visuallyHidden')
@@ -46,3 +45,5 @@ window.onclick = function(event) {
 searchButton.addEventListener('click', () => {
 	toggleSearchModal()
 })
+
+getAllPosts()

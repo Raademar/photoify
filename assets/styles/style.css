@@ -236,6 +236,9 @@ a {
 	transition: .2s ease-in-out all;
 	margin-bottom: 20px;
 }
+input[type="file"] {
+	margin-top: 20px;
+}
 textarea  {
 	resize: none;
 	padding-top: 30px;
@@ -248,5 +251,10 @@ textarea  {
 }
 .posts-form-field:active {
 	outline: none;
+}
+.preview-image img {
+	height: 200px;
+	width: 100%;
+	background: white;
 }
 /* *************** */
