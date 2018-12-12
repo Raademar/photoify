@@ -1,3 +1,33 @@
-img {
-  max-width: 100px;
+body {
+	margin: 0;
+	padding: 0;
+}
+.outer-container {
+	width: 100vw;
+	height: 100%;
+	min-height: 100vh;
+	background: rgb(20,20,20);
+	background: radial-gradient(circle, rgba(20,20,20,1) 0%, rgba(5,5,5,1) 100%);
+}
+.photo-container {
+	max-width: 355px;
+	max-height: 500px;
+	position: relative;
+}
+.photo-container img {
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+	width: 355px;
+	height: 500px;
+	position: absolute;
+	top: 30px;
+	left: 10px;
+	display: flex;
+	justify-content: center;
+	border-radius: 10px;
+}
+.photo-container img:nth-child(2) {
+	top: 45px;
+}
+.photo-container img:nth-child(3) {
+	top: 60px;
 }
