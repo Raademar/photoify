@@ -16,6 +16,9 @@ const getAllPosts = () => {
 
 const renderPhotos = (posts) => {
 	let postLength = posts.length
+	if(postLength === 0) {
+		photoHolder.innerHTML = `<h3>No photos to display :(</h3>`
+	}
 	posts.forEach(item => {
 		let img = document.createElement('img')
 		img.src = item.image

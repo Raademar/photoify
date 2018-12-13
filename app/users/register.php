@@ -25,10 +25,17 @@ if(isset($_POST['name'], $_POST['username'], $_POST['email'], $_POST['password']
 	if(!$statement) {
 		die(var_dump($pdo->errorInfo()));
 	}
-	$_SESSION['user_authenticated'] = [
-		'name' => $name,
-		'username' => $username,
-		'email' => $username,
-	];
+
+	$statement = $pdo->prepare('SELECT * FROM users WHERE email = :email');
+	$statement->bindParam(':email', $email, PDO::PARAM_STR);
+	$statement->execute();
+	$user = $statement->fetch(PDO::FETCH_ASSOC);
+	
+	if(!$user) {
+		die(var_dump($user->errorInfo()));
+	}
+
+	$_SESSION['user_authenticated'] = $user;
+
 	redirect('/');
 }

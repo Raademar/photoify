@@ -2,7 +2,6 @@
 Instagram clone, school project @ Yrgo
 
 ## TODO
-* Create posts
 * Upload files
 * Update posts
 * Delete posts
@@ -18,6 +17,7 @@ Instagram clone, school project @ Yrgo
 * General styling of app
 
 ## DONE
-~~Register~~
-~~Login~~
-~~Logout~~
+* ~~Register~~
+* ~~Login~~
+* ~~Logout~~
+* ~~Create posts~~
