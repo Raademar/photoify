@@ -17,6 +17,9 @@ a {
 	min-height: 100vh;
 	background: rgb(20,20,20);
 	background: radial-gradient(circle, rgba(20,20,20,1) 0%, rgba(5,5,5,1) 100%);
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
 }
 .photo-container {
 	max-width: 355px;
@@ -252,9 +255,12 @@ textarea  {
 .posts-form-field:active {
 	outline: none;
 }
+.preview-image {
+	height: 200px;
+	width: 100%;
+}
 .preview-image img {
 	height: 200px;
 	width: 100%;
-	background: white;
 }
 /* *************** */

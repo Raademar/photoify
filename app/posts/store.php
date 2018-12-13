@@ -2,9 +2,9 @@
 declare(strict_types=1);
 require __DIR__.'/../autoload.php';
 
-if(isset($_FILES['image'], $_POST['title'])) {
+if(isset($_FILES['image'])) {
   $image = $_FILES['image'];
-  $title = $_POST['title'];
+	$desc = trim(filter_var($_POST['description'], FILTER_SANITIZE_STRING)) ?? '';
   $errors = [];
 
   if($image['size'] >= 3145728) {
@@ -23,8 +23,22 @@ if(isset($_FILES['image'], $_POST['title'])) {
     mkdir(__DIR__ .'/../uploads/' . $_SESSION['user_authenticated']['id'], 0777, true);
   }
   $destination = '/../uploads/' . $_SESSION['user_authenticated']['id'] . '/' . time() . '-' . $image['name'];
-  move_uploaded_file($image['tmp_name'], __DIR__.$destination);
+	move_uploaded_file($image['tmp_name'], __DIR__.$destination);
 
+	// Set the $destination variable to be stored in the DB.
+	$destination = '/app/uploads/' . $_SESSION['user_authenticated']['id'] . '/' . time() . '-' . $image['name'];
+	
+	$statement = $pdo->prepare('INSERT INTO posts (user_id, description, tags, image) 
+		VALUES (:user_id, :description, :tags, :image)');
+	$statement->bindParam(':user_id', $_SESSION['user_authenticated']['id'], PDO::PARAM_INT);
+	$statement->bindParam(':description', $desc, PDO::PARAM_STR);
+	$statement->bindParam(':tags', $tags, PDO::PARAM_STR);
+	$statement->bindParam(':image', $destination, PDO::PARAM_STR);
+	$statement->execute();
+	
+	if(!$pdo){
+		die(var_dump($statement->errorInfo()));
+	}
 
 }
 

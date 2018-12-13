@@ -9,8 +9,8 @@ require __DIR__.'/views/header.php';
 		<div class="posts-input-container">
 			<div class="preview-image"></div>
 			<input type="file" name="image" id="image" class="file-upload">
-			<input type="text" name="title" id="title" class="posts-form-field" placeholder="Username or email">
-			<textarea id="password" class="posts-form-field" placeholder="Describe your photo.."></textarea>
+			<!-- <input type="text" name="title" id="title" class="posts-form-field" placeholder="Title.."> -->
+			<textarea name="description" id="description" class="posts-form-field" placeholder="Describe your photo.."></textarea>
 			<button type="submit" class="fullsize-button submit-posts-button">Share photo</button>
 		</div>
 	</form>
