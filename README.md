@@ -15,8 +15,9 @@ Instagram clone, school project @ Yrgo
 * Set up restrictions in db (limit size of profile desc) Apply these on client as well.
 * Separate the setting of profile image from other profile setting (or come up with solution).
 
-## DOING
 
+## DOING
+* User seems to get lost after posts has been made, look into this.
 
 ## DONE
 * ~~Register~~
