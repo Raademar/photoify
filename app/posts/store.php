@@ -19,8 +19,8 @@ if(isset($_FILES['image'])) {
   }
   
   // Here we check if the user already have a folder for uploads, if not, create one.
-  if (!file_exists(__DIR__ .'/../uploads/' . $_SESSION['user_authenticated']['id'])) {
-    mkdir(__DIR__ .'/../uploads/' . $_SESSION['user_authenticated']['id'], 0777, true);
+  if (!file_exists(__DIR__ .'/../uploads/' . $_SESSION['user_authenticated']['id'] . '/posts/')) {
+    mkdir(__DIR__ .'/../uploads/' . $_SESSION['user_authenticated']['id'] . '/posts/', 0777, true);
   }
   $destination = '/../uploads/' . $_SESSION['user_authenticated']['id']  . '/posts/' . time() . '-' . $image['name'];
 	move_uploaded_file($image['tmp_name'], __DIR__.$destination);
@@ -42,4 +42,4 @@ if(isset($_FILES['image'])) {
 
 }
 
-redirect('/');
+redirect('/index.php');
