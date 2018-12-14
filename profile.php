@@ -10,8 +10,9 @@ if(!isset($_SESSION['user_authenticated'])) {
 
 
 <div class="outer-container">
-<form action="/app/users/profile.php" method="POST" enctype="multipart/form-data">
-		<div class="profile-input-container">
+	<!-- Modal for editing profile settings. -->
+	<form action="/app/users/profile.php" method="POST" enctype="multipart/form-data" class="profile-modal-holder is-hidden is-visuallyHidden">
+		<div class="profile-input-container profile-modal-content">
 			<input type="text" name="name" id="name" class="profile-form-field" placeholder="Your name..">
 			<input type="text" name="username" id="username" class="profile-form-field" placeholder="Your username..">
 			<input type="file" name="image" id="image" class="file-upload">
@@ -20,6 +21,14 @@ if(!isset($_SESSION['user_authenticated'])) {
 			<button type="submit" class="fullsize-button submit-profile-button">Update profile</button>
 		</div>
 	</form>
+	<!-- End of modal -->
+	<!-- User profile -->
+	<div class="profile-container">
+		<img src="" alt="User profile photo." class="profile-image">
+		<h2 class="active-user">No active user.</h2> 
+		<h5 class="active-user-description toggle-description">No active user.</h5>
+		<div class="profile-photo-gallery"></div>
+	</div>
 	<a href="/app/users/logout.php" class="logout-button">Logout</a>
 <!-- outer-container ends in footer. -->
 <?php 

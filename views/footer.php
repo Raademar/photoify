@@ -19,6 +19,7 @@ declare(strict_types=1);
 </div>
 <?php endif; ?>
 	<script src="assets/scripts/<?= contains('/index.php',$_SERVER['SCRIPT_NAME'])? 'main.js' : 'post.js'; ?>"></script>
+	<script src="<?= contains('/profile.php',$_SERVER['SCRIPT_NAME'])? 'assets/scripts/user.js' : ''; ?>"></script>
 	<!-- <script>
 	if ('serviceWorker' in navigator) {
 		window.addEventListener('load', function() {
