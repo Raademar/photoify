@@ -13,6 +13,7 @@ Instagram clone, school project @ Yrgo
 * Database setup completed
 * General styling of app
 * Set up restrictions in db (limit size of profile desc) Apply these on client as well.
+* Separate the setting of profile image from other profile setting (or come up with solution).
 
 ## DOING
 

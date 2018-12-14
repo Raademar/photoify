@@ -2,13 +2,18 @@
 declare(strict_types=1);
 require __DIR__.'/../autoload.php';
 
+$id = (int) $_SESSION['user_authenticated']['id'];
+$statement = $pdo->prepare('SELECT * FROM users WHERE id = :user_id');
+$statement->bindParam(':user_id', $id, PDO::PARAM_INT);
+$statement->execute();
+$user = $statement->fetch(PDO::FETCH_ASSOC);
+
 if(isset($_POST['password'])) {
-  $name = trim(filter_var($_POST['name'], FILTER_SANITIZE_STRING));
-  $username = trim(filter_var($_POST['username'] , FILTER_SANITIZE_STRING));
-  $image = $_FILES['image'];
-  $desc = trim(filter_var($_POST['description'], FILTER_SANITIZE_STRING));
+  $name = ($_POST['name']) ? trim(filter_var($_POST['name'], FILTER_SANITIZE_STRING)) : $user['name'];
+  $username = ($_POST['username']) ? trim(filter_var($_POST['username'] , FILTER_SANITIZE_STRING)) : $user['username'];
+  $image = ($_FILES['image']) ? $_FILES['image'] : $user['profile_image'];
+  $desc = ($_POST['description']) ? trim(filter_var($_POST['description'], FILTER_SANITIZE_STRING)) : $user['description'];
   $password = $_POST['password'];
-  $id = (int) $_SESSION['user_authenticated']['id'];
   $errors = [];
 
   if($image['size'] >= 3145728) {
