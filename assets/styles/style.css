@@ -46,7 +46,6 @@ a {
 	top: 60px;
 }
 
-
 /*  BUTTON STYLES  */
 .button-nav-container {
 	display: flex;
@@ -74,7 +73,7 @@ a {
 	color: #fff;
 	border: none;
 	border-radius: 10px;
-	font-size: 1.5rem;
+	font-size: 1.1rem;
 }
 .floating-action-button {
 	width: 60px;
@@ -141,7 +140,6 @@ a {
 	border: 1px solid white;
 	background: transparent;
 	padding-left: 24px;
-	font-size: 1.1rem;
 	color: #fff;
 	transition: .2s ease-in-out all;
 }
@@ -168,7 +166,6 @@ a {
 	border: 1px solid white;
 	background: transparent;
 	padding-left: 24px;
-	font-size: 1.1rem;
 	color: #fff;
 	transition: .2s ease-in-out all;
 }
@@ -201,7 +198,7 @@ a {
 	border: 1px solid white;
 	background: transparent;
 	padding-left: 24px;
-	font-size: 1.1rem;
+	
 	color: #fff;
 	transition: .2s ease-in-out all;
 	margin-bottom: 20px;
@@ -236,7 +233,7 @@ a {
 	border: 1px solid white;
 	background: transparent;
 	padding-left: 24px;
-	font-size: 1.1rem;
+	
 	color: #fff;
 	transition: .2s ease-in-out all;
 	margin-bottom: 20px;
@@ -247,14 +244,54 @@ input[type="file"] {
 textarea  {
 	resize: none;
 	padding-top: 30px;
-	font-size: 1.1rem;
-	color:red;
+	font-family: inherit;
+	font-size: inherit;
 }
 .posts-form-field:focus {
 	outline: none;
 	border: 1px solid #FFBE0B;
 }
 .posts-form-field:active {
+	outline: none;
+}
+.preview-image {
+	height: 200px;
+	width: 100%;
+}
+.preview-image img {
+	height: 200px;
+	width: 100%;
+}
+/* *************** */
+/* profile STYLES */
+
+.profile-input-container {
+	height: 80vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.profile-form-field {
+	height: 60px;
+	width: 260px;
+	border-radius: 10px;
+	border: 1px solid white;
+	background: transparent;
+	padding-left: 24px;
+
+	color: #fff;
+	transition: .2s ease-in-out all;
+	margin-bottom: 20px;
+}
+input[type="file"] {
+	margin-top: 20px;
+}
+.profile-form-field:focus {
+	outline: none;
+	border: 1px solid #FFBE0B;
+}
+.profile-form-field:active {
 	outline: none;
 }
 .preview-image {

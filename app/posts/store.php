@@ -22,11 +22,11 @@ if(isset($_FILES['image'])) {
   if (!file_exists(__DIR__ .'/../uploads/' . $_SESSION['user_authenticated']['id'])) {
     mkdir(__DIR__ .'/../uploads/' . $_SESSION['user_authenticated']['id'], 0777, true);
   }
-  $destination = '/../uploads/' . $_SESSION['user_authenticated']['id'] . '/' . time() . '-' . $image['name'];
+  $destination = '/../uploads/' . $_SESSION['user_authenticated']['id']  . '/posts/' . time() . '-' . $image['name'];
 	move_uploaded_file($image['tmp_name'], __DIR__.$destination);
 
 	// Set the $destination variable to be stored in the DB.
-	$destination = '/app/uploads/' . $_SESSION['user_authenticated']['id'] . '/' . time() . '-' . $image['name'];
+	$destination = '/app/uploads/' . $_SESSION['user_authenticated']['id'] . '/posts/' . time() . '-' . $image['name'];
 	
 	$statement = $pdo->prepare('INSERT INTO posts (user_id, description, tags, image) 
 		VALUES (:user_id, :description, :tags, :image)');
@@ -36,7 +36,7 @@ if(isset($_FILES['image'])) {
 	$statement->bindParam(':image', $destination, PDO::PARAM_STR);
 	$statement->execute();
 	
-	if(!$pdo){
+	if(!$statement){
 		die(var_dump($statement->errorInfo()));
 	}
 
