@@ -2,7 +2,6 @@
 Instagram clone, school project @ Yrgo
 
 ## TODO
-* Update posts
 * Delete posts
 * Like posts
 * Comment on posts
@@ -17,6 +16,7 @@ Instagram clone, school project @ Yrgo
 
 
 ## DOING
+* Update posts
 * User seems to get lost after posts has been made, look into this. (Only on demo mobile via Ngrok?)
 
 ## DONE
