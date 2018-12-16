@@ -25,7 +25,7 @@ const renderPhotos = (posts) => {
 		let editButton = document.createElement('a')
 		let icon = document.createElement('i')
 		icon.classList.add('fas','fa-edit','edit-icon')
-		editButton.href = `edit-post.php?id=${item.id}`
+		editButton.href = `/edit-post.php?id=${item.id}`
 		editButton.appendChild(icon)
 		photoDiv.classList.add('photo')
 		photoDiv.appendChild(editButton)

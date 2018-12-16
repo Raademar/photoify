@@ -5,11 +5,11 @@ require __DIR__.'/views/header.php';
 ?>
 
 <div class="outer-container">
-	<form action="/app/posts/store.php" method="POST" enctype="multipart/form-data">
+	<form action="/app/posts/update-post.php" method="POST" enctype="multipart/form-data">
 		<div class="posts-input-container">
 			<div class="preview-image"></div>
 			<input type="file" name="image" id="image" class="file-upload">
-			<textarea name="description" id="description" class="posts-form-field" placeholder="Describe your photo.."></textarea>
+			<textarea name="description" id="description" class="posts-form-field description" placeholder="Describe your photo.."></textarea>
 			<button type="submit" class="fullsize-button submit-posts-button">Share photo</button>
 		</div>
 	</form>
