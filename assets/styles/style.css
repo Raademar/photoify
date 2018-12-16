@@ -20,6 +20,7 @@ a {
 	outline: none;
 	text-decoration: none;
 }
+/* INDEX STYLES */
 .outer-container {
 	width: 100vw;
 	height: 100%;
@@ -33,9 +34,8 @@ a {
 .photo-container {
 	max-width: 355px;
 	max-height: 500px;
-	position: relative;
 }
-.photo-container img {
+.photo-container > .photo {
 	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 	width: 355px;
 	height: 500px;
@@ -46,12 +46,18 @@ a {
 	justify-content: center;
 	border-radius: 10px;
 }
-.photo-container img:nth-child(2) {
+.photo-container > .photo > img {
+	width: 100%;
+	height: 100%;
+	border-radius: 10px;
+}
+.photo-container > .photo:nth-child(2) {
 	top: 45px;
 }
-.photo-container img:nth-child(3) {
+.photo-container > .photo:nth-child(3) {
 	top: 60px;
 }
+/* ****************** */
 
 /*  BUTTON STYLES  */
 .button-nav-container {
@@ -240,7 +246,6 @@ a {
 	border: 1px solid white;
 	background: transparent;
 	padding-left: 24px;
-	
 	color: #fff;
 	transition: .2s ease-in-out all;
 	margin-bottom: 20px;
@@ -265,9 +270,19 @@ textarea  {
 	height: 200px;
 	width: 100%;
 }
-.preview-image img {
+.preview-image > .photo {
 	height: 200px;
 	width: 100%;
+}
+.preview-image > .photo img {
+	width: 355px;
+	height: 500px;
+}
+.edit-icon {
+	position: absolute;
+	right: 0;
+	top: 50%;
+	z-index: 9999;
 }
 /* *************** */
 /* PROFILE STYLES */

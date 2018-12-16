@@ -17,7 +17,7 @@ Instagram clone, school project @ Yrgo
 
 
 ## DOING
-* User seems to get lost after posts has been made, look into this.
+* User seems to get lost after posts has been made, look into this. (Only on demo mobile via Ngrok?)
 
 ## DONE
 * ~~Register~~

@@ -20,14 +20,22 @@ const renderPhotos = (posts) => {
 		photoHolder.innerHTML = `<h3>No photos to display :(</h3>`
 	}
 	posts.forEach(item => {
+		let photoDiv = document.createElement('div')
+		// Create an icon with link to edit-post for each photo
+		let editButton = document.createElement('a')
+		let icon = document.createElement('i')
+		icon.classList.add('fas','fa-edit','edit-icon')
+		editButton.href = `edit-post.php?id=${item.id}`
+		editButton.appendChild(icon)
+		photoDiv.classList.add('photo')
+		photoDiv.appendChild(editButton)
+		// --------------------------------------------------
 		let img = document.createElement('img')
 		img.src = item.image
-		photoHolder.appendChild(img)
-	})
-	// Assign a descending z-index to each rendered image to display them in order.
-	const rederedImages = [...document.querySelectorAll('img')]
-	rederedImages.map(x => {
-		x.style.zIndex = --postLength
+		photoDiv.appendChild(img)
+		photoHolder.appendChild(photoDiv)
+		// Assign a descending z-index to each rendered image to display them in order.
+		photoDiv.style.zIndex = --postLength
 	})
 }
 
