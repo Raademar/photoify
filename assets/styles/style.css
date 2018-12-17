@@ -68,6 +68,10 @@ a {
 	position: absolute;
 	bottom: 10px;
 }
+.button-holder-div {
+	display: flex;
+	align-items: center;
+}
 .navigation-button {
 	width: 60px;
 	height: 60px;
@@ -79,14 +83,20 @@ a {
 	border-radius: 10px;
 }
 .fullsize-button {
-	width: 180px;
-	height: 60px;
+	width: 160px;
+	height: 50px;
 	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 	background: #FFBE0B;
 	color: #fff;
 	border: none;
 	border-radius: 10px;
 	font-size: 1.1rem;
+}
+.delete-text-button {
+	color: #E22434;
+	margin-left: 5px;
+	background: transparent;
+	border: none;
 }
 .floating-action-button {
 	width: 60px;

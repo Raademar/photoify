@@ -2,6 +2,7 @@ const fileUpload = document.querySelector('.file-upload')
 const description = document.querySelector('.description')
 const editPhotoURI = `/app/posts/update.php${window.location.search}`
 const previewImage = document.querySelector('.preview-image')
+const deleteButton = document.querySelector('.delete-posts-button')
 
 
 const previewUploadedFiles = (files) => {
@@ -46,3 +47,7 @@ const fetchPostForEdit = () => {
 if(window.location.pathname === '/edit-post.php') {
 	fetchPostForEdit()
 }
+
+deleteButton.addEventListener('click', function() {
+	this.form.action = '/app/posts/delete.php'
+})

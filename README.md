@@ -16,7 +16,7 @@ Instagram clone, school project @ Yrgo
 
 
 ## DOING
-* Update posts
+
 * User seems to get lost after posts has been made, look into this. (Only on demo mobile via Ngrok?)
 
 ## DONE
@@ -27,3 +27,4 @@ Instagram clone, school project @ Yrgo
 * ~~Upload files to user profile~~
 * ~~Set profile image~~
 * ~~Set profile description~~
+* ~~Update posts~~
