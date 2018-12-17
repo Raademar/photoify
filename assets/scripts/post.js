@@ -4,13 +4,13 @@ const editPhotoURI = `/app/posts/update.php${window.location.search}`
 const previewImage = document.querySelector('.preview-image')
 const deleteButton = document.querySelector('.delete-posts-button')
 
+if(previewImage.childNodes.length > 0) {
+	previewImage.removeChild(previewImage.firstChild)
+}
 
 const previewUploadedFiles = (files) => {
 	// Remove the images from preview if there is any.
 	// We do this so when the user wants to choose another image they dont stack.
-	if(previewImage.hasChildNodes) {
-		previewImage.removeChild(previewImage.firstChild)
-	}
 	for (let i = 0; i < files.length; i++) {
     let file = files[i];
 		let img = document.createElement('img')
@@ -46,8 +46,7 @@ const fetchPostForEdit = () => {
 
 if(window.location.pathname === '/edit-post.php') {
 	fetchPostForEdit()
+	deleteButton.addEventListener('click', function() {
+		this.form.action = '/app/posts/delete.php'
+	})
 }
-
-deleteButton.addEventListener('click', function() {
-	this.form.action = '/app/posts/delete.php'
-})

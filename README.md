@@ -2,7 +2,6 @@
 Instagram clone, school project @ Yrgo
 
 ## TODO
-* Delete posts
 * Like posts
 * Comment on posts
 * Display posts on index depending on the people user follows
@@ -13,6 +12,7 @@ Instagram clone, school project @ Yrgo
 * General styling of app
 * Set up restrictions in db (limit size of profile desc) Apply these on client as well.
 * Separate the setting of profile image from other profile setting (or come up with solution).
+* Limit edit / delete action on posts the user created.
 
 
 ## DOING
@@ -28,3 +28,4 @@ Instagram clone, school project @ Yrgo
 * ~~Set profile image~~
 * ~~Set profile description~~
 * ~~Update posts~~
+* ~~Delete posts~~
