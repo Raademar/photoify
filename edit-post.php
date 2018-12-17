@@ -2,6 +2,12 @@
 declare(strict_types=1);
 require __DIR__.'/views/header.php';
 // die(var_dump($_SESSION['user_authenticated']));
+$id = $_GET['id'] ?? null;
+
+if($id === null) {
+  echo("Cannot get the requested post.");
+  exit();
+}
 ?>
 
 <div class="outer-container">
@@ -9,7 +15,8 @@ require __DIR__.'/views/header.php';
 		<div class="posts-input-container">
 			<div class="preview-image"></div>
 			<input type="file" name="image" id="image" class="file-upload">
-			<textarea name="description" id="description" class="posts-form-field description" placeholder="Describe your photo.."></textarea>
+      <textarea name="description" id="description" class="posts-form-field description" placeholder="Describe your photo.."></textarea>
+      <input type="hidden" name="id" id="id" value="<?= $id; ?>">
 			<button type="submit" class="fullsize-button submit-posts-button">Share photo</button>
 		</div>
 	</form>

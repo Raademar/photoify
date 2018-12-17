@@ -2,12 +2,7 @@
 declare(strict_types=1);
 require __DIR__.'/../autoload.php';
 
-$id = $_GET['id'] ?? null;
-
-if($id === null) {
-  echo("Cannot get the requested post.");
-  exit();
-}
+$id = $_POST['id'];
 
 $statement = $pdo->prepare('SELECT * FROM posts WHERE id = :id');
 $statement->bindParam(':id', $id, PDO::PARAM_INT);
