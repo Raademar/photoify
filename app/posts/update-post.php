@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 require __DIR__.'/../autoload.php';
+ini_set('display_errors', 'On');
 
 $id = $_POST['id'];
 
@@ -13,7 +14,17 @@ if(isset($_POST['description'])) {
   // If user has edited the image or uploaded a new image on the same post
   // delete the current image before we save the new one.
   if(isset($_FILES['image'])) {
-    unlink($post['image']);
+    if(file_exists($_SERVER['DOCUMENT_ROOT'].$post['image'])) {
+      if(unlink($_SERVER['DOCUMENT_ROOT'].$post['image'])){
+      } else {
+        echo 'fail';
+        die(var_dump($post['image']));
+      }
+    } else {
+      echo 'file does not exist.';
+      var_dump($_SERVER["DOCUMENT_ROOT"].$post['image']);
+      die(var_dump($post['image']));
+    }
   }
   $image = ($_FILES['image']) ? $_FILES['image'] : $post['image'];
 	$desc = ($_POST['description']) ? trim(filter_var($_POST['description'], FILTER_SANITIZE_STRING)) : $post['description'];
