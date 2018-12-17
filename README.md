@@ -6,7 +6,7 @@ Instagram clone, school project @ Yrgo
 * Comment on posts
 * Display posts on index depending on the people user follows
 * Swiping images for navigation
-* Toggle info of images(posts) when tapping on them
+
 * Toggle navbar when tapping on image(post) or on icon on right side
 * Database setup completed
 * General styling of app
@@ -16,7 +16,7 @@ Instagram clone, school project @ Yrgo
 
 
 ## DOING
-
+* Toggle info of images(posts) when tapping on them
 * User seems to get lost after posts has been made, look into this. (Only on demo mobile via Ngrok?)
 
 ## DONE
