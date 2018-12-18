@@ -5,6 +5,7 @@ const profileSettingsModal = document.querySelector('.profile-modal-holder')
 const profileImage = document.querySelector('.profile-image')
 const name = document.querySelector('.active-user')
 const desc = document.querySelector('.active-user-description')
+const gallery = document.querySelector('.profile-photo-gallery')
 
 
 const getUserInfo = () => {
@@ -13,7 +14,9 @@ const getUserInfo = () => {
 			return res.json()
 		})
 		.then(json => {
-			renderInfo(json)
+			console.log(json);
+			renderInfo(json[0])
+			renderPhotos(json[1])
 		})
 }
 
@@ -25,6 +28,19 @@ const renderInfo = (user) => {
   profileImage.src = user.profile_image
   name.textContent = user.name
   desc.textContent = user.description
+}
+
+const renderPhotos = (userPhoto) => {
+	let postLength = userPhoto.length
+	if(postLength === 0) {
+		return
+	}
+	userPhoto.forEach(photo => {
+		let image = document.createElement('img')
+		image.classList.add('thumb-photo-gallery')
+		image.src = photo.image
+		gallery.appendChild(image)
+	})
 }
 
 const toggleprofileSettingsModal = () => {

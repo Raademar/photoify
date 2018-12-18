@@ -8,6 +8,7 @@ $statement->bindParam(':user_id', $id, PDO::PARAM_INT);
 $statement->execute();
 $user = $statement->fetch(PDO::FETCH_ASSOC);
 
+// POST ROUTE TO PROFILE
 if(isset($_POST['password'])) {
   $name = ($_POST['name']) ? trim(filter_var($_POST['name'], FILTER_SANITIZE_STRING)) : $user['name'];
   $username = ($_POST['username']) ? trim(filter_var($_POST['username'] , FILTER_SANITIZE_STRING)) : $user['username'];
@@ -59,5 +60,12 @@ if(isset($_POST['password'])) {
 	}
 
 }
+// ***********************************
+
+// GET ROUTE
+
+
+
+// **********************************
 
 redirect('/profile.php');

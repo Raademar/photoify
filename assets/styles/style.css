@@ -397,6 +397,10 @@ input[type="file"] {
 .profile-photo-gallery {
 	width: 90%;
 	height: 300px;
-	background: white;
+}
+.thumb-photo-gallery {
+	width: 100px;
+	height: 100px;
+	margin: 5px 5px 0px 5px;
 }
 /* *************** */

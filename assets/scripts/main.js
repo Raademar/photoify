@@ -44,8 +44,7 @@ const renderPhotos = (posts) => {
 		photoDiv.style.zIndex = --postLength
 
 		photoDiv.appendChild(photoOverlay)
-		photoOverlay.classList.add('photo-overlay')
-		photoOverlay.classList.add('toggle-overlay')
+		photoOverlay.classList.add('photo-overlay', 'toggle-overlay')
 		photoOverlay.appendChild(p)
 		p.textContent = item.description
 		// -------------------------------------------------------
