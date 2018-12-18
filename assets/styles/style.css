@@ -5,6 +5,7 @@ body {
 	color: #fff;
 	overflow-y: auto;
 	overflow-x: hidden;
+	box-sizing: border-box;
 }
 .icon::before {
   display: inline-block;
