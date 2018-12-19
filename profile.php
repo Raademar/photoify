@@ -25,6 +25,10 @@ if(!isset($_SESSION['user_authenticated'])) {
 	<!-- User profile -->
 	<div class="profile-container">
 		<img src="" alt="User profile photo." class="profile-image">
+		<div class="profile-image-overlay">
+			<i class="fas fa-camera"></i>
+			<span>Update</span>
+		</div>
 		<h2 class="active-user">No active user.</h2> 
 		<h5 class="active-user-description toggle-description">No active user.</h5>
 		<div class="profile-photo-gallery"></div>

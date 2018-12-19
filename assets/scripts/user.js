@@ -61,4 +61,11 @@ name.addEventListener('click', () => {
   toggleprofileSettingsModal()
 })
 
+profileImage.addEventListener('mouseover', () => {
+	document.querySelector('.profile-image-overlay').style.visibility = 'visible'
+})
+document.querySelector('.profile-image-overlay').addEventListener('mouseleave', () => {
+	document.querySelector('.profile-image-overlay').style.visibility = 'hidden'
+})
+
 getUserInfo()
