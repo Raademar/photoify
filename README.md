@@ -2,7 +2,7 @@
 Instagram clone, school project @ Yrgo
 
 ## TODO
-* Like posts
+
 * Comment on posts
 * Display posts on index depending on the people user follows
 * Swiping images for navigation
@@ -29,3 +29,4 @@ Instagram clone, school project @ Yrgo
 * ~~Set profile description~~
 * ~~Update posts~~
 * ~~Delete posts~~
+* ~~Like posts~~

@@ -13,6 +13,8 @@ const getAllPosts = () => {
 			return res.json()
 		})
 		.then(json => {
+			console.log(json)
+			
 			renderPhotos(json)
 		})
 }
