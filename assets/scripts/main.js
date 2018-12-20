@@ -1,7 +1,9 @@
 const photoURI = '/app/posts/index.php'
+const storeURI = '/app/posts/store.php'
 const photoHolder = document.querySelector('.photo-container')
 const searchButton = document.querySelector('.search-button')
 const searchModal = document.querySelector('.search-modal-holder')
+
 
 
 const getAllPosts = () => {
@@ -22,8 +24,7 @@ const renderPhotos = (posts) => {
 	}
 	posts.forEach(item => {
 		let photoDiv = document.createElement('div')
-
-		// Create an icon with link to edit-post for each photo
+		// Set styles for the icons for each photo.
 		let editButton = document.createElement('a')
 		let editIcon = document.createElement('i')
 		let commentIcon = document.createElement('i')
@@ -43,6 +44,7 @@ const renderPhotos = (posts) => {
 		let img = document.createElement('img')
 		let photoOverlay = document.createElement('div')
 		img.src = item.image
+
 		photoDiv.appendChild(img)
 		photoHolder.appendChild(photoDiv)
 
@@ -58,8 +60,32 @@ const renderPhotos = (posts) => {
 		photoOverlay.appendChild(likeIcon)
 		photoOverlay.appendChild(dislikeIcon)
 		// -------------------------------------------------------
+
+		// Assign clickListener for likeIcon.
+
+		likeIcon.addEventListener('click', () => {
+			let like = {
+				id: item.id,
+			}
+			fetch(storeURI, {
+				method: 'POST',
+				body: JSON.stringify(like),
+				headers:{
+					'Content-Type': 'application/json'
+				}
+			})
+			.then(res => res.json())
+			.then(response => console.log('Success:', JSON.stringify(response)))
+			.catch(error => console.error('Error:', error))
+		})
+		// -------------------------------
+
+
 		// Assign a clickListener for each photo to toggle overlay.
-		photoDiv.addEventListener('click', () => {
+		photoDiv.addEventListener('click', (event) => {
+			if(event.target == likeIcon || event.target == commentIcon || event.target == dislikeIcon) {
+				return
+			}
 			photoOverlay.classList.toggle('toggle-overlay')
 		})
 		// -----------------------------------------------------

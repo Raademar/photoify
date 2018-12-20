@@ -39,7 +39,48 @@ if(isset($_FILES['image'])) {
 	if(!$statement){
 		die(var_dump($statement->errorInfo()));
 	}
-
+  redirect('/index.php');
 }
 
-redirect('/index.php');
+// Post request for likes
+
+$request = json_decode(file_get_contents('php://input'));
+
+if(isset($request->id)) {
+  // Update likes
+  $postId = intval($request->id);
+  $userId = $_SESSION['user_authenticated']['id'];
+
+
+  $statement = $pdo->prepare('INSERT INTO likes (post_id, user_id) VALUES (:post_id, :user_id)');
+  $statement->bindParam(':post_id', $postId, PDO::PARAM_INT);
+  $statement->bindParam(':user_id', $userId, PDO::PARAM_INT);
+
+  if(!$statement){
+    die(var_dump($statement->errorInfo()));
+  }
+
+  $statement->execute();
+
+  if(!$statement){
+    die(var_dump($statement->errorInfo()));
+  }
+
+  $statement = $pdo->prepare('SELECT DISTINCT post_id, user_id FROM likes WHERE post_id = :post_id');
+  $statement->bindParam(':post_id', $postId, PDO::PARAM_INT);
+
+  if(!$statement){
+    die(var_dump($statement->errorInfo()));
+  }
+
+  $statement->execute();
+
+  if(!$statement){
+    die(var_dump($statement->errorInfo()));
+  }
+
+  $likes = $statement->fetch(PDO::FETCH_ASSOC);
+  header('Content-Type: application/json');
+
+  echo json_encode($likes);
+}

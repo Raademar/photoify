@@ -426,7 +426,7 @@ input[type="file"] {
 .profile-photo-gallery {
 	width: 100%;
 	display: flex;
-	justify-content: flex-start;
+	justify-content: center;
 	flex-wrap: wrap;
 }
 .thumb-photo-gallery {
