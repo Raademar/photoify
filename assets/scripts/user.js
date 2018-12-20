@@ -61,9 +61,11 @@ name.addEventListener('click', () => {
   toggleprofileSettingsModal()
 })
 
+// Toggle overlay for profile image
 profileImage.addEventListener('mouseover', () => {
 	document.querySelector('.profile-image-overlay').style.visibility = 'visible'
 })
+// When mouse leaved overlay, remove it.
 document.querySelector('.profile-image-overlay').addEventListener('mouseleave', () => {
 	document.querySelector('.profile-image-overlay').style.visibility = 'hidden'
 })

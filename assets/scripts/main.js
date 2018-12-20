@@ -26,12 +26,18 @@ const renderPhotos = (posts) => {
 		// Create an icon with link to edit-post for each photo
 		let editButton = document.createElement('a')
 		let editIcon = document.createElement('i')
+		let commentIcon = document.createElement('i')
+		let likeIcon = document.createElement('i')
+		let dislikeIcon = document.createElement('i')
 		let p = document.createElement('p')
-		editIcon.classList.add('fas','fa-edit','edit-icon')
+		editIcon.classList.add('fas','fa-edit','fa-2x', 'edit-icon')
+		commentIcon.classList.add('far', 'fa-comments', 'fa-2x', 'icon-style', 'comment-icon')
+		likeIcon.classList.add('far', 'fa-heart', 'fa-2x', 'icon-style', 'like-icon')
+		dislikeIcon.classList.add('far', 'fa-thumbs-down', 'fa-2x', 'icon-style', 'dislike-icon')
 		editButton.href = `/edit-post.php?id=${item.id}`
 		editButton.appendChild(editIcon)
 		photoDiv.classList.add('photo')
-		photoDiv.appendChild(editButton)
+		
 		// --------------------------------------------------
 		// Set the src for each image and assign a toggleable overlay.
 		let img = document.createElement('img')
@@ -42,11 +48,15 @@ const renderPhotos = (posts) => {
 
 		// Assign a descending z-index to each rendered image to display them in order.
 		photoDiv.style.zIndex = --postLength
-
+		// Get the image data and set it to the image overlay.
 		photoDiv.appendChild(photoOverlay)
 		photoOverlay.classList.add('photo-overlay', 'toggle-overlay')
 		photoOverlay.appendChild(p)
 		p.textContent = item.description
+		photoOverlay.appendChild(editButton)
+		photoOverlay.appendChild(commentIcon)
+		photoOverlay.appendChild(likeIcon)
+		photoOverlay.appendChild(dislikeIcon)
 		// -------------------------------------------------------
 		// Assign a clickListener for each photo to toggle overlay.
 		photoDiv.addEventListener('click', () => {

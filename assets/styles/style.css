@@ -316,6 +316,18 @@ textarea  {
 	top: 50%;
 	z-index: 9999;
 }
+.icon-style {
+	margin: 5px;
+}
+.like-icon {
+	color: #E22434;
+}
+.dislike-icon {
+	color: #4C1BEC;
+}
+.comment-icon {
+	color: #FFBE0B;
+}
 /* *************** */
 /* PROFILE STYLES */
 
