@@ -1,5 +1,6 @@
 const photoURI = '/app/posts/index.php'
 const storeURI = '/app/posts/store.php'
+const deleteURI = '/app/posts/delete.php'
 const photoHolder = document.querySelector('.photo-container')
 const searchButton = document.querySelector('.search-button')
 const searchModal = document.querySelector('.search-modal-holder')
@@ -62,12 +63,32 @@ const renderPhotos = (posts) => {
 		// -------------------------------------------------------
 
 		// Assign clickListener for likeIcon.
-
 		likeIcon.addEventListener('click', () => {
+			likeIcon.classList.remove('far')
+			likeIcon.classList.add('fas')
 			let like = {
 				id: item.id,
 			}
 			fetch(storeURI, {
+				method: 'POST',
+				body: JSON.stringify(like),
+				headers:{
+					'Content-Type': 'application/json'
+				}
+			})
+			.then(res => res.json())
+			.then(response => console.log('Success:', JSON.stringify(response)))
+			.catch(error => console.error('Error:', error))
+		})
+		// -------------------------------
+		// Assign clickListener for dislikeIcon.
+		dislikeIcon.addEventListener('click', () => {
+			dislikeIcon.classList.remove('far')
+			dislikeIcon.classList.add('fas')
+			let like = {
+				id: item.id,
+			}
+			fetch(deleteURI, {
 				method: 'POST',
 				body: JSON.stringify(like),
 				headers:{
