@@ -14,8 +14,17 @@ const getAllPosts = () => {
 		})
 		.then(json => {
 			console.log(json)
-			
 			renderPhotos(json)
+			// Assign swiping listener that exec swiping func for each photo.
+			// const photos = [...document.querySelectorAll('.photo')]
+			// photos.forEach(photo => {
+			// 	photo.addEventListener('touchstart', () => {
+			// 		swipeToNextTouchStart(photo)
+			// 	})
+			// 	photo.addEventListener('touchmove', () => {
+			// 		swipeToNextTouchMove(photo, topPos, newPos)
+			// 	})
+			// })
 		})
 }
 
@@ -53,7 +62,6 @@ const renderPhotos = (posts) => {
 		photoHolder.appendChild(photoDiv)
 
 		// Assign a descending z-index to each rendered image to display them in order.
-		photoDiv.style.zIndex = --postLength
 		// Get the image data and set it to the image overlay.
 		photoDiv.appendChild(photoOverlay)
 		photoOverlay.classList.add('photo-overlay', 'toggle-overlay')
@@ -119,6 +127,26 @@ const renderPhotos = (posts) => {
 		// -----------------------------------------------------
 	})
 }
+
+// FUNC FOR SWIPING PHOTOS
+// const swipeToNextTouchStart = (photo) => {
+// 	console.log(photo.style.color)
+// 	let topPos = photo.offsetTop
+// 	let newPos = event.touches ? event.touches[0].pageY : event.pageY
+// 	// console.log(topPos)
+// }
+// // FUNC FOR MOVING PHOTO WHEN SWIPING
+// const swipeToNextTouchMove = (photo, topPos, newPos) => {
+// 	newPos = event.touches ? event.touches[0].pageY : event.pageY
+// 	console.log(newPos, 'new Position')
+// 	photo.style.top = (newPos - topPos)
+// }
+// FUNC FOR CHECKING WHERE TOUCH STOPS ON PHOTO
+// const swipeToNextTouchStop = (photo, topPos, newPos, endPos) => {
+// 	endPos = 
+// }
+
+
 
 const toggleSearchModal = () => {
 	searchModal.classList.remove('is-hidden')

@@ -15,7 +15,6 @@ Instagram clone, school project @ Yrgo
 
 
 ## DOING
-* Toggle info of images(posts) when tapping on them
 * Styling profile
 * User seems to get lost after posts has been made, look into this. (Only on demo mobile via Ngrok?)
 
@@ -30,3 +29,4 @@ Instagram clone, school project @ Yrgo
 * ~~Update posts~~
 * ~~Delete posts~~
 * ~~Like posts~~
+* ~~Toggle info of images(posts) when tapping on them~~
