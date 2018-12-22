@@ -57,6 +57,21 @@ if(isset($request->id)) {
 
   if(!$statement){
     die(var_dump($statement->errorInfo()));
+	}
+	
+	// UPDATE TABLE WITH THE NEW LIKE INTO THE POSTS TABLE
+  $statement = $pdo->prepare('UPDATE posts SET likes = (SELECT COUNT(post_id) FROM likes WHERE post_id = :post_id GROUP BY post_id) WHERE id = :post_id;');
+  $statement->bindParam(':post_id', $postId, PDO::PARAM_INT);
+
+  if(!$statement){
+    die(var_dump($pdo->errorInfo()));
+  }
+
+  $statement->execute();
+
+  if(!$statement){
+    die(var_dump($statement->errorInfo()));
+
   }
 
   $statement = $pdo->prepare('SELECT DISTINCT post_id, user_id FROM likes WHERE post_id = :post_id');

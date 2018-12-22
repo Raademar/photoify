@@ -34,6 +34,7 @@ const renderPhotos = (posts) => {
 		let likeIcon = document.createElement('i')
 		let dislikeIcon = document.createElement('i')
 		let p = document.createElement('p')
+		let likesOfPhoto = document.createElement('p')
 		editIcon.classList.add('fas','fa-edit','fa-2x', 'edit-icon')
 		commentIcon.classList.add('far', 'fa-comments', 'fa-2x', 'icon-style', 'comment-icon')
 		likeIcon.classList.add('far', 'fa-heart', 'fa-2x', 'icon-style', 'like-icon')
@@ -57,7 +58,9 @@ const renderPhotos = (posts) => {
 		photoDiv.appendChild(photoOverlay)
 		photoOverlay.classList.add('photo-overlay', 'toggle-overlay')
 		photoOverlay.appendChild(p)
+		photoOverlay.appendChild(likesOfPhoto)
 		p.textContent = item.description
+		likesOfPhoto.textContent = `${item.likes} people like this photo.`
 		photoOverlay.appendChild(editButton)
 		photoOverlay.appendChild(commentIcon)
 		photoOverlay.appendChild(likeIcon)
@@ -68,6 +71,7 @@ const renderPhotos = (posts) => {
 		likeIcon.addEventListener('click', () => {
 			likeIcon.classList.remove('far')
 			likeIcon.classList.add('fas')
+			likesOfPhoto.textContent = `${++item.likes} people like this photo.`
 			let like = {
 				id: item.id,
 			}
@@ -87,6 +91,7 @@ const renderPhotos = (posts) => {
 		dislikeIcon.addEventListener('click', () => {
 			dislikeIcon.classList.remove('far')
 			dislikeIcon.classList.add('fas')
+			likesOfPhoto.textContent = `${--item.likes} people like this photo.`
 			let like = {
 				id: item.id,
 			}
