@@ -5,8 +5,6 @@ const photoHolder = document.querySelector('.photo-container')
 const searchButton = document.querySelector('.search-button')
 const searchModal = document.querySelector('.search-modal-holder')
 
-
-
 const getAllPosts = () => {
 	fetch(photoURI)
 		.then(res => {
@@ -28,9 +26,9 @@ const getAllPosts = () => {
 		})
 }
 
-const renderPhotos = (posts) => {
+const renderPhotos = posts => {
 	let postLength = posts.length
-	if(postLength === 0) {
+	if (postLength === 0) {
 		photoHolder.innerHTML = `<h3>No photos to display :(</h3>`
 		return
 	}
@@ -44,35 +42,65 @@ const renderPhotos = (posts) => {
 		let dislikeIcon = document.createElement('i')
 		let p = document.createElement('p')
 		let likesOfPhoto = document.createElement('p')
-		editIcon.classList.add('fas','fa-edit','fa-2x', 'edit-icon')
-		commentIcon.classList.add('far', 'fa-comments', 'fa-2x', 'icon-style', 'comment-icon')
-		likeIcon.classList.add('far', 'fa-heart', 'fa-2x', 'icon-style', 'like-icon')
-		dislikeIcon.classList.add('far', 'fa-thumbs-down', 'fa-2x', 'icon-style', 'dislike-icon')
+		let iconHolder = document.createElement('div')
+		iconHolder.classList.add('icon-holder-inside-overlay')
+		editIcon.classList.add('fas', 'fa-edit', 'fa-2x', 'edit-icon')
+		commentIcon.classList.add(
+			'far',
+			'fa-comments',
+			'fa-2x',
+			'icon-style',
+			'comment-icon'
+		)
+		likeIcon.classList.add(
+			'far',
+			'fa-heart',
+			'fa-2x',
+			'icon-style',
+			'like-icon'
+		)
+		dislikeIcon.classList.add(
+			'far',
+			'fa-thumbs-down',
+			'fa-2x',
+			'icon-style',
+			'dislike-icon'
+		)
 		editButton.href = `/edit-post.php?id=${item.id}`
 		editButton.appendChild(editIcon)
 		photoDiv.classList.add('photo')
-		
+
 		// --------------------------------------------------
 		// Set the src for each image and assign a toggleable overlay.
 		let img = document.createElement('img')
+		let profileImageThumb = document.createElement('img')
+		let h5 = document.createElement('h5')
 		let photoOverlay = document.createElement('div')
+		let userInfo = document.createElement('div')
+		userInfo.classList.add('user-info')
 		img.src = item.image
+		profileImageThumb.src = item.profile_image
+		h5.textContent = item.username
 
+		userInfo.appendChild(profileImageThumb)
+		userInfo.appendChild(h5)
+		photoDiv.appendChild(userInfo)
 		photoDiv.appendChild(img)
 		photoHolder.appendChild(photoDiv)
 
-		// Assign a descending z-index to each rendered image to display them in order.
 		// Get the image data and set it to the image overlay.
 		photoDiv.appendChild(photoOverlay)
 		photoOverlay.classList.add('photo-overlay', 'toggle-overlay')
+		userInfo.classList.add('user-info')
 		photoOverlay.appendChild(p)
 		photoOverlay.appendChild(likesOfPhoto)
 		p.textContent = item.description
 		likesOfPhoto.textContent = `${item.likes} people like this photo.`
 		photoOverlay.appendChild(editButton)
-		photoOverlay.appendChild(commentIcon)
-		photoOverlay.appendChild(likeIcon)
-		photoOverlay.appendChild(dislikeIcon)
+		iconHolder.appendChild(commentIcon)
+		iconHolder.appendChild(likeIcon)
+		iconHolder.appendChild(dislikeIcon)
+		photoOverlay.appendChild(iconHolder)
 		// -------------------------------------------------------
 
 		// Assign clickListener for likeIcon.
@@ -81,18 +109,18 @@ const renderPhotos = (posts) => {
 			likeIcon.classList.add('fas')
 			likesOfPhoto.textContent = `${++item.likes} people like this photo.`
 			let like = {
-				id: item.id,
+				id: item.id
 			}
 			fetch(storeURI, {
 				method: 'POST',
 				body: JSON.stringify(like),
-				headers:{
+				headers: {
 					'Content-Type': 'application/json'
 				}
 			})
-			.then(res => res.json())
-			.then(response => console.log('Success:', JSON.stringify(response)))
-			.catch(error => console.error('Error:', error))
+				.then(res => res.json())
+				.then(response => console.log('Success:', JSON.stringify(response)))
+				.catch(error => console.error('Error:', error))
 		})
 		// -------------------------------
 		// Assign clickListener for dislikeIcon.
@@ -101,25 +129,28 @@ const renderPhotos = (posts) => {
 			dislikeIcon.classList.add('fas')
 			likesOfPhoto.textContent = `${--item.likes} people like this photo.`
 			let like = {
-				id: item.id,
+				id: item.id
 			}
 			fetch(deleteURI, {
 				method: 'POST',
 				body: JSON.stringify(like),
-				headers:{
+				headers: {
 					'Content-Type': 'application/json'
 				}
 			})
-			.then(res => res.json())
-			.then(response => console.log('Success:', JSON.stringify(response)))
-			.catch(error => console.error('Error:', error))
+				.then(res => res.json())
+				.then(response => console.log('Success:', JSON.stringify(response)))
+				.catch(error => console.error('Error:', error))
 		})
 		// -------------------------------
 
-
 		// Assign a clickListener for each photo to toggle overlay.
-		photoDiv.addEventListener('click', (event) => {
-			if(event.target == likeIcon || event.target == commentIcon || event.target == dislikeIcon) {
+		photoDiv.addEventListener('click', event => {
+			if (
+				event.target == likeIcon ||
+				event.target == commentIcon ||
+				event.target == dislikeIcon
+			) {
 				return
 			}
 			photoOverlay.classList.toggle('toggle-overlay')
@@ -143,10 +174,8 @@ const renderPhotos = (posts) => {
 // }
 // FUNC FOR CHECKING WHERE TOUCH STOPS ON PHOTO
 // const swipeToNextTouchStop = (photo, topPos, newPos, endPos) => {
-// 	endPos = 
+// 	endPos =
 // }
-
-
 
 const toggleSearchModal = () => {
 	searchModal.classList.remove('is-hidden')

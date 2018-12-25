@@ -26,19 +26,18 @@ a {
 	width: 100vw;
 	height: 100%;
 	min-height: 100vh;
-	background: rgb(20,20,20);
-	background: radial-gradient(circle, rgba(20,20,20,1) 0%, rgba(5,5,5,1) 100%);
+	background: #232323;
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
 }
 .photo-container {
-	width: 355px;
+	width: 375px;
 	transition: .2s ease-in-out all;
 }
 .photo {
-	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-	width: 355px;
+	margin: 10px 0 100px 0;
+	width: 375px;
 	display: flex;
 	flex-direction: column;
 	align-content: center;
@@ -47,17 +46,22 @@ a {
 	transition: .2s ease-in-out all;
 	position: relative;
 }
+.photo > .user-info {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	margin: 12px 0;
+}
+.photo > .user-info > img {
+	width: 40px;
+	height: 40px;
+	border-radius: 50px;
+	margin: 0 12px 0 12px;
+}
 .photo-container > .photo > img {
 	width: 100%;
-	height: 100%;
-	border-radius: 10px;
 	transition: .2s ease-in-out all;
-}
-.photo-container > .photo:nth-child(2) {
-	top: 45px;
-}
-.photo-container > .photo:nth-child(3) {
-	top: 60px;
 }
 .photo-overlay {
 	background: rgba(5, 5, 5, 0.7);
@@ -69,10 +73,21 @@ a {
 	width: 100%;
 	height: 100%;
 	transition: .2s ease-in-out all;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 }
 .toggle-overlay {
 	transition: .2s ease-in-out all;
 	display: none;
+}
+.right-align {
+	justify-self: flex-end;
+	margin-right: 48px;
+}
+.icon-holder-inside-overlay {
+	display: flex;
+	justify-content: center;
 }
 /* ****************** */
 
@@ -80,11 +95,12 @@ a {
 .button-nav-container {
 	display: flex;
 	width: 100%;
+	height: 80px;
 	justify-content: space-evenly;
-	align-content: center;
+	align-items: center;
 	position: fixed;
-	bottom: -1px;
-	background: #050505;
+	bottom: 0;
+	background: #232323;
 }
 .button-holder-div {
 	display: flex;
@@ -98,7 +114,7 @@ a {
 	background: linear-gradient(49deg, rgba(20,20,20,1) -50%, rgba(76,27,236,1) 100%);
 	color: #fff;
 	border: none;
-	border-radius: 10px;
+	border-radius: 20px;
 }
 .fullsize-button {
 	width: 160px;
@@ -124,7 +140,8 @@ a {
 	background: linear-gradient(45deg, rgba(226,36,52,1) -50%, rgba(252,93,24,1) 100%);
 	color: #fff;
 	border: none;
-	border-radius: 60px;
+	border-radius: 20px;
+	transform: rotate(45deg);
 }
 .logout-button {
 	color: #E22434;

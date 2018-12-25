@@ -2,7 +2,9 @@
 declare(strict_types=1);
 require __DIR__. '/../autoload.php';
 
-$statement = $pdo->prepare('SELECT * FROM posts ORDER BY id DESC');
+$statement = $pdo->prepare('SELECT users.username, users.profile_image, p.id, p.image, p.user_id, p.description, p.likes FROM posts AS p
+	INNER JOIN users ON users.id = p.user_id 
+	ORDER BY p.id DESC');
 
 if(!$statement){
   die(var_dump($pdo->errorInfo()));
