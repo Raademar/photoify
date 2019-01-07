@@ -67,7 +67,11 @@ if(isset($request->id)) {
   }
 
   // UPDATE TABLE WITH THE NEW LIKE INTO THE POSTS TABLE
-  $statement = $pdo->prepare('UPDATE posts SET likes = (SELECT COUNT(post_id) FROM likes WHERE post_id = :post_id GROUP BY post_id) WHERE id = :post_id;');
+  $statement = $pdo->prepare('UPDATE posts 
+		SET likes = (SELECT COUNT(post_id) 
+		FROM likes WHERE post_id = :post_id 
+		GROUP BY post_id) 
+		WHERE id = :post_id;');
   $statement->bindParam(':post_id', $postId, PDO::PARAM_INT);
 
   if(!$statement){

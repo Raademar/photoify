@@ -12,17 +12,8 @@ const getAllPosts = () => {
 		})
 		.then(json => {
 			console.log(json)
-			renderPhotos(json)
-			// Assign swiping listener that exec swiping func for each photo.
-			// const photos = [...document.querySelectorAll('.photo')]
-			// photos.forEach(photo => {
-			// 	photo.addEventListener('touchstart', () => {
-			// 		swipeToNextTouchStart(photo)
-			// 	})
-			// 	photo.addEventListener('touchmove', () => {
-			// 		swipeToNextTouchMove(photo, topPos, newPos)
-			// 	})
-			// })
+			renderPhotos(json.posts)
+			renderComments(findPostsWithComments(json.posts, json.comments))
 		})
 }
 
@@ -33,16 +24,22 @@ const renderPhotos = posts => {
 		return
 	}
 	posts.forEach(item => {
-		let photoDiv = document.createElement('div')
 		// Set styles for the icons for each photo.
+		let photoDiv = document.createElement('div')
 		let editButton = document.createElement('a')
 		let editIcon = document.createElement('i')
 		let commentIcon = document.createElement('i')
 		let likeIcon = document.createElement('i')
 		let dislikeIcon = document.createElement('i')
 		let p = document.createElement('p')
+		let comments = document.createElement('p')
 		let likesOfPhoto = document.createElement('p')
 		let iconHolder = document.createElement('div')
+		let imageHolderDiv = document.createElement('div')
+		let commentsAndLikeHolder = document.createElement('div')
+
+		commentsAndLikeHolder.classList.add('comments-and-like-holder')
+		imageHolderDiv.classList.add('image-holder-div')
 		iconHolder.classList.add('icon-holder-inside-overlay')
 		editIcon.classList.add('fas', 'fa-edit', 'fa-2x', 'edit-icon')
 		commentIcon.classList.add(
@@ -85,16 +82,20 @@ const renderPhotos = posts => {
 		userInfo.appendChild(profileImageThumb)
 		userInfo.appendChild(h5)
 		photoDiv.appendChild(userInfo)
-		photoDiv.appendChild(img)
+		imageHolderDiv.appendChild(img)
+		photoDiv.appendChild(imageHolderDiv)
 		photoHolder.appendChild(photoDiv)
 
 		// Get the image data and set it to the image overlay.
-		photoDiv.appendChild(photoOverlay)
+		imageHolderDiv.appendChild(photoOverlay)
 		photoOverlay.classList.add('photo-overlay', 'toggle-overlay')
 		userInfo.classList.add('user-info')
-		photoOverlay.appendChild(p)
-		photoOverlay.appendChild(likesOfPhoto)
-		p.textContent = item.description
+		commentsAndLikeHolder.appendChild(likesOfPhoto)
+		commentsAndLikeHolder.appendChild(p)
+		commentsAndLikeHolder.appendChild(comments)
+		photoOverlay.appendChild(commentsAndLikeHolder)
+		p.textContent = `${item.username}: ${item.description}`
+		comments.textContent = item.content
 		likesOfPhoto.textContent = `${item.likes} people like this photo.`
 		photoOverlay.appendChild(editButton)
 		iconHolder.appendChild(commentIcon)
@@ -158,24 +159,23 @@ const renderPhotos = posts => {
 		// -----------------------------------------------------
 	})
 }
-
-// FUNC FOR SWIPING PHOTOS
-// const swipeToNextTouchStart = (photo) => {
-// 	console.log(photo.style.color)
-// 	let topPos = photo.offsetTop
-// 	let newPos = event.touches ? event.touches[0].pageY : event.pageY
-// 	// console.log(topPos)
-// }
-// // FUNC FOR MOVING PHOTO WHEN SWIPING
-// const swipeToNextTouchMove = (photo, topPos, newPos) => {
-// 	newPos = event.touches ? event.touches[0].pageY : event.pageY
-// 	console.log(newPos, 'new Position')
-// 	photo.style.top = (newPos - topPos)
-// }
-// FUNC FOR CHECKING WHERE TOUCH STOPS ON PHOTO
-// const swipeToNextTouchStop = (photo, topPos, newPos, endPos) => {
-// 	endPos =
-// }
+const findPostsWithComments = (posts, comments) => {
+	// Assign comments to each post
+	comments.map(comment => {
+		let post = posts.find(x => x.id === comment.post_id)
+		post.comment = comment.content
+		console.log(comment)
+		
+		return post ? { ...comment } : 'broken'
+	})
+	// ----------------------------
+}
+const renderComments = () => {
+	let p = document.createElement('p')
+	const photoOverlay = document.querySelector('.photo-overlay')
+	photoOverlay.appendChild(p)
+	p.textContent = post.comment
+}
 
 const toggleSearchModal = () => {
 	searchModal.classList.remove('is-hidden')

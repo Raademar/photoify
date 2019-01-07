@@ -2,24 +2,32 @@
 declare(strict_types=1);
 require __DIR__. '/../autoload.php';
 
-$statement = $pdo->prepare('SELECT users.username, users.profile_image, p.id, p.image, p.user_id, p.description, p.likes FROM posts AS p
-	INNER JOIN users ON users.id = p.user_id 
+$statement = $pdo->prepare(
+	'SELECT users.username, users.profile_image, p.id, p.image, p.user_id, p.description, p.likes -- comments.post_id, comments.content, comments.user_id
+	FROM posts AS p
+	INNER JOIN users ON users.id = p.user_id
+	-- LEFT JOIN comments ON comments.post_id = p.id
 	ORDER BY p.id DESC');
 
 if(!$statement){
   die(var_dump($pdo->errorInfo()));
 }
 $statement->execute();
-$res = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-// Create new sql query to fetch count of likes for each post.
+$posts = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-// $statement = $pdo->prepare('SELECT COUNT(*) FROM likes WHERE post_id = 45');
-// $statement->execute();
-// $likes = $statement->fetch(PDO::FETCH_ASSOC);
 
+$fetchComments = $pdo->prepare('SELECT * FROM comments');
+if(!$fetchComments){
+  die(var_dump($pdo->errorInfo()));
+}
+$fetchComments->execute();
+$comments = $fetchComments->fetchAll(PDO::FETCH_ASSOC);
+
+$data['posts'] = $posts;
+$data['comments'] = $comments;
 header('Content-Type: application/json');
-echo json_encode($res);
+echo json_encode($data);
 
 
 
