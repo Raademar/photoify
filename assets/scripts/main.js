@@ -11,6 +11,8 @@ const getAllPosts = () => {
 			return res.json()
 		})
 		.then(json => {
+			console.log(json);
+			
 			renderPhotos(json.posts)
 		})
 }
@@ -171,25 +173,30 @@ const renderPhotos = posts => {
 					data.forEach((comment, i, a) => {
 						const commentHolder = [...document.querySelectorAll('.comments-and-like-holder')]
 						const innerCommentDiv = document.createElement('div')
-						console.log(commentHolder[i])
-						if(findCountOfItems('inner-comment-holder', commentHolder) === data.length){
-							return
-						} else {
-							// console.log(innerCommentDiv.childNodes.length)
-							// console.log(data.length)
-							
-							//commentHolder[i].appendChild(innerCommentDiv)
-							console.log(commentHolder[i])
-							console.log(findCountOfItems('inner-comment-holder', commentHolder))
-							innerCommentDiv.classList.add('inner-comment-holder')
-							const commentText = document.createElement('p')
-							commentText.classList.add('comment-text')
-							commentText.textContent = `${comment.content}`
-							let res = commentHolder.filter(holder => holder.dataset.id === photo.dataset.id)
-							res[0].appendChild(innerCommentDiv)
-							createBoldText(comment.username,innerCommentDiv)
-							innerCommentDiv.appendChild(commentText)
-							innerCommentDiv.innerHTML += `<div class="clear"></div>`
+						let currentChild = commentHolder[i].children
+						console.log(currentChild)
+						
+						//console.log(commentHolder)
+						for(let j = 0; j < 1; j++){
+							if(currentChild[j].classList.contains('inner-comment-holder')){
+								return
+							} else {
+								// console.log(innerCommentDiv.childNodes.length)
+								// console.log(data.length)
+								
+								//commentHolder[i].appendChild(innerCommentDiv)
+								//console.log(commentHolder)
+								//console.log(findCountOfItems('inner-comment-holder', commentHolder))
+								innerCommentDiv.classList.add('inner-comment-holder')
+								const commentText = document.createElement('p')
+								commentText.classList.add('comment-text')
+								commentText.textContent = `${comment.content}`
+								let res = commentHolder.filter(holder => holder.dataset.id === photo.dataset.id)
+								res[0].appendChild(innerCommentDiv)
+								createBoldText(comment.username,innerCommentDiv)
+								innerCommentDiv.appendChild(commentText)
+								innerCommentDiv.innerHTML += `<div class="clear"></div>`
+							}
 						}
 					})
 				})
@@ -197,8 +204,9 @@ const renderPhotos = posts => {
 }
 
 const findCountOfItems = (needle, haystack) => {
-	let count = haystack.map(x => x.classList.contains(needle))
-	return count.length
+	return haystack.map(x => x.classList.contains(needle))
+	// console.log(count)
+	// return count
 }
 
 // CREATE USERNAME AS DOM ELEMENT TO MAKE IT BOLD
