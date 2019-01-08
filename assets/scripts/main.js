@@ -91,10 +91,12 @@ const renderPhotos = posts => {
 		photoOverlay.classList.add('photo-overlay', 'toggle-overlay')
 		userInfo.classList.add('user-info')
 		commentsAndLikeHolder.appendChild(likesOfPhoto)
+		createBoldText(item.username, commentsAndLikeHolder)
 		commentsAndLikeHolder.appendChild(p)
 		commentsAndLikeHolder.appendChild(comments)
 		photoOverlay.appendChild(commentsAndLikeHolder)
-		p.textContent = `${item.username}: ${item.description}`
+		p.textContent = `${item.description}`
+		p.classList.add('comment-text')
 		comments.textContent = item.content
 		likesOfPhoto.textContent = `${item.likes} people like this photo.`
 		photoOverlay.appendChild(editButton)
@@ -158,7 +160,6 @@ const renderPhotos = posts => {
 		// -----------------------------------------------------
 	})
 		const photos = [...document.querySelectorAll('.photo')]
-		
 		photos.forEach(photo => photo.addEventListener('click', () => {
 			const commentURI  = `/app/comments/index.php?post=${photo.dataset.id}`
 			fetch(commentURI)
@@ -167,31 +168,34 @@ const renderPhotos = posts => {
 			})
 			.then(data => {
 				console.log(data)
-				data.forEach(comment => {
-					console.log(comment.content)
-					const commentHolder = [...document.querySelectorAll('.comments-and-like-holder')]
-					console.log(commentHolder);
-					const commentText = document.createElement('p')
-					let res = commentHolder.filter(holder => holder.dataset.id === photo.dataset.id)
-					res[0].appendChild(commentText)
-					commentText.textContent += `${comment.username} ${comment.content} \n`
+					data.forEach((comment, i, a) => {
+						const commentHolder = [...document.querySelectorAll('.comments-and-like-holder')]
+						console.log(commentHolder);
+						
+						if(commentHolder[i].childNodes.length >= 4){
+							const commentText = document.createElement('p')
+							commentText.classList.add('comment-text')
+							commentText.textContent = `${comment.content}`
+							let res = commentHolder.filter(holder => holder.dataset.id === photo.dataset.id)
+							createBoldText(comment.username, res[0])
+							res[0].appendChild(commentText)
+							res[0].innerHTML += `<div class="clear"></div>`
+						} else {
+							return
+						}
+					})
 				})
-			})
 		}))
 }
 
-
-
-// THIS IS BROKEN COME BACK HERE.
-const findCommentsForPost = (comments) => {
-// Assign comments to each post
-// comments.map(comment => {
-// 		let post = posts.find(x => x.id === comment.post_id)
-// 		photoOverlay.appendChild(commentHolder)
-// 		commentHolder.textContent += `${post.user_id} ${post.comment} \n`
-// })
+// CREATE USERNAME AS DOM ELEMENT TO MAKE IT BOLD
+const createBoldText = (text, parent) => {
+	let node = document.createRange().createContextualFragment(`<span>${text}</span>`)
+	parent.appendChild(node)
+	parent.querySelectorAll('span').forEach(item => {
+		item.classList.add('bold-username')
+	})
 }
-// ----------------------------
 
 const toggleSearchModal = () => {
 	searchModal.classList.remove('is-hidden')

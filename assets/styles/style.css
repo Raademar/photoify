@@ -49,14 +49,6 @@ a {
 .image-holder-div {
 	position: relative;
 }
-.comments-and-like-holder p {
-	text-align: left;
-	margin: 6px 24px;
-}
-.comments-and-like-holder p:nth-of-type(1) {
-	text-align: center;
-	margin-bottom: 12px;
-}
 .photo > .user-info {
 	width: 100%;
 	display: flex;
@@ -472,5 +464,27 @@ input[type="file"] {
 }
 .dropdown-profile-settings-ul li {
 	height: 40px;
+}
+.comments-and-like-holder p {
+	text-align: left;
+	margin: 6px 24px;
+}
+.comments-and-like-holder p:nth-of-type(1) {
+	text-align: center;
+	margin-bottom: 12px;
+}
+.bold-username {
+	font-weight: 800 !important;
+	margin-left: 24px !important;
+}
+.comment-text {
+	display: inline;
+	margin-left: 6px !important;
+}
+.clear{
+  clear: both;
+  display: block;  
+  content: "";
+  width: 100%;  
 }
 /* *************** */
