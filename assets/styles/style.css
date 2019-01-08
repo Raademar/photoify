@@ -458,4 +458,19 @@ input[type="file"] {
 	height: 120px;
 	margin: 5px 5px 0px 5px;
 }
+.dropdown-profile-settings {
+	display: flex;
+	align-content: center;
+	justify-content: center;
+	width: 40%;
+	border: 1px solid #050505;
+}
+.dropdown-profile-settings-ul {
+	list-style-type: none;
+	width: 400px;
+	padding-left: 0px;
+}
+.dropdown-profile-settings-ul li {
+	height: 40px;
+}
 /* *************** */

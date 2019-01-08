@@ -16,16 +16,7 @@ $statement->execute();
 
 $posts = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-
-$fetchComments = $pdo->prepare('SELECT * FROM comments');
-if(!$fetchComments){
-  die(var_dump($pdo->errorInfo()));
-}
-$fetchComments->execute();
-$comments = $fetchComments->fetchAll(PDO::FETCH_ASSOC);
-
 $data['posts'] = $posts;
-$data['comments'] = $comments;
 header('Content-Type: application/json');
 echo json_encode($data);
 

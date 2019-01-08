@@ -12,6 +12,18 @@ if(!isset($_SESSION['user_authenticated'])) {
 
 <div class="outer-container">
 	<!-- Modal for editing profile settings. -->
+	<div class="dropdown-profile-settings">
+		<ul class="dropdown-profile-settings-ul">
+			<li>Profile</li>
+			<li>Account</li>
+			<li>Feed</li>
+			<li>Connections</li>
+			<li>Privacy</li>
+			<li>Notifications</li>
+			<li class="like-icon">Logout</li>
+		</ul>
+	</div>
+
 	<form action="/app/users/profile.php" method="POST" enctype="multipart/form-data" class="profile-modal-holder is-hidden is-visuallyHidden">
 		<div class="profile-input-container profile-modal-content">
 			<input type="text" name="name" id="name" class="profile-form-field" placeholder="Your name..">

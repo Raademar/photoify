@@ -11,9 +11,7 @@ const getAllPosts = () => {
 			return res.json()
 		})
 		.then(json => {
-			console.log(json)
 			renderPhotos(json.posts)
-			renderComments(findPostsWithComments(json.posts, json.comments))
 		})
 }
 
@@ -39,6 +37,7 @@ const renderPhotos = posts => {
 		let commentsAndLikeHolder = document.createElement('div')
 
 		commentsAndLikeHolder.classList.add('comments-and-like-holder')
+		commentsAndLikeHolder.dataset.id = item.id
 		imageHolderDiv.classList.add('image-holder-div')
 		iconHolder.classList.add('icon-holder-inside-overlay')
 		editIcon.classList.add('fas', 'fa-edit', 'fa-2x', 'edit-icon')
@@ -74,6 +73,7 @@ const renderPhotos = posts => {
 		let h5 = document.createElement('h5')
 		let photoOverlay = document.createElement('div')
 		let userInfo = document.createElement('div')
+		photoDiv.dataset.id = item.id
 		userInfo.classList.add('user-info')
 		img.src = item.image
 		profileImageThumb.src = item.profile_image
@@ -144,7 +144,6 @@ const renderPhotos = posts => {
 				.catch(error => console.error('Error:', error))
 		})
 		// -------------------------------
-
 		// Assign a clickListener for each photo to toggle overlay.
 		photoDiv.addEventListener('click', event => {
 			if (
@@ -158,24 +157,41 @@ const renderPhotos = posts => {
 		})
 		// -----------------------------------------------------
 	})
-}
-const findPostsWithComments = (posts, comments) => {
-	// Assign comments to each post
-	comments.map(comment => {
-		let post = posts.find(x => x.id === comment.post_id)
-		post.comment = comment.content
-		console.log(comment)
+		const photos = [...document.querySelectorAll('.photo')]
 		
-		return post ? { ...comment } : 'broken'
-	})
-	// ----------------------------
+		photos.forEach(photo => photo.addEventListener('click', () => {
+			const commentURI  = `/app/comments/index.php?post=${photo.dataset.id}`
+			fetch(commentURI)
+			.then(res => {
+				return res.json()
+			})
+			.then(data => {
+				console.log(data)
+				data.forEach(comment => {
+					console.log(comment.content)
+					const commentHolder = [...document.querySelectorAll('.comments-and-like-holder')]
+					console.log(commentHolder);
+					const commentText = document.createElement('p')
+					let res = commentHolder.filter(holder => holder.dataset.id === photo.dataset.id)
+					res[0].appendChild(commentText)
+					commentText.textContent += `${comment.username} ${comment.content} \n`
+				})
+			})
+		}))
 }
-const renderComments = () => {
-	let p = document.createElement('p')
-	const photoOverlay = document.querySelector('.photo-overlay')
-	photoOverlay.appendChild(p)
-	p.textContent = post.comment
+
+
+
+// THIS IS BROKEN COME BACK HERE.
+const findCommentsForPost = (comments) => {
+// Assign comments to each post
+// comments.map(comment => {
+// 		let post = posts.find(x => x.id === comment.post_id)
+// 		photoOverlay.appendChild(commentHolder)
+// 		commentHolder.textContent += `${post.user_id} ${post.comment} \n`
+// })
 }
+// ----------------------------
 
 const toggleSearchModal = () => {
 	searchModal.classList.remove('is-hidden')
