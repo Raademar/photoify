@@ -170,9 +170,11 @@ const renderPhotos = posts => {
 				console.log(data)
 					data.forEach((comment, i, a) => {
 						const commentHolder = [...document.querySelectorAll('.comments-and-like-holder')]
-						console.log(commentHolder);
+						const innerCommentDiv = document.createElement('div')
+						innerCommentDiv.classList.add('inner-comment-holder')
+						commentHolder[i].appendChild(innerCommentDiv)
 						
-						if(commentHolder[i].childNodes.length >= 4){
+						if(innerCommentDiv.childNodes.length === 0){
 							const commentText = document.createElement('p')
 							commentText.classList.add('comment-text')
 							commentText.textContent = `${comment.content}`
