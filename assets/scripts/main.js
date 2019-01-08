@@ -167,27 +167,38 @@ const renderPhotos = posts => {
 				return res.json()
 			})
 			.then(data => {
-				console.log(data)
+				//console.log(data)
 					data.forEach((comment, i, a) => {
 						const commentHolder = [...document.querySelectorAll('.comments-and-like-holder')]
 						const innerCommentDiv = document.createElement('div')
-						innerCommentDiv.classList.add('inner-comment-holder')
-						commentHolder[i].appendChild(innerCommentDiv)
-						
-						if(innerCommentDiv.childNodes.length === 0){
+						console.log(commentHolder[i])
+						if(findCountOfItems('inner-comment-holder', commentHolder) === data.length){
+							return
+						} else {
+							// console.log(innerCommentDiv.childNodes.length)
+							// console.log(data.length)
+							
+							//commentHolder[i].appendChild(innerCommentDiv)
+							console.log(commentHolder[i])
+							console.log(findCountOfItems('inner-comment-holder', commentHolder))
+							innerCommentDiv.classList.add('inner-comment-holder')
 							const commentText = document.createElement('p')
 							commentText.classList.add('comment-text')
 							commentText.textContent = `${comment.content}`
 							let res = commentHolder.filter(holder => holder.dataset.id === photo.dataset.id)
-							createBoldText(comment.username, res[0])
-							res[0].appendChild(commentText)
-							res[0].innerHTML += `<div class="clear"></div>`
-						} else {
-							return
+							res[0].appendChild(innerCommentDiv)
+							createBoldText(comment.username,innerCommentDiv)
+							innerCommentDiv.appendChild(commentText)
+							innerCommentDiv.innerHTML += `<div class="clear"></div>`
 						}
 					})
 				})
 		}))
+}
+
+const findCountOfItems = (needle, haystack) => {
+	let count = haystack.map(x => x.classList.contains(needle))
+	return count.length
 }
 
 // CREATE USERNAME AS DOM ELEMENT TO MAKE IT BOLD
