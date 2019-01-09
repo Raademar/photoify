@@ -17,27 +17,56 @@ if(!isset($_SESSION['user_authenticated'])) {
 		<h2 class="settings-h2">Settings</h2> 
 		<div class="dropdown-profile-settings">
 			<ul class="dropdown-profile-settings-ul">
-				<li class="settings-list-item">Profile</li>
-				<li class="settings-list-item">Account</li>
-				<li class="settings-list-item">Feed</li>
-				<li class="settings-list-item">Connections</li>
-				<li class="settings-list-item">Privacy</li>
-				<li class="settings-list-item">Notifications</li>
+				<li class="settings-list-item profile">Profile</li>
+				<li class="settings-list-item account">Account</li>
+				<li class="settings-list-item feed">Feed</li>
+				<li class="settings-list-item connections">Connections</li>
+				<li class="settings-list-item privacy">Privacy</li>
+				<li class="settings-list-item notifications">Notifications</li>
 				<li class="like-icon"><a href="/app/users/logout.php" class="logout-button">Logout</a></li>
 			</ul>
 		</div>
 	</div>
-<!-- 
-	<form action="/app/users/profile.php" method="POST" enctype="multipart/form-data" class="profile-modal-holder is-hidden is-visuallyHidden">
+
+	<!-- PROFILE SETTINGS -->
+	<form action="/app/users/profile.php" method="POST" enctype="multipart/form-data" class="profile-modal-holder is-hidden is-visuallyHidden profile-settings">
 		<div class="profile-input-container profile-modal-content">
+			<span class="close-modal"><i class="fas fa-arrow-left"></i></span>
+			<h2 class="settings-h2">Profile</h2> 
 			<input type="text" name="name" id="name" class="profile-form-field" placeholder="Your name..">
 			<input type="text" name="username" id="username" class="profile-form-field" placeholder="Your username..">
-			<input type="file" name="image" id="image" class="file-upload">
 			<textarea name="description" id="description" class="profile-form-field" placeholder="Write something about yourself.."></textarea>
-			<input type="password" name="password" id="password" class="profile-form-field" placeholder="Enter your password..">
 			<button type="submit" class="fullsize-button submit-profile-button">Update profile</button>
 		</div>
-	</form> -->
+	</form>
+	<!-- --------------- -->
+
+	<!-- ACCOUNT SETTINGS -->
+	<form action="/app/users/profile.php" method="POST" enctype="multipart/form-data" class="profile-modal-holder is-hidden is-visuallyHidden account-settings">
+		<div class="profile-input-container profile-modal-content">
+			<span class="close-modal"><i class="fas fa-arrow-left"></i></span>
+			<h2 class="settings-h2">Account</h2> 
+			<input type="password" name="password" id="password" class="profile-form-field" placeholder="Enter your new password..">
+			<input type="password" name="password2" id="password2" class="profile-form-field" placeholder="Enter your new password again..">
+			<button type="submit" class="fullsize-button submit-profile-button">Update profile</button>
+		</div>
+	</form>
+	<!-- --------------- -->
+	
+	<!-- FEED SETTINGS -->
+	<form action="/app/users/profile.php" method="POST" enctype="multipart/form-data" class="profile-modal-holder is-hidden is-visuallyHidden feed-settings">
+		<div class="profile-input-container profile-modal-content">
+			<span class="close-modal"><i class="fas fa-arrow-left"></i></span>
+			<h2 class="settings-h2">Feed</h2> 
+			<label for="friends-feed">See only the photos of people you have a connection with</label>
+			<input type="checkbox" name="friends-feed" id="friends-feed">
+			<label for="everyones-feed">See everyones photo</label>
+			<input type="checkbox" name="everyones-feed" id="everyones-feed">
+			<button type="submit" class="fullsize-button submit-profile-button">Update profile</button>
+		</div>
+	</form>
+	<!-- --------------- -->
+
 	<!-- End of modal -->
 	<!-- User profile -->
 	<div class="profile-container">

@@ -174,16 +174,16 @@ const renderPhotos = posts => {
 						const commentHolder = [...document.querySelectorAll('.comments-and-like-holder')]
 						const innerCommentDiv = document.createElement('div')
 						let currentChild = commentHolder[i].children
-						console.log(currentChild)
+						//console.log(currentChild, 'current child')
 						
-						//console.log(commentHolder)
-						for(let j = 0; j < 1; j++){
+						for(let j = 0; i < currentChild.length; j++){
 							if(currentChild[j].classList.contains('inner-comment-holder')){
+								console.log(currentChild[j])
 								return
 							} else {
+								//console.log(currentChild[j].classList)
 								// console.log(innerCommentDiv.childNodes.length)
 								// console.log(data.length)
-								
 								//commentHolder[i].appendChild(innerCommentDiv)
 								//console.log(commentHolder)
 								//console.log(findCountOfItems('inner-comment-holder', commentHolder))

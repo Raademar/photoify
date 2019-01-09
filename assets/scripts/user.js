@@ -8,7 +8,8 @@ const desc = document.querySelector(".active-user-description")
 const gallery = document.querySelector(".profile-photo-gallery")
 
 const settingsContainer = document.querySelector('.settings-container')
-const closeModal = document.querySelector('.close-modal')
+const closeModal = [...document.querySelectorAll('.close-modal')]
+const toggleSpecificSettingsModal = [...document.querySelectorAll('.settings-list-item')]
 
 const getUserInfo = () => {
 	fetch(profileURI)
@@ -51,11 +52,35 @@ const toggleprofileSettingsModal = () => {
 	settingsContainer.style.zIndex = "9999"
 }
 
-closeModal.onclick = () => {
-	settingsContainer.classList.add("is-hidden")
-	settingsContainer.classList.add("is-visuallyHidden")
-	settingsContainer.style.zIndex = "0"
+const toggleSpecificSetting = (setting) => {
+	const settingForms = [...document.querySelectorAll('form')]
+	settingForms.forEach((form) => {
+		if(form.classList.contains(`${setting}-settings`)) {
+			form.classList.remove("is-hidden")
+			form.classList.remove("is-visuallyHidden")
+			form.style.zIndex = "99999"
+		}
+	})
 }
+
+toggleSpecificSettingsModal.forEach((setting) => {
+	setting.addEventListener('click', () => {
+		let settingToToggle = setting.classList[1]
+		toggleSpecificSetting(settingToToggle)
+	})
+})
+
+closeModal.forEach(close => close.addEventListener('click', () => {
+	if(close.parentNode !== settingsContainer) {
+		close.parentNode.parentNode.classList.add("is-hidden")
+		close.parentNode.parentNode.classList.add("is-visuallyHidden")
+		close.parentNode.parentNode.style.zIndex = "0"
+	} else {
+		settingsContainer.classList.add("is-hidden")
+		settingsContainer.classList.add("is-visuallyHidden")
+		settingsContainer.style.zIndex = "0"
+	}
+}))
 
 name.addEventListener("click", () => {
 	toggleprofileSettingsModal()
