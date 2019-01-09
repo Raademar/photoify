@@ -12,18 +12,22 @@ if(!isset($_SESSION['user_authenticated'])) {
 
 <div class="outer-container">
 	<!-- Modal for editing profile settings. -->
-	<div class="dropdown-profile-settings">
-		<ul class="dropdown-profile-settings-ul">
-			<li>Profile</li>
-			<li>Account</li>
-			<li>Feed</li>
-			<li>Connections</li>
-			<li>Privacy</li>
-			<li>Notifications</li>
-			<li class="like-icon">Logout</li>
-		</ul>
+	<div class="settings-container is-hidden is-visuallyHidden">
+		<span class="close-modal"><i class="fas fa-arrow-left"></i></span>
+		<h2 class="settings-h2">Settings</h2> 
+		<div class="dropdown-profile-settings">
+			<ul class="dropdown-profile-settings-ul">
+				<li class="settings-list-item">Profile</li>
+				<li class="settings-list-item">Account</li>
+				<li class="settings-list-item">Feed</li>
+				<li class="settings-list-item">Connections</li>
+				<li class="settings-list-item">Privacy</li>
+				<li class="settings-list-item">Notifications</li>
+				<li class="like-icon"><a href="/app/users/logout.php" class="logout-button">Logout</a></li>
+			</ul>
+		</div>
 	</div>
-
+<!-- 
 	<form action="/app/users/profile.php" method="POST" enctype="multipart/form-data" class="profile-modal-holder is-hidden is-visuallyHidden">
 		<div class="profile-input-container profile-modal-content">
 			<input type="text" name="name" id="name" class="profile-form-field" placeholder="Your name..">
@@ -33,7 +37,7 @@ if(!isset($_SESSION['user_authenticated'])) {
 			<input type="password" name="password" id="password" class="profile-form-field" placeholder="Enter your password..">
 			<button type="submit" class="fullsize-button submit-profile-button">Update profile</button>
 		</div>
-	</form>
+	</form> -->
 	<!-- End of modal -->
 	<!-- User profile -->
 	<div class="profile-container">
@@ -46,7 +50,6 @@ if(!isset($_SESSION['user_authenticated'])) {
 		<h5 class="active-user-description toggle-description">No active user.</h5>
 		<div class="profile-photo-gallery"></div>
 	</div>
-	<a href="/app/users/logout.php" class="logout-button">Logout</a>
 <!-- outer-container ends in footer. -->
 <?php 
 require __DIR__.'/views/footer.php';

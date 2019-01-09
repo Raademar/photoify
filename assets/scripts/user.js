@@ -7,6 +7,9 @@ const name = document.querySelector(".active-user")
 const desc = document.querySelector(".active-user-description")
 const gallery = document.querySelector(".profile-photo-gallery")
 
+const settingsContainer = document.querySelector('.settings-container')
+const closeModal = document.querySelector('.close-modal')
+
 const getUserInfo = () => {
 	fetch(profileURI)
 		.then(res => {
@@ -43,17 +46,15 @@ const renderPhotos = userPhoto => {
 }
 
 const toggleprofileSettingsModal = () => {
-	profileSettingsModal.classList.remove("is-hidden")
-	profileSettingsModal.classList.remove("is-visuallyHidden")
-	profileSettingsModal.style.zIndex = "9999"
+	settingsContainer.classList.remove("is-hidden")
+	settingsContainer.classList.remove("is-visuallyHidden")
+	settingsContainer.style.zIndex = "9999"
 }
 
-window.onclick = function(event) {
-	if (event.target == profileSettingsModal) {
-		profileSettingsModal.classList.add("is-hidden")
-		profileSettingsModal.classList.add("is-visuallyHidden")
-		profileSettingsModal.style.zIndex = "0"
-	}
+closeModal.onclick = () => {
+	settingsContainer.classList.add("is-hidden")
+	settingsContainer.classList.add("is-visuallyHidden")
+	settingsContainer.style.zIndex = "0"
 }
 
 name.addEventListener("click", () => {
