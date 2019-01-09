@@ -35,6 +35,7 @@ if(!isset($_SESSION['user_authenticated'])) {
 			<h2 class="settings-h2">Profile</h2> 
 			<input type="text" name="name" id="name" class="profile-form-field" placeholder="Your name..">
 			<input type="text" name="username" id="username" class="profile-form-field" placeholder="Your username..">
+			<input type="email" name="email" id="email" class="profile-form-field" placeholder="Your email..">
 			<textarea name="description" id="description" class="profile-form-field" placeholder="Write something about yourself.."></textarea>
 			<button type="submit" class="fullsize-button submit-profile-button">Update profile</button>
 		</div>
@@ -48,7 +49,7 @@ if(!isset($_SESSION['user_authenticated'])) {
 			<h2 class="settings-h2">Account</h2> 
 			<input type="password" name="password" id="password" class="profile-form-field" placeholder="Enter your new password..">
 			<input type="password" name="password2" id="password2" class="profile-form-field" placeholder="Enter your new password again..">
-			<button type="submit" class="fullsize-button submit-profile-button">Update profile</button>
+			<button type="submit" disabled class="fullsize-button submit-profile-button">Update profile</button>
 		</div>
 	</form>
 	<!-- --------------- -->

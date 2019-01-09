@@ -314,8 +314,10 @@ input[type='file'] {
 textarea {
 	resize: none;
 	padding-top: 30px;
-	font-family: inherit;
-	font-size: inherit;
+	font-family: 'Open Sans', sans-serif !important;
+}
+input {
+	font-family: 'Open Sans', sans-serif !important;
 }
 .posts-form-field:focus {
 	outline: none;

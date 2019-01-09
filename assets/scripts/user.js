@@ -63,10 +63,29 @@ const toggleSpecificSetting = (setting) => {
 	})
 }
 
+const fillUserInfo = user => {
+	const name = document.querySelector('#name')
+	const username = document.querySelector('#username')
+	const email = document.querySelector('#email')
+	const description = document.querySelector('#description')
+
+	name.value = user.name
+	username.value = user.username
+	email.value = user.email
+	description.value = user.description
+}
+
 toggleSpecificSettingsModal.forEach((setting) => {
 	setting.addEventListener('click', () => {
 		let settingToToggle = setting.classList[1]
 		toggleSpecificSetting(settingToToggle)
+		fetch(profileURI)
+		.then(res => {
+			return res.json()
+		})
+		.then(json => {
+			fillUserInfo(json[0])
+		})
 	})
 })
 
