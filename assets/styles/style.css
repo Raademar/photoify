@@ -115,7 +115,7 @@ a {
 .navigation-button {
 	width: 60px;
 	height: 60px;
-	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+	/* box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); */
 	background: rgb(20, 20, 20);
 	background: linear-gradient(
 		49deg,
@@ -129,8 +129,12 @@ a {
 .fullsize-button {
 	width: 160px;
 	height: 50px;
-	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-	background: #ffbe0b;
+	/* box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); */
+	background: linear-gradient(
+		49deg,
+		rgba(20, 20, 20, 1) -50%,
+		rgba(76, 27, 236, 1) 100%
+	);
 	color: #fff;
 	border: none;
 	border-radius: 10px;
@@ -145,7 +149,7 @@ a {
 .floating-action-button {
 	width: 60px;
 	height: 60px;
-	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+	/* box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); */
 	background: rgb(226, 36, 52);
 	background: linear-gradient(
 		45deg,

@@ -11,8 +11,8 @@ const getAllPosts = () => {
 			return res.json()
 		})
 		.then(json => {
-			console.log(json);
-			
+			console.log(json)
+
 			renderPhotos(json.posts)
 		})
 }
@@ -161,46 +161,39 @@ const renderPhotos = posts => {
 		})
 		// -----------------------------------------------------
 	})
-		const photos = [...document.querySelectorAll('.photo')]
-		photos.forEach(photo => photo.addEventListener('click', () => {
-			const commentURI  = `/app/comments/index.php?post=${photo.dataset.id}`
+	const photos = [...document.querySelectorAll('.photo')]
+	photos.forEach(photo =>
+		photo.addEventListener('click', event => {
+			const commentURI = `/app/comments/index.php?post=${photo.dataset.id}`
 			fetch(commentURI)
-			.then(res => {
-				return res.json()
-			})
-			.then(data => {
-				//console.log(data)
+				.then(res => {
+					return res.json()
+				})
+				.then(data => {
+					const commentHolder = event.target.parentNode.querySelector(
+						'.comments-and-like-holder'
+					)
+					const outerInnerCommentDiv = document.createElement('div')
+					outerInnerCommentDiv.classList.add('outer-inner-comment-holder')
+					if(commentHolder.contains(commentHolder.querySelector('.outer-inner-comment-holder'))) {
+						commentHolder.removeChild(commentHolder.querySelector('.outer-inner-comment-holder'))
+					}
+					commentHolder.appendChild(outerInnerCommentDiv)
+					outerInnerCommentDiv.innerHTML = ''
 					data.forEach((comment, i, a) => {
-						const commentHolder = [...document.querySelectorAll('.comments-and-like-holder')]
 						const innerCommentDiv = document.createElement('div')
-						let currentChild = commentHolder[i].children
-						//console.log(currentChild, 'current child')
-						
-						for(let j = 0; i < currentChild.length; j++){
-							if(currentChild[j].classList.contains('inner-comment-holder')){
-								console.log(currentChild[j])
-								return
-							} else {
-								//console.log(currentChild[j].classList)
-								// console.log(innerCommentDiv.childNodes.length)
-								// console.log(data.length)
-								//commentHolder[i].appendChild(innerCommentDiv)
-								//console.log(commentHolder)
-								//console.log(findCountOfItems('inner-comment-holder', commentHolder))
-								innerCommentDiv.classList.add('inner-comment-holder')
-								const commentText = document.createElement('p')
-								commentText.classList.add('comment-text')
-								commentText.textContent = `${comment.content}`
-								let res = commentHolder.filter(holder => holder.dataset.id === photo.dataset.id)
-								res[0].appendChild(innerCommentDiv)
-								createBoldText(comment.username,innerCommentDiv)
-								innerCommentDiv.appendChild(commentText)
-								innerCommentDiv.innerHTML += `<div class="clear"></div>`
-							}
-						}
+						innerCommentDiv.classList.add('inner-comment-holder')
+						outerInnerCommentDiv.appendChild(innerCommentDiv)
+						const commentText = document.createElement('p')
+						commentText.classList.add('comment-text')
+						commentText.textContent = `${comment.content}`
+						createBoldText(comment.username, innerCommentDiv)
+						innerCommentDiv.appendChild(commentText)
+						innerCommentDiv.innerHTML += `<div class="clear"></div>`
 					})
 				})
-		}))
+		})
+	)
 }
 
 const findCountOfItems = (needle, haystack) => {
@@ -211,7 +204,9 @@ const findCountOfItems = (needle, haystack) => {
 
 // CREATE USERNAME AS DOM ELEMENT TO MAKE IT BOLD
 const createBoldText = (text, parent) => {
-	let node = document.createRange().createContextualFragment(`<span>${text}</span>`)
+	let node = document
+		.createRange()
+		.createContextualFragment(`<span>${text}</span>`)
 	parent.appendChild(node)
 	parent.querySelectorAll('span').forEach(item => {
 		item.classList.add('bold-username')
