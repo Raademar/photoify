@@ -104,3 +104,25 @@ if(isset($request->id)) {
 
   echo json_encode($likes);
 }
+
+if(isset($request->postId)) {
+  $postId = intval($request->postId);
+  $comment = trim(filter_var($request->comment, FILTER_SANITIZE_STRING));
+  $userId = $_SESSION['user_authenticated']['id'];
+
+  $statement = $pdo->prepare('INSERT INTO comments (post_id, user_id, content) VALUES (:post_id, :user_id, :content)');
+  $statement->bindParam(':post_id', $postId, PDO::PARAM_INT);
+  $statement->bindParam(':user_id', $userId, PDO::PARAM_INT);
+  $statement->bindParam(':content', $comment, PDO::PARAM_STR);
+
+  if(!$statement){
+    die(var_dump($statement->errorInfo()));
+  }
+
+  $statement->execute();
+
+  if(!$statement){
+    die(var_dump($statement->errorInfo()));
+  }
+  redirect('index.php');
+}

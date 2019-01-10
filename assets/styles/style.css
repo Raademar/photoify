@@ -360,6 +360,30 @@ input {
 .comment-icon {
 	color: #ffbe0b;
 }
+.comment-modal-content {
+	display: flex;
+	flex-direction: column;
+	
+}
+.comment-modal-content span {
+	text-align: center !important;
+}
+.comment-text-input {
+	height: 60px;
+	width: 260px;
+	border: 1px solid white;
+	background: transparent;
+	padding-left: 24px;
+	color: #fff;
+	transition: 0.2s ease-in-out all;
+}
+.comment-text-input:focus {
+	outline: none;
+	border: 1px solid #ffbe0b;
+}
+.comment-text-input:active {
+	outline: none;
+}
 /* *************** */
 /* PROFILE STYLES */
 

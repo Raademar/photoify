@@ -4,6 +4,7 @@ const deleteURI = '/app/posts/delete.php'
 const photoHolder = document.querySelector('.photo-container')
 const searchButton = document.querySelector('.search-button')
 const searchModal = document.querySelector('.search-modal-holder')
+const bottomNav = document.querySelector('.button-nav-container')
 
 const getAllPosts = () => {
 	fetch(photoURI)
@@ -107,7 +108,47 @@ const renderPhotos = posts => {
 		iconHolder.appendChild(dislikeIcon)
 		photoOverlay.appendChild(iconHolder)
 		// -------------------------------------------------------
+		
+		// Assign clickListener for commentIcon
 
+		commentIcon.addEventListener('click', () => {
+			bottomNav.classList.add('animated', 'fadeOutDownBig')
+			const commentInputModal = `
+				<div class="comment-modal-holder animated fadeInDown">
+					<div class="comment-modal-content">
+						<div class="input-container comment-input-container">
+							<input type="text" name="comment-text" id="comment-text" class="comment-text-input" placeholder="Write your comment..">
+							<button type="submit" class="fullsize-button submit-comment-button">Submit comment</button>
+						</div>
+						<span class="delete-text-button">Cancel</span>
+					</div>
+				</div>
+			`
+			photoDiv.innerHTML += commentInputModal
+			const submitCommentButton = document.querySelector('.submit-comment-button')
+			const commentText = document.querySelector('.comment-text-input')			
+			submitCommentButton.addEventListener('click', () => {
+				let comment = {
+					postId: item.id,
+					comment: commentText.value
+				}
+				fetch(storeURI, {
+					method: 'POST',
+					body: JSON.stringify(comment),
+					headers: {
+						'Content-Type': 'application/json'
+					}
+				})
+					.then(res => res.json())
+					.then(response => {
+					})
+					.catch(error => console.error(error))
+				commentInputModal.classList.remove('fadeInDown')
+				commentInputModal.classList.add('fadeOutUp')
+				})
+		})
+
+		// ------------------------------------
 		// Assign clickListener for likeIcon.
 		likeIcon.addEventListener('click', () => {
 			likeIcon.classList.remove('far')
