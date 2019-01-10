@@ -3,7 +3,7 @@ Instagram clone, school project @ Yrgo
 
 ## TODO
 
-* Comment on posts
+
 * Display posts on index depending on the people user follows
 * Swiping images for navigation
 * Toggle navbar when tapping on image(post) or on icon on right side
@@ -16,7 +16,6 @@ Instagram clone, school project @ Yrgo
 
 ## DOING
 * Styling profile
-* User seems to get lost after posts has been made, look into this. (Only on demo mobile via Ngrok?)
 
 ## DONE
 * ~~Register~~
@@ -30,3 +29,4 @@ Instagram clone, school project @ Yrgo
 * ~~Delete posts~~
 * ~~Like posts~~
 * ~~Toggle info of images(posts) when tapping on them~~
+* ~~Comment on posts~~
