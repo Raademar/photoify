@@ -110,7 +110,6 @@ const renderPhotos = posts => {
 		// -------------------------------------------------------
 		
 		// Assign clickListener for commentIcon
-
 		commentIcon.addEventListener('click', () => {
 			bottomNav.classList.add('animated', 'fadeOutDownBig')
 			const commentInputModal = `
@@ -126,7 +125,15 @@ const renderPhotos = posts => {
 			`
 			photoDiv.innerHTML += commentInputModal
 			const submitCommentButton = document.querySelector('.submit-comment-button')
-			const commentText = document.querySelector('.comment-text-input')			
+			const commentText = document.querySelector('.comment-text-input')
+			const cancelComment = document.querySelector('.delete-text-button')
+			const commentModal = document.querySelector('.comment-modal-holder')
+			cancelComment.addEventListener('click', () => {
+				bottomNav.classList.remove('fadeOutDownBig')
+				bottomNav.classList.add('animated', 'fadeInUpBig')
+				commentModal.innerHTML = ''
+			})
+			
 			submitCommentButton.addEventListener('click', () => {
 				let comment = {
 					postId: item.id,
@@ -143,8 +150,9 @@ const renderPhotos = posts => {
 					.then(response => {
 					})
 					.catch(error => console.error(error))
-				commentInputModal.classList.remove('fadeInDown')
-				commentInputModal.classList.add('fadeOutUp')
+					bottomNav.classList.remove('fadeOutDownBig')
+					bottomNav.classList.add('animated', 'fadeInUpBig')
+					commentModal.innerHTML = ''
 				})
 		})
 
