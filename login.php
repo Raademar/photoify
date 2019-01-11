@@ -5,6 +5,9 @@ require __DIR__.'/views/header.php';
 ?>
 
 <div class="outer-container">
+<?php if (isset($_SESSION['errors'])): ?>
+	<h5 class="error-message"> <?=$_SESSION['errors']; ?> </h5> 
+<?php endif; ?>
 	<form action="/app/users/login.php" method="POST">
 		<div class="login-input-container">
 			<input type="text" name="username" id="username" class="login-form-field" placeholder="Username or email">

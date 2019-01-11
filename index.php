@@ -10,6 +10,9 @@ if(!isset($_SESSION['user_authenticated'])) {
 ?>
 
 <div class="outer-container">
+<?php if (isset($_SESSION['errors'])): ?>
+	<h5 class="error-message"> <?=$_SESSION['errors']; ?> </h5> 
+<?php endif; ?>
 	<div class="search-modal-holder is-hidden is-visuallyHidden">
 		<div class="search-modal-content">
 			<form action="/app/posts/index.php" method="GET">

@@ -6,17 +6,13 @@ require __DIR__.'/../autoload.php';
 if(isset($_FILES['image'])) {
   $image = $_FILES['image'];
 	$desc = trim(filter_var($_POST['description'], FILTER_SANITIZE_STRING)) ?? '';
-  $errors = [];
 
-  if($image['size'] >= 3145728) {
-    $errors[] = 'The uploaded file '. $image['name'] . ' exceeded the filsize limit';
+  if($image['size'] == 0) {
+    reportError('Please choose a photo to upload.', '/new-post.php');
   }
 
-  if(count($errors) > 0) {
-    $_SESSION['errors'] = $errors;
-
-    print_r($errors);
-    exit;
+  if($image['size'] >= 3545728) {
+    reportError('The uploaded file exceeded the filsize limit', '/new-post.php');
   }
   
   // Here we check if the user already have a folder for uploads, if not, create one.
@@ -39,7 +35,9 @@ if(isset($_FILES['image'])) {
 	
 	if(!$statement){
 		die(var_dump($statement->errorInfo()));
-	}
+  }
+  
+  $_SESSION['errors'] = '';
   redirect('/index.php');
 }
 

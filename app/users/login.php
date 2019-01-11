@@ -11,8 +11,7 @@ if(isset($_POST['username'], $_POST['password'])) {
 	$statement->execute();
 	$user = $statement->fetch(PDO::FETCH_ASSOC);
 	if(!$user) {
-		die(var_dump($pdo->errorInfo()));
-		redirect('/login.php');
+		reportError('Wrong login credentials given.', '/login.php');
 	}
 	if(password_verify($password, $user['password'])){
 		$_SESSION['user_authenticated'] = [
@@ -22,9 +21,10 @@ if(isset($_POST['username'], $_POST['password'])) {
 			'email' => $user['email'],
 			'password' => $user['password'],
 		];
+		$_SESSION['errors'] = '';
 		redirect('/index.php');
 	} else {
-		echo "Wrong credentials!";
+		reportError('Wrong login credentials given.', '/login.php');
 	}
 } else {
 	redirect('/login.php');

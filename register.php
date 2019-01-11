@@ -6,7 +6,7 @@ require __DIR__.'/views/header.php';
 
 <div class="outer-container">
 <?php if (isset($_SESSION['errors'])): ?>
-<h5 class="error-message"> <?=$_SESSION['errors']; ?> </h5> 
+	<h5 class="error-message"> <?=$_SESSION['errors']; ?> </h5> 
 <?php endif; ?>
 	<form action="/app/users/register.php" method="POST">
 		<div class="register-input-container">

@@ -1,10 +1,17 @@
 <?php
 declare(strict_types=1);
 require __DIR__.'/views/header.php';
-// die(var_dump($_SESSION['user_authenticated']));
+
+if(!isset($_SESSION['user_authenticated'])) {
+	redirect('/login.php');
+}
+
 ?>
 
 <div class="outer-container">
+<?php if (isset($_SESSION['errors'])): ?>
+	<h5 class="error-message"> <?=$_SESSION['errors']; ?> </h5> 
+<?php endif; ?>
 	<form action="/app/posts/store.php" method="POST" enctype="multipart/form-data">
 		<div class="posts-input-container">
 			<div class="preview-image"></div>

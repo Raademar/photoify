@@ -12,9 +12,7 @@ if(isset($_POST['name'], $_POST['username'], $_POST['email'], $_POST['password']
 	if($password === $repeatPassword) {
 		$password = password_hash($password, PASSWORD_DEFAULT);
 	} else {
-		$_SESSION['errors'] = 'Passwords do not match!';
-		redirect('/register.php');
-		exit;
+		reportError('Passwords do not match!', '/register.php');
 	}
 
 	$statement = $pdo->prepare('SELECT * FROM users WHERE username = :username OR email = :email');
@@ -29,9 +27,7 @@ if(isset($_POST['name'], $_POST['username'], $_POST['email'], $_POST['password']
 	$user = $statement->fetch(PDO::FETCH_ASSOC);
 
 	if($user) {
-		$_SESSION['errors'] = 'A user with those credentials already exist, please try again';
-		redirect('/register.php');
-		exit;
+		reportError('A user with those credentials already exist, please try again', '/register.php');
 	}
 
 

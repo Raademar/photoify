@@ -19,20 +19,17 @@ if(isset($_POST['description'])) {
     if(file_exists($_SERVER['DOCUMENT_ROOT'].$post['image'])) {
       if(unlink($_SERVER['DOCUMENT_ROOT'].$post['image'])){
       } else {
-        echo 'fail';
-        die(var_dump($post['image']));
+        reportError('Something went wrong', "/edit-post.php/?id=$id");
       }
     } else {
-      echo 'file does not exist.';
-      var_dump($_SERVER["DOCUMENT_ROOT"].$post['image']);
-      die(var_dump($post['image']));
+      reportError('File does not exist.', "/edit-post.php/?id=$id");
     }
 
     // If the user edits to a new image, select that one as $image
     $image = $_FILES['image'];
 
-    if($image['size'] >= 3145728) {
-      $errors[] = 'The uploaded file '. $image['name'] . ' exceeded the filsize limit';
+    if($image['size'] == 0) {
+      reportError('Please choose a photo to upload.', "/edit-post.php/?id=$id");
     }
 
     $destination = '/../uploads/' . $_SESSION['user_authenticated']['id']  . '/posts/' . time() . '-' . $image['name'];
@@ -51,12 +48,6 @@ if(isset($_POST['description'])) {
 
   $desc = ($_POST['description']) ? trim(filter_var($_POST['description'], FILTER_SANITIZE_STRING)) : $post['description'];
   
-
-  if(count($errors) > 0) {
-    $_SESSION['errors'] = $errors;
-    print_r($errors);
-    exit;
-  }
 	
 	$statement = $pdo->prepare('UPDATE posts SET image = :image, description = :description WHERE id = :id');
 	$statement->bindParam(':image', $destination, PDO::PARAM_STR);
@@ -66,7 +57,8 @@ if(isset($_POST['description'])) {
 	
 	if(!$statement){
 		die(var_dump($statement->errorInfo()));
-	}
-
+  }
+  
+  $_SESSION['errors'] = '';
   redirect('/index.php');
 }

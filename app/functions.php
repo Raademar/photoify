@@ -17,3 +17,16 @@ if (!function_exists('redirect')) {
 function contains($needle, $haystack) {
     return strpos($haystack, $needle) !== false;
 }
+
+  /**
+   * Report error to the client.
+   * 
+   * @param string $errorMessage
+   * 
+   * @return void
+   */
+  function reportError(string $errorMessage, string $path) {
+    $_SESSION['errors'] = $errorMessage;
+		redirect($path);
+		exit;
+  }

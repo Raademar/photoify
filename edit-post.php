@@ -1,7 +1,12 @@
 <?php
 declare(strict_types=1);
+
 require __DIR__.'/views/header.php';
-// die(var_dump($_SESSION['user_authenticated']));
+
+if(!isset($_SESSION['user_authenticated'])) {
+	redirect('/login.php');
+}
+
 $id = $_GET['id'] ?? null;
 
 if($id === null) {
