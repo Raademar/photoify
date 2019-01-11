@@ -13,7 +13,6 @@ const getAllPosts = () => {
 		})
 		.then(json => {
 			console.log(json)
-
 			renderPhotos(json.posts)
 		})
 }
@@ -154,6 +153,7 @@ const renderPhotos = posts => {
 						bottomNav.classList.add("animated", "fadeInUpBig")
 						commentModal.innerHTML = ""
 						photoOverlay.classList.add("toggle-overlay")
+						console.log(response)
 					})
 					.catch(error => console.error(error))
 			})
@@ -209,7 +209,12 @@ const renderPhotos = posts => {
 			) {
 				return
 			}
-		(photoOverlay.classList.contains("toggle-overlay")) ? photoOverlay.classList.remove("toggle-overlay") : photoOverlay.classList.add("toggle-overlay")
+			if(photoOverlay.classList.contains("toggle-overlay")){
+				console.log('overlay toggled');	
+				photoOverlay.classList.remove("toggle-overlay")
+			} else {
+					photoOverlay.classList.add("toggle-overlay")
+				}
 		})
 		// -----------------------------------------------------
 	})

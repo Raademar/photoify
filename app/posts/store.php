@@ -124,5 +124,22 @@ if(isset($request->postId)) {
   if(!$statement){
     die(var_dump($statement->errorInfo()));
   }
-  redirect('index.php');
+
+  $statement = $pdo->prepare('SELECT * FROM comments WHERE post_id = :post_id');
+  $statement->bindParam(':post_id', $postId, PDO::PARAM_INT);
+
+  if(!$statement){
+    die(var_dump($statement->errorInfo()));
+  }
+
+  $statement->execute();
+
+  if(!$statement){
+    die(var_dump($statement->errorInfo()));
+  }
+
+  $comments = $statement->fetchAll(PDO::FETCH_ASSOC);
+  header('Content-Type: application/json');
+
+  echo json_encode($comments);
 }
