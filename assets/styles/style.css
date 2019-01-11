@@ -25,6 +25,10 @@ a {
 	outline: none;
 	text-decoration: none;
 }
+.error-message {
+	color: #e22434;
+	text-align: center;
+}
 /* INDEX STYLES */
 .outer-container {
 	width: 100vw;
