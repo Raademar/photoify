@@ -10,7 +10,7 @@ $statement->bindParam(':user_id', $id, PDO::PARAM_INT);
 $statement->execute();
 $user = $statement->fetch(PDO::FETCH_ASSOC);
 
-$statement = $pdo->prepare('SELECT users.id, posts.user_id, posts.description, posts.image 
+$statement = $pdo->prepare('SELECT users.id, posts.user_id, posts.description, posts.image, posts.id 
   FROM posts INNER JOIN users ON users.id = posts.user_id WHERE users.id = :id ORDER BY posts.id DESC');
 
 if(!$statement) {

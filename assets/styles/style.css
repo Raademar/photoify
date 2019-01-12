@@ -476,15 +476,33 @@ input[type='file'] {
 	font-size: 18px;
 }
 .profile-photo-gallery {
-	width: 100%;
-	display: flex;
-	justify-content: center;
-	flex-wrap: wrap;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-gap: 5px;
+	padding: 48px 0px 92px 0px;
 }
-.thumb-photo-gallery {
-	width: 160px;
-	height: 120px;
+/* .thumb-photo-gallery {
 	margin: 5px 5px 0px 5px;
+} */
+.thumbnail {
+	position: relative;
+	width: 120px;
+	height: 120px;
+	overflow: hidden;
+}
+.thumbnail img {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  height: 100%;
+  width: auto;
+  -webkit-transform: translate(-50%,-50%);
+      -ms-transform: translate(-50%,-50%);
+          transform: translate(-50%,-50%);
+}
+.thumbnail img.portrait {
+  width: 100%;
+  height: auto;
 }
 .dropdown-profile-settings {
 	display: flex;

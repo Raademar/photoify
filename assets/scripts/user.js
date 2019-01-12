@@ -6,7 +6,6 @@ const profileImage = document.querySelector(".profile-image")
 const name = document.querySelector(".active-user")
 const desc = document.querySelector(".active-user-description")
 const gallery = document.querySelector(".profile-photo-gallery")
-
 const settingsContainer = document.querySelector('.settings-container')
 const closeModal = [...document.querySelectorAll('.close-modal')]
 const toggleSpecificSettingsModal = [...document.querySelectorAll('.settings-list-item')]
@@ -39,11 +38,21 @@ const renderPhotos = userPhoto => {
 		return
 	}
 	userPhoto.forEach(photo => {
-		let image = document.createElement("img")
-		image.classList.add("thumb-photo-gallery")
-		image.src = photo.image
-		gallery.appendChild(image)
+		
+		const thumbnailImage = `
+			<div class="thumbnail">
+				<img src="${photo.image}" data-id="${photo.id}">
+			</div>
+		`
+		gallery.innerHTML += thumbnailImage
 	})
+		const portraitThumbnailImage = [...document.querySelectorAll('.thumbnail img')]
+		portraitThumbnailImage.map(img => {
+			(img.clientHeight > img.clientWidth) ? img.classList.add('portrait') : img.classList.add('landscape')
+		})
+
+
+	//class="${(photo.image.clientHeight > photo.image.clientWidth) ? 'portrait' : ''}"
 }
 
 const toggleprofileSettingsModal = () => {
