@@ -3,14 +3,11 @@ Instagram clone, school project @ Yrgo
 
 ## TODO
 
-
+* Set cookie when user visits landing page, so the loading screen doesnt load every time we go to index.php
 * Display posts on index depending on the people user follows
-* Swiping images for navigation
-* Toggle navbar when tapping on image(post) or on icon on right side
 * Database setup completed
 * General styling of app
 * Set up restrictions in db (limit size of profile desc) Apply these on client as well.
-* Separate the setting of profile image from other profile setting (or come up with solution).
 * Limit edit / delete action on posts the user created.
 
 
@@ -30,3 +27,5 @@ Instagram clone, school project @ Yrgo
 * ~~Like posts~~
 * ~~Toggle info of images(posts) when tapping on them~~
 * ~~Comment on posts~~
+* ~~Toggle navbar when tapping on image(post) or on icon on right side~~
+* ~~Separate the setting of profile image from other profile setting (or come up with solution).~~
