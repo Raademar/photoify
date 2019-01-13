@@ -8,7 +8,7 @@ if(!isset($_SESSION['user_authenticated'])) {
 
 // die(var_dump($_SESSION['user_authenticated']));
 ?>
-
+<div id="loading"></div>
 <div class="outer-container">
 <?php if (isset($_SESSION['errors'])): ?>
 	<h5 class="error-message"> <?=$_SESSION['errors']; ?> </h5> 
@@ -25,6 +25,26 @@ if(!isset($_SESSION['user_authenticated'])) {
 	</div>
 	<div class="photo-container"></div>
 	<!-- outer-container ends in footer. -->
+
+<script>
+	function onReady(callback) {
+		var intervalId = window.setInterval(function() {
+			if (document.getElementsByTagName('body')[0] !== undefined) {
+				window.clearInterval(intervalId);
+				callback.call(this);
+			}
+		}, 2000);
+	}
+
+	function setVisible(selector, visible) {
+		document.querySelector(selector).style.display = visible ? 'flex' : 'none';
+	}
+
+	onReady(function() {
+		setVisible('.outer-container', true);
+		setVisible('#loading', false);
+	});
+</script>
 
 <?php 
 require __DIR__.'/views/footer.php';

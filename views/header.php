@@ -21,6 +21,7 @@ require __DIR__.'/../app/autoload.php';
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 	<link rel="stylesheet" href="assets/styles/style.css" media="all">
 	<link rel="manifest" href="/manifest.json">
+	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
   <title><?php echo $config['title']; ?></title>
 </head>
 <body>

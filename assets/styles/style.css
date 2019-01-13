@@ -7,6 +7,24 @@ body {
 	overflow-x: hidden;
 	box-sizing: border-box;
 }
+.page    { display: none; padding: 0 0.5em; }
+.page h1 { font-size: 2em; line-height: 1em; margin-top: 1.1em; font-weight: bold; }
+.page p  { font-size: 1.5em; line-height: 1.275em; margin-top: 0.15em; }
+
+#loading {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 100vw;
+  height: 100vh;
+  background-color: #232323;
+  background-image: url("/assets/icons/loading_screen_iphone_x_optimized.gif");
+  background-repeat: no-repeat;
+	background-position: center;
+	background-size: 100%;
+}
 .icon::before {
 	display: inline-block;
 	font-style: normal;
@@ -127,7 +145,7 @@ a {
 	background: linear-gradient(
 		49deg,
 		rgba(20, 20, 20, 1) -50%,
-		rgba(76, 27, 236, 1) 100%
+		#4c1bec 100%
 	);
 	color: #fff;
 	border: none;
@@ -139,7 +157,7 @@ a {
 	/* box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); */
 	background: linear-gradient(
 		49deg,
-		rgba(20, 20, 20, 1) -50%,
+		#141414 -50%,
 		rgba(76, 27, 236, 1) 100%
 	);
 	color: #fff;
@@ -161,7 +179,7 @@ a {
 	background: linear-gradient(
 		45deg,
 		rgba(226, 36, 52, 1) -50%,
-		rgba(252, 93, 24, 1) 100%
+		#fc5d18 100%
 	);
 	color: #fff;
 	border: none;
