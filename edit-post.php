@@ -20,6 +20,7 @@ if($id === null) {
 		<div class="posts-input-container">
 			<div class="preview-image"></div>
 			<input type="file" name="image" id="image" class="file-upload">
+      <label for="image">Pick file to upload</label>
       <textarea name="description" id="description" class="posts-form-field description" placeholder="Describe your photo.."></textarea>
       <input type="hidden" name="id" id="id" value="<?= $id; ?>">
       <div class="button-holder-div">

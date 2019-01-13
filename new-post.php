@@ -16,6 +16,7 @@ if(!isset($_SESSION['user_authenticated'])) {
 		<div class="posts-input-container">
 			<div class="preview-image"></div>
 			<input type="file" name="image" id="image" class="file-upload">
+			<label for="image">Pick file to upload</label>
 			<textarea name="description" id="description" class="posts-form-field description" placeholder="Describe your photo.."></textarea>
 			<button type="submit" class="fullsize-button submit-posts-button">Share photo</button>
 		</div>

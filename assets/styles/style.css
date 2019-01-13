@@ -321,8 +321,30 @@ a {
 	transition: 0.2s ease-in-out all;
 	margin-bottom: 20px;
 }
-input[type='file'] {
+.file-upload {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+.file-upload + label {
+	/* font-size: 1.25em; */
+	/* font-weight: 700; */
+	color: white;
+	background: linear-gradient(
+		49deg,
+		rgba(20, 20, 20, 1) -50%,
+		rgba(76, 27, 236, 1) 100%);
+	display: inline-block;
+	padding: 0.625rem 1.25rem;
 	margin: 20px 0;
+	border-radius: 10px;
+}
+.file-upload:focus + label,
+.file-upload + label:hover {
+    cursor: pointer;
 }
 textarea {
 	resize: none;
@@ -341,9 +363,9 @@ input {
 }
 .preview-image {
 	height: 200px;
-	width: 100%;
+	width: 50%;
 }
-.preview-image > .photo {
+.preview-image + .photo {
 	height: 200px;
 	width: 100%;
 }
@@ -432,10 +454,6 @@ input[type='file'] {
 }
 .profile-form-field:active {
 	outline: none;
-}
-.preview-image {
-	height: 200px;
-	width: 100%;
 }
 .preview-image img {
 	height: 200px;
