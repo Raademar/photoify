@@ -11,6 +11,9 @@ if(!isset($_SESSION['user_authenticated'])) {
 
 
 <div class="outer-container">
+<?php if (isset($_SESSION['errors'])): ?>
+	<h5 class="error-message"> <?=$_SESSION['errors']; ?> </h5> 
+<?php endif; ?>
 	<!-- Modal for editing profile settings. -->
 	<div class="settings-container is-hidden is-visuallyHidden">
 		<span class="close-modal"><i class="fas fa-arrow-left"></i></span>
@@ -74,7 +77,7 @@ if(!isset($_SESSION['user_authenticated'])) {
 		<img src="" alt="User profile photo." class="profile-image">
 		<div class="profile-image-overlay">
 			<i class="fas fa-camera"></i>
-			<span>Update</span>
+			<span>Update</span>	
 		</div>
 		<h2 class="active-user">No active user.</h2> 
 		<h5 class="active-user-description toggle-description">No active user.</h5>

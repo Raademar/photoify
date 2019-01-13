@@ -106,19 +106,22 @@ a {
 	display: flex;
 	width: 100%;
 	height: 80px;
-	justify-content: space-evenly;
+	justify-content: center;
 	align-items: center;
 	position: fixed;
 	bottom: 0;
 	background: #232323;
+}
+.button-nav-container > a, .button-nav-container > button {
+	margin: 0px 30px;
 }
 .button-holder-div {
 	display: flex;
 	align-items: center;
 }
 .navigation-button {
-	width: 60px;
-	height: 60px;
+	width: 55px;
+	height: 55px;
 	/* box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); */
 	background: rgb(20, 20, 20);
 	background: linear-gradient(
@@ -151,8 +154,8 @@ a {
 	border: none;
 }
 .floating-action-button {
-	width: 60px;
-	height: 60px;
+	width: 55px;
+	height: 55px;
 	/* box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); */
 	background: rgb(226, 36, 52);
 	background: linear-gradient(
@@ -163,6 +166,9 @@ a {
 	color: #fff;
 	border: none;
 	border-radius: 20px;
+	transform: rotate(45deg);
+}
+.floating-action-button > i {
 	transform: rotate(45deg);
 }
 .logout-button {
@@ -197,7 +203,7 @@ a {
 	z-index: 0;
 }
 .search-modal-content {
-	width: 355px;
+	width: 100%;
 	height: 188px;
 	background: rgb(20, 20, 20);
 	background: radial-gradient(
@@ -207,7 +213,6 @@ a {
 	);
 	position: absolute;
 	top: 25%;
-	left: 10px;
 }
 .input-container {
 	display: flex;
@@ -217,7 +222,7 @@ a {
 	height: 188px;
 }
 .search-query {
-	height: 60px;
+	height: 55px;
 	width: 260px;
 	border: 1px solid white;
 	background: transparent;
@@ -469,6 +474,23 @@ input[type='file'] {
 	color: #050505;
 	cursor: pointer;
 }
+.input-file {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+.input-file + label {
+	cursor: pointer;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
 .active-user::after {
 	font-family: 'Font Awesome 5 Free';
 	font-weight: 600;
@@ -480,10 +502,8 @@ input[type='file'] {
 	grid-template-columns: 1fr 1fr 1fr;
 	grid-gap: 5px;
 	padding: 48px 0px 92px 0px;
+	position: relative;
 }
-/* .thumb-photo-gallery {
-	margin: 5px 5px 0px 5px;
-} */
 .thumbnail {
 	position: relative;
 	width: 120px;
@@ -567,5 +587,78 @@ input[type='file'] {
 	top: 0;
 	z-index: 0;
 	background: #232323;
+}
+.fullsize-photo-overlay-modal {
+	display: flex;
+	justify-content: center;
+	align-content: center;
+	position: absolute;
+	left: 0;
+	top: 0;
+	background-color: black;
+	background-color: rgba(0, 0, 0, 0.6);
+	-webkit-transition: 0.5s;
+	overflow: auto;
+	transition: all 0.3s linear;
+	z-index: 0;
+}
+.fullsize-photo {
+	height: 100%;
+	width: 100%;
+}
+.profile-photo-modal-holder {
+	display: flex;
+	justify-content: center;
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	padding-top: 100px;
+	background-color: black;
+	background-color: rgba(0, 0, 0, 0.6);
+	-webkit-transition: 0.5s;
+	overflow: auto;
+	transition: all 0.3s linear;
+	z-index: 0;
+}
+.inner-profile-modal-holder {
+	width: 75%;
+	height: 188px;
+	background: rgb(20, 20, 20);
+	background: radial-gradient(
+		circle,
+		rgba(20, 20, 20, 1) 0%,
+		rgba(5, 5, 5, 1) 100%
+	);
+	position: absolute;
+	top: 25%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	align-items: center;
+}
+.inner-profile-modal-holder-buttons {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+}
+.inner-profile-modal-holder-buttons button {
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+	line-height: 1.5;
+	margin: 0;
+	min-height: 24px;
+	padding: 4px 8px;
+	text-align: center;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	vertical-align: middle;
+}
+.upload-new-profile-image {
+	color: #4c1bec;
 }
 /* *************** */

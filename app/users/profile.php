@@ -60,4 +60,47 @@ if(isset($_POST['name'], $_POST['username'], $_POST['email'], $_POST['descriptio
 }
 // ----------------------------
 
+// POST ROUTE TO UPDATE PROFILE IMAGE
+if($_FILES['profile-photo']['name'] !== '') {
+  if(file_exists($_SERVER['DOCUMENT_ROOT'].$user['profile_image'])) {
+    if(unlink($_SERVER['DOCUMENT_ROOT'].$user['profile_image'])){
+    } else {
+      reportError('Something went wrong', "/profile.php");
+    }
+  } else {
+    reportError('File does not exist.', "/profile.php");
+  }
+
+  // If the user edits to a new image, select that one as $image
+  $image = $_FILES['profile-photo'];
+
+  if($image['size'] == 0) {
+    reportError('Please choose a photo to upload.', "/profile.php");
+  }
+
+  $destination = '/../uploads/' . $_SESSION['user_authenticated']['id']  . '/profile_pictures/' . time() . '-' . $image['name'];
+  move_uploaded_file($image['tmp_name'], __DIR__.$destination);
+
+  // Set the $destination variable to be stored in the DB.
+  $destination = '/app/uploads/' . $_SESSION['user_authenticated']['id'] . '/profile_pictures/' . time() . '-' . $image['name'];
+
+} else {
+  // Else we keep the same image as previous.
+  $image = $user['profile_image'];
+
+  // Set the $destination variable to be stored in the DB.
+  $destination = $image;
+}
+	
+$statement = $pdo->prepare('UPDATE users SET profile_image = :image WHERE id = :id');
+$statement->bindParam(':image', $destination, PDO::PARAM_STR);
+$statement->bindParam(':id', $id, PDO::PARAM_STR);
+$statement->execute();
+
+if(!$statement){
+  die(var_dump($pdo->errorInfo()));
+}
+
+$_SESSION['errors'] = '';
 redirect('/profile.php');
+

@@ -1,4 +1,5 @@
 const profileURI = "/app/users/index.php"
+const profileUpdateImageURI = "/app/users/profile.php"
 const profileContainer = document.querySelector(".profile-container")
 const searchButton = document.querySelector(".search-button")
 const profileSettingsModal = document.querySelector(".profile-modal-holder")
@@ -9,6 +10,8 @@ const gallery = document.querySelector(".profile-photo-gallery")
 const settingsContainer = document.querySelector('.settings-container')
 const closeModal = [...document.querySelectorAll('.close-modal')]
 const toggleSpecificSettingsModal = [...document.querySelectorAll('.settings-list-item')]
+const profileImgeOverlay = document.querySelector('.profile-image-overlay')
+
 
 const getUserInfo = () => {
 	fetch(profileURI)
@@ -32,27 +35,33 @@ const renderInfo = user => {
 	desc.textContent = user.description
 }
 
-const renderPhotos = userPhoto => {
+const renderPhotos = async userPhoto => {
 	let postLength = userPhoto.length
 	if (postLength === 0) {
 		return
 	}
 	userPhoto.forEach(photo => {
-		
 		const thumbnailImage = `
 			<div class="thumbnail">
 				<img src="${photo.image}" data-id="${photo.id}">
 			</div>
 		`
 		gallery.innerHTML += thumbnailImage
+
 	})
 		const portraitThumbnailImage = [...document.querySelectorAll('.thumbnail img')]
-		portraitThumbnailImage.map(img => {
+		await portraitThumbnailImage.map(img => {
 			(img.clientHeight > img.clientWidth) ? img.classList.add('portrait') : img.classList.add('landscape')
 		})
 
+		portraitThumbnailImage.map(img => {
+			img.addEventListener('click', (event) => {
+				let imageId = img.dataset.id
+				fetchSpecificPhoto(imageId, event.target)
+			})
+		})
 
-	//class="${(photo.image.clientHeight > photo.image.clientWidth) ? 'portrait' : ''}"
+		localStorage.setItem('userPhotos', JSON.stringify(userPhoto))
 }
 
 const toggleprofileSettingsModal = () => {
@@ -70,6 +79,23 @@ const toggleSpecificSetting = (setting) => {
 			form.style.zIndex = "99999"
 		}
 	})
+}
+
+// window.addEventListener('click', () => {
+// 	if(document.querySelector('.fullsize-photo-overlay-modal'))
+// 	document.querySelector('.fullsize-photo-overlay-modal').parentNode.removeChild(document.querySelector('.fullsize-photo-overlay-modal'))
+// })
+
+const fetchSpecificPhoto = (imageId, target) => {
+	let photoToShowFullsize = JSON.parse(localStorage.getItem('userPhotos')).filter(x => x.id === imageId)
+	console.log(photoToShowFullsize)
+	
+	const fullsizePhotoOverlayModal = `
+		<div class="fullsize-photo-overlay-modal">
+			<img src="${photoToShowFullsize[0].image}" class="fullsize-photo">
+		</div>
+	`
+	target.parentNode.parentNode.innerHTML += (fullsizePhotoOverlayModal)
 }
 
 const fillUserInfo = user => {
@@ -123,6 +149,43 @@ document
 	.querySelector(".profile-image-overlay")
 	.addEventListener("mouseleave", () => {
 		document.querySelector(".profile-image-overlay").style.visibility = "hidden"
-	})
+})
 
+const toggleprofileModal = () => {
+	const tempProfileModal = `
+		<div class="profile-photo-modal-holder">
+			<div class="inner-profile-modal-holder">
+				<div class="inner-profile-modal-holder-header">
+					<h3 class="h3-header">Change profile image</h3>
+				</div>
+				<div class="inner-profile-modal-holder-buttons">
+					<form action="/app/users/profile.php" method="POST" enctype="multipart/form-data" class="update-profile-photo-form">
+						<input type="file" name="profile-photo" id="profile-photo" class="input-file">
+						<label for="profile-photo">
+							<span class="upload-new-profile-image">Upload new image</span>
+						</label>
+						</form>
+					<button class="close-profile-modal error-message">Cancel</button>
+				</div>
+			</div>
+		</div>
+	`
+	profileContainer.innerHTML += tempProfileModal
+	const profileModal = document.querySelector(".profile-photo-modal-holder")
+	
+	window.onclick = function(event) {
+		if (event.target == profileModal) {
+			profileContainer.removeChild(profileModal)
+		}
+	}	
+}
+profileImgeOverlay.addEventListener("click", () => {
+	console.log('toggled modal')
+	toggleprofileModal()
+	const profilePhotoInputFile = document.querySelector('.input-file')
+	const updateProfilePhotoForm = document.querySelector('.update-profile-photo-form')
+	profilePhotoInputFile.addEventListener('change', () => {
+		updateProfilePhotoForm.submit()
+	})
+})
 getUserInfo()
