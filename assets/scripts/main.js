@@ -13,11 +13,11 @@ const getAllPosts = () => {
 		})
 		.then(json => {
 			console.log(json)
-			renderPhotos(json.posts)
+			renderPhotos(json.posts, json.active_user)
 		})
 }
 
-const renderPhotos = posts => {
+const renderPhotos = (posts, user) => {
 	let postLength = posts.length
 	if (postLength === 0) {
 		photoHolder.innerHTML = `<h3>No photos to display :(</h3>`
@@ -65,7 +65,19 @@ const renderPhotos = posts => {
 			"dislike-icon"
 		)
 		editButton.href = `/edit-post.php?id=${item.id}`
-		editButton.appendChild(editIcon)
+		
+		
+		const dropDownMenu = `
+		<div class="dropdown">
+			<button class="dropbtn"></button>
+			<div class="dropdown-content">
+				<a href="${editButton}">
+					Edit post
+					<i class="fas fa-edit edit-icon"></i>
+				</a>
+			</div>
+		</div>
+		`
 		photoDiv.classList.add("photo")
 
 		// --------------------------------------------------
@@ -101,13 +113,13 @@ const renderPhotos = posts => {
 		p.classList.add("comment-text")
 		comments.textContent = item.content
 		likesOfPhoto.textContent = `${item.likes || 0} ${(item.likes === 1) ? 'person' : 'people'} like this photo.` // FIX THIS
-		photoOverlay.appendChild(editButton)
+
+		if(item.user_id === user) photoOverlay.innerHTML += dropDownMenu
 		iconHolder.appendChild(commentIcon)
 		iconHolder.appendChild(likeIcon)
 		iconHolder.appendChild(dislikeIcon)
 		photoOverlay.appendChild(iconHolder)
 		// -------------------------------------------------------
-
 		// Assign clickListener for commentIcon
 		commentIcon.addEventListener("click", () => {
 			bottomNav.classList.add("animated", "fadeOutDownBig")
@@ -133,6 +145,7 @@ const renderPhotos = posts => {
 				bottomNav.classList.remove("fadeOutDownBig")
 				bottomNav.classList.add("animated", "fadeInUpBig")
 				commentModal.innerHTML = ""
+				window.location.reload(false); 
 			})
 
 			submitCommentButton.addEventListener("click", () => {
@@ -156,6 +169,7 @@ const renderPhotos = posts => {
 						console.log(response)
 					})
 					.catch(error => console.error(error))
+					window.location.reload(true); 
 			})
 		})
 
@@ -201,22 +215,28 @@ const renderPhotos = posts => {
 		})
 		// -------------------------------
 		// Assign a clickListener for each photo to toggle overlay.
+
 		photoDiv.addEventListener("click", event => {
-			if (
-				event.target == likeIcon ||
-				event.target == commentIcon ||
-				event.target == dislikeIcon
-			) {
+			const targets = [likeIcon, commentIcon, dislikeIcon, document.querySelector('.dropbtn')]
+			if (targets.includes(event.target)) {
+				console.log('woopido')
 				return
 			}
-			if(photoOverlay.classList.contains("toggle-overlay")){
-				console.log('overlay toggled');	
+			if(photoOverlay.classList.contains("toggle-overlay")){	
 				photoOverlay.classList.remove("toggle-overlay")
 			} else {
 					photoOverlay.classList.add("toggle-overlay")
 				}
 		})
+		
 		// -----------------------------------------------------
+	})
+
+	const dropbtns = [...document.querySelectorAll('.dropbtn')]
+	dropbtns.forEach(dropbtn => {
+		dropbtn.addEventListener('click', () => {
+			togglePostSettingsDropdown()
+		})
 	})
 	const photos = [...document.querySelectorAll(".photo")]
 	photos.forEach(photo =>
@@ -255,9 +275,14 @@ const renderPhotos = posts => {
 						innerCommentDiv.innerHTML += `<div class="clear"></div>`
 					})
 				})
-		})
-	)
+		}))
 }
+
+// const deleteForm = document.querySelector('.delete-post-form-button')
+// deleteForm.addEventListener('click', () => {
+// 	console.log('hej');
+	
+// })
 
 const findCountOfItems = (needle, haystack) => {
 	return haystack.map(x => x.classList.contains(needle))
@@ -293,5 +318,23 @@ window.onclick = function(event) {
 searchButton.addEventListener("click", () => {
 	toggleSearchModal()
 })
+
+const togglePostSettingsDropdown = (event) => {
+  document.querySelector('.dropdown-content').classList.toggle("show")
+}
+
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    let dropdowns = document.querySelector('.dropdown-content')
+    for (let i = 0; i < dropdowns.length; i++) {
+      let openDropdown = dropdowns[i]
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show')
+      }
+    }
+  }
+}
 
 getAllPosts()

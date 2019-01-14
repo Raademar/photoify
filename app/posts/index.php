@@ -17,6 +17,7 @@ $statement->execute();
 $posts = $statement->fetchAll(PDO::FETCH_ASSOC);
 
 $data['posts'] = $posts;
+$data['active_user'] = $_SESSION['user_authenticated']['id'];
 header('Content-Type: application/json');
 echo json_encode($data);
 

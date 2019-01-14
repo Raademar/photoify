@@ -35,7 +35,7 @@ const renderInfo = user => {
 	desc.textContent = user.description
 }
 
-const renderPhotos = async userPhoto => {
+const renderPhotos = userPhoto => {
 	let postLength = userPhoto.length
 	if (postLength === 0) {
 		return
@@ -50,7 +50,7 @@ const renderPhotos = async userPhoto => {
 
 	})
 		const portraitThumbnailImage = [...document.querySelectorAll('.thumbnail img')]
-		await portraitThumbnailImage.map(img => {
+		portraitThumbnailImage.map(img => {
 			(img.clientHeight > img.clientWidth) ? img.classList.add('portrait') : img.classList.add('landscape')
 		})
 
@@ -176,6 +176,7 @@ const toggleprofileModal = () => {
 	window.onclick = function(event) {
 		if (event.target == profileModal) {
 			profileContainer.removeChild(profileModal)
+			window.location.reload()
 		}
 	}	
 }
@@ -186,6 +187,7 @@ profileImgeOverlay.addEventListener("click", () => {
 	const updateProfilePhotoForm = document.querySelector('.update-profile-photo-form')
 	profilePhotoInputFile.addEventListener('change', () => {
 		updateProfilePhotoForm.submit()
+		window.location.reload()
 	})
 })
 getUserInfo()

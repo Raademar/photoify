@@ -1,9 +1,6 @@
 <?php
 declare(strict_types=1);
 require __DIR__.'/../autoload.php';
-// In this file we delete new posts in the database.
-
-
 if(isset($_POST['id'])){
   
   $id = $_POST['id'];
@@ -27,13 +24,10 @@ if(isset($_POST['id'])){
       // MIGHT NEED TO BE MOVED
       redirect('/');
     } else {
-      echo 'fail';
-      die(var_dump($post['image']));
+      reportError('Something went wrong', '/index.php');
     }
   } else {
-    echo 'file does not exist.';
-    var_dump($_SERVER["DOCUMENT_ROOT"].$post['image']);
-    die(var_dump($post['image']));
+    reportError('File does not exist', '/index.php');
   }
 }
 

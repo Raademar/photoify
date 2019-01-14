@@ -7,11 +7,11 @@ if(!isset($_SESSION['user_authenticated'])) {
 	redirect('/login.php');
 }
 
+
 $id = $_GET['id'] ?? null;
 
 if($id === null) {
-  echo("Cannot get the requested post.");
-  exit();
+  reportError('Cannot get the requested post.', '/index.php');
 }
 ?>
 

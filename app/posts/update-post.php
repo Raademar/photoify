@@ -10,7 +10,9 @@ $statement->bindParam(':id', $id, PDO::PARAM_INT);
 $statement->execute();
 $post = $statement->fetch(PDO::FETCH_ASSOC);
 
-$errors = [];
+if($post['user_id'] !== $_SESSION['user_athenticated']['id']) {
+	reportError('Ownership of post is missing.', '/index.php');
+}
 
 if(isset($_POST['description'])) {
   // If user has edited the image or uploaded a new image on the same post
