@@ -91,7 +91,8 @@ const renderPhotos = (posts, user) => {
 		let userInfo = document.createElement("div")
 		photoDiv.dataset.id = item.id
 		userInfo.classList.add("user-info")
-		img.src = item.image
+		img.dataset.src = item.image
+		img.classList.add('lazy')
 		profileImageThumb.src = item.profile_image
 		h5.textContent = item.username
 
@@ -237,8 +238,6 @@ const renderPhotos = (posts, user) => {
 		})
 	})
 
-	
-	
 
 	const dropbtns = [...document.querySelectorAll('.dropbtn')]
 	dropbtns.forEach(dropbtn => {
@@ -284,7 +283,39 @@ const renderPhotos = (posts, user) => {
 					})
 				})
 		}))
+		document.addEventListener("DOMContentLoaded", function() {
+			let lazyloadImages = document.querySelectorAll("img.lazy");    
+			let lazyloadThrottleTimeout;
+			
+			function lazyload () {
+				if(lazyloadThrottleTimeout) {
+					clearTimeout(lazyloadThrottleTimeout);
+				}    
+				console.log('scrolling')
+				
+				lazyloadThrottleTimeout = setTimeout(function() {
+						let scrollTop = window.pageYOffset;
+						lazyloadImages.forEach(function(img) {
+								if(img.offsetTop < (window.innerHeight + scrollTop)) {
+									img.src = img.dataset.src;
+									img.classList.remove('lazy');
+								}
+						});
+						if(lazyloadImages.length == 0) { 
+							document.removeEventListener("scroll", lazyload);
+							window.removeEventListener("resize", lazyload);
+							window.removeEventListener("orientationChange", lazyload);
+						}
+				}, 20);
+			}
+			
+			document.addEventListener("scroll", lazyload);
+			window.addEventListener("resize", lazyload);
+			window.addEventListener("orientationChange", lazyload);
+		});
 }
+
+
 
 const findCountOfItems = (needle, haystack) => {
 	return haystack.map(x => x.classList.contains(needle))

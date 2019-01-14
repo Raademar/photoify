@@ -26,16 +26,13 @@ if(!isset($_SESSION['user_authenticated'])) {
 	<!-- outer-container ends in footer. -->
 
 <script>
-
-
-
 	function onReady(callback) {
 		var intervalId = window.setInterval(function() {
-			if (finishedLoading === true) {
+			if (true) {
 				window.clearInterval(intervalId)
 				callback.call(this)
 			}
-		}, 1000)
+		}, 2000)
 	}
 
 	function setVisible(selector, visible) {
