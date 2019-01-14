@@ -26,16 +26,16 @@ if(!isset($_SESSION['user_authenticated'])) {
 	<!-- outer-container ends in footer. -->
 
 <script>
-	if (!document.cookie.split(';').filter((item) => item.includes('active_visit=true')).length) {
-		console.log('finns inte')
-		
-		function onReady(callback) {
+
+
+
+	function onReady(callback) {
 		var intervalId = window.setInterval(function() {
-			if (document.getElementsByTagName('body')[0] !== undefined) {
+			if (finishedLoading === true) {
 				window.clearInterval(intervalId)
 				callback.call(this)
 			}
-		}, 2000)
+		}, 1000)
 	}
 
 	function setVisible(selector, visible) {
@@ -49,10 +49,6 @@ if(!isset($_SESSION['user_authenticated'])) {
 	setTimeout(() => {
 		document.cookie = 'active_visit=true'
 	}, 10000);
-	} else {
-			console.log('finns')
-			document.querySelector('#loading').style.display = 'none'
-	}
 </script>
 
 <?php 

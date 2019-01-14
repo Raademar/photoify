@@ -5,6 +5,8 @@ const photoHolder = document.querySelector(".photo-container")
 const searchButton = document.querySelector(".search-button")
 const searchModal = document.querySelector(".search-modal-holder")
 const bottomNav = document.querySelector(".button-nav-container")
+let postsLoaded = 0
+let finishedLoading = false
 
 const getAllPosts = () => {
 	fetch(photoURI)
@@ -82,7 +84,7 @@ const renderPhotos = (posts, user) => {
 
 		// --------------------------------------------------
 		// Set the src for each image and assign a toggleable overlay.
-		let img = document.createElement("img")
+		let img = new Image()
 		let profileImageThumb = document.createElement("img")
 		let h5 = document.createElement("h5")
 		let photoOverlay = document.createElement("div")
@@ -113,7 +115,6 @@ const renderPhotos = (posts, user) => {
 		p.classList.add("comment-text")
 		comments.textContent = item.content
 		likesOfPhoto.textContent = `${item.likes || 0} ${(item.likes === 1) ? 'person' : 'people'} like this photo.` // FIX THIS
-
 		if(item.user_id === user) photoOverlay.innerHTML += dropDownMenu
 		iconHolder.appendChild(commentIcon)
 		iconHolder.appendChild(likeIcon)
@@ -228,9 +229,16 @@ const renderPhotos = (posts, user) => {
 					photoOverlay.classList.add("toggle-overlay")
 				}
 		})
-		
 		// -----------------------------------------------------
+		img.addEventListener('load', () => {
+			++postsLoaded
+			if(postsLoaded === posts.length) finishedLoading = true
+			document.cookie = 'images_loaded'
+		})
 	})
+
+	
+	
 
 	const dropbtns = [...document.querySelectorAll('.dropbtn')]
 	dropbtns.forEach(dropbtn => {
@@ -278,16 +286,8 @@ const renderPhotos = (posts, user) => {
 		}))
 }
 
-// const deleteForm = document.querySelector('.delete-post-form-button')
-// deleteForm.addEventListener('click', () => {
-// 	console.log('hej');
-	
-// })
-
 const findCountOfItems = (needle, haystack) => {
 	return haystack.map(x => x.classList.contains(needle))
-	// console.log(count)
-	// return count
 }
 
 // CREATE USERNAME AS DOM ELEMENT TO MAKE IT BOLD
