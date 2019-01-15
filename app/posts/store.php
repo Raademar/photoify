@@ -13,15 +13,21 @@ if(isset($_FILES['image'])) {
 
   if($image['size'] >= 3545728) {
     reportError('The uploaded file exceeded the filsize limit', '/new-post.php');
-  }
+	}
+
   
   // Here we check if the user already have a folder for uploads, if not, create one.
   if (!file_exists(__DIR__ .'/../uploads/' . $_SESSION['user_authenticated']['id'] . '/posts/')) {
-    mkdir(__DIR__ .'/../uploads/' . $_SESSION['user_authenticated']['id'] . '/posts/', 0777, true);
+		mkdir(__DIR__ .'/../uploads/' . $_SESSION['user_authenticated']['id'] . '/posts/', 0777, true);
   }
-  $destination = '/../uploads/' . $_SESSION['user_authenticated']['id']  . '/posts/' . time() . '-' . $image['name'];
+	$destination = '/../uploads/' . $_SESSION['user_authenticated']['id']  . '/posts/' . time() . '-' . $image['name'];
+	
+	// Compress the images before we init the save.
+	compress($image['tmp_name'], $image['tmp_name'], 75);
+
 	move_uploaded_file($image['tmp_name'], __DIR__.$destination);
 
+	
 	// Set the $destination variable to be stored in the DB.
 	$destination = '/app/uploads/' . $_SESSION['user_authenticated']['id'] . '/posts/' . time() . '-' . $image['name'];
 	
