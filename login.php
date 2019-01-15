@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 require __DIR__.'/views/header.php';
-
+setcookie('active_visit', 'active', time() - 3600);
 ?>
 
 <div class="outer-container">

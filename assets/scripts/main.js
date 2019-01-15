@@ -101,7 +101,8 @@ const renderPhotos = (posts, user) => {
 		photoDiv.appendChild(userInfo)
 		imageHolderDiv.appendChild(img)
 		photoDiv.appendChild(imageHolderDiv)
-		photoHolder.appendChild(photoDiv)
+		photoHolder.insertAdjacentElement('beforeend', photoDiv)
+		//photoHolder.appendChild(photoDiv)
 
 		// Get the image data and set it to the image overlay.
 		imageHolderDiv.appendChild(photoOverlay)
@@ -136,7 +137,7 @@ const renderPhotos = (posts, user) => {
 					</div>
 				</div>
 			`
-			photoDiv.innerHTML += commentInputModal
+			photoDiv.insertAdjacentHTML('beforeend', commentInputModal)
 			const submitCommentButton = document.querySelector(
 				".submit-comment-button"
 			)
@@ -147,7 +148,7 @@ const renderPhotos = (posts, user) => {
 				bottomNav.classList.remove("fadeOutDownBig")
 				bottomNav.classList.add("animated", "fadeInUpBig")
 				commentModal.innerHTML = ""
-				window.location.reload(false); 
+				//window.location.reload(false); 
 			})
 
 			submitCommentButton.addEventListener("click", () => {

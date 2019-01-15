@@ -18,42 +18,56 @@ function contains($needle, $haystack) {
     return strpos($haystack, $needle) !== false;
 }
 
+/**
+ * Report error to the client.
+ * 
+ * @param string $errorMessage
+ * 
+ * @return void
+ */
+function reportError(string $errorMessage, string $path) {
+    $_SESSION['errors'] = $errorMessage;
+        redirect($path);
+        exit;
+}
+
+/**
+ * Compress images before we save them to the database
+ * 
+ * @param 
+ * 
+ * 
+ * 
+ * 
+ * @param int $quality
+ * 
+ */
+function compress($source, $compressedImage, $quality) {
+
+	$info = getimagesize($source);
+
+	if ($info['mime'] === 'image/jpeg') 
+			$image = imagecreatefromjpeg($source);
+
+	elseif ($info['mime'] === 'image/gif') 
+			$image = imagecreatefromgif($source);
+
+	elseif ($info['mime'] === 'image/png') 
+			$image = imagecreatefrompng($source);
+
+	imagejpeg($image, $compressedImage, $quality);
+}
+
+if (!function_exists('saved_to_database')) {
   /**
-   * Report error to the client.
+   * Exit script, clear errors and redirect.
    * 
-   * @param string $errorMessage
+   * @param string $path
    * 
    * @return void
    */
-  function reportError(string $errorMessage, string $path) {
-    $_SESSION['errors'] = $errorMessage;
-		redirect($path);
-		exit;
-	}
-
-	/**
-	 * Compress images before we save them to the database
-	 * 
-	 * @param 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * @param int $quality
-	 * 
-	 */
-	function compress($source, $compressedImage, $quality) {
-
-    $info = getimagesize($source);
-
-    if ($info['mime'] === 'image/jpeg') 
-        $image = imagecreatefromjpeg($source);
-
-    elseif ($info['mime'] === 'image/gif') 
-        $image = imagecreatefromgif($source);
-
-    elseif ($info['mime'] === 'image/png') 
-        $image = imagecreatefrompng($source);
-
-    imagejpeg($image, $compressedImage, $quality);
+  function saved_to_database(string $path) {
+		$_SESSION['errors'] = '';
+    redirect($path);
+  }
 }

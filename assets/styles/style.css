@@ -131,6 +131,7 @@ a {
 	position: fixed;
 	bottom: 0;
 	background: #232323;
+	
 }
 .button-nav-container > a, .button-nav-container > button {
 	margin: 0px 30px;
@@ -156,6 +157,7 @@ a {
 	color: #fff;
 	border: none;
 	border-radius: 20px;
+	cursor: pointer;
 }
 .fullsize-button {
 	width: 160px;
@@ -170,12 +172,14 @@ a {
 	border: none;
 	border-radius: 10px;
 	font-size: 1.1rem;
+	cursor: pointer;
 }
 .delete-text-button {
 	color: #e22434;
 	margin-left: 5px;
 	background: transparent;
 	border: none;
+	cursor: pointer;
 }
 .floating-action-button {
 	width: 55px;
@@ -191,15 +195,18 @@ a {
 	border: none;
 	border-radius: 20px;
 	transform: rotate(45deg);
+	cursor: pointer;
 }
 .floating-action-button > i {
 	transform: rotate(45deg);
 }
 .logout-button {
 	color: #e22434;
+	cursor: pointer;
 }
 .login-register-swap {
 	color: #ffbe0b;
+	cursor: pointer;
 }
 /* *************** */
 
@@ -549,7 +556,6 @@ input[type='file'] {
 	width: 100px;
 	height: 100px;
 	border-radius: 50px;
-	background: #fff;
 }
 .profile-image-overlay {
 	visibility: hidden;
@@ -685,12 +691,12 @@ input[type='file'] {
 	justify-content: center;
 	align-content: center;
 	position: absolute;
-	height: 100vh;
-	width: 100vw;
+	/* height: 100vh;
+	width: 100vw; */
 	left: 0;
 	top: 0;
-	background-color: black;
-	background-color: rgba(0, 0, 0, 0.8);
+	/* background-color: black;
+	background-color: rgba(0, 0, 0, 0.8); */
 	-webkit-transition: 0.5s;
 	overflow: auto;
 	transition: all 0.3s linear;
@@ -718,23 +724,20 @@ input[type='file'] {
 	-webkit-transition: 0.5s;
 	overflow: auto;
 	transition: all 0.3s linear;
-	z-index: 0;
+	z-index: 1;
 }
 .inner-profile-modal-holder {
 	width: 75%;
+	max-width: 600px;
 	height: 188px;
-	background: rgb(20, 20, 20);
-	background: radial-gradient(
-		circle,
-		rgba(20, 20, 20, 1) 0%,
-		rgba(5, 5, 5, 1) 100%
-	);
+	background: #232323;
 	position: absolute;
 	top: 25%;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-evenly;
 	align-items: center;
+	border-radius: 10px;
 }
 .inner-profile-modal-holder-buttons {
 	display: flex;

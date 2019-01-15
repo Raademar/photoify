@@ -3,6 +3,7 @@ declare(strict_types=1);
 require __DIR__.'/views/header.php';
 
 if(!isset($_SESSION['user_authenticated'])) {
+	setcookie('active_visit', 'active', time() - 3600);
 	redirect('/login.php');
 }
 
@@ -41,7 +42,7 @@ if(!isset($_SESSION['user_authenticated'])) {
 					window.clearInterval(intervalId)
 					callback.call(this)
 				}
-			}, 2000)
+			}, 3000)
 		}
 
 		onReady(function() {

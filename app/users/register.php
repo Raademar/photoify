@@ -54,6 +54,5 @@ if(isset($_POST['name'], $_POST['username'], $_POST['email'], $_POST['password']
 	}
 
 	$_SESSION['user_authenticated'] = $user;
-	$_SESSION['errors'] = '';
-	redirect('/');
+	saved_to_database('/');
 }

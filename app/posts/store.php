@@ -43,8 +43,7 @@ if(isset($_FILES['image'])) {
 		die(var_dump($statement->errorInfo()));
   }
   
-  $_SESSION['errors'] = '';
-  redirect('/index.php');
+  saved_to_database('/index.php');
 }
 
 // Post request for likes

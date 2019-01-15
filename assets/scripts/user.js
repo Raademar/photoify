@@ -31,7 +31,7 @@ const renderInfo = user => {
 		return
 	}
 	profileImage.src = user.profile_image
-	name.textContent = user.name
+	name.textContent = user.username
 	desc.textContent = user.description
 }
 
@@ -148,7 +148,7 @@ name.addEventListener("click", () => {
 profileImage.addEventListener("mouseover", () => {
 	document.querySelector(".profile-image-overlay").style.visibility = "visible"
 })
-// When mouse leaved overlay, remove it.
+// When mouse leaves overlay, remove it.
 document
 	.querySelector(".profile-image-overlay")
 	.addEventListener("mouseleave", () => {
@@ -174,13 +174,14 @@ const toggleprofileModal = () => {
 			</div>
 		</div>
 	`
-	profileContainer.innerHTML += tempProfileModal
+
+	profileContainer.insertAdjacentHTML('beforeend', tempProfileModal)
 	const profileModal = document.querySelector(".profile-photo-modal-holder")
 	
 	window.onclick = function(event) {
 		if (event.target == profileModal) {
 			profileContainer.removeChild(profileModal)
-			window.location.reload()
+			//window.location.reload()
 		}
 	}	
 }
@@ -191,7 +192,6 @@ profileImgeOverlay.addEventListener("click", () => {
 	const updateProfilePhotoForm = document.querySelector('.update-profile-photo-form')
 	profilePhotoInputFile.addEventListener('change', () => {
 		updateProfilePhotoForm.submit()
-		window.location.reload()
 	})
 })
 getUserInfo()
