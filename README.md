@@ -3,9 +3,8 @@ Instagram clone, school project @ Yrgo
 
 ## TODO
 
-* Set cookie when user visits landing page, so the loading screen doesnt load every time we go to index.php
-* Toggling selected post on users profile.
 * lazy loading images.
+* compress images on backend before saving them.
 
 ### IF TIME
 
@@ -31,3 +30,5 @@ Instagram clone, school project @ Yrgo
 * ~~Toggle navbar when tapping on image(post) or on icon on right side~~
 * ~~Separate the setting of profile image from other profile setting (or come up with solution).~~
 * ~~Limit edit / delete action on posts the user created.~~
+* ~~Set cookie when user visits landing page, so the loading screen doesnt load every time we go to index.php~~
+* ~~Toggling selected post on users profile.~~

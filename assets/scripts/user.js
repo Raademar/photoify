@@ -52,9 +52,6 @@ const renderPhotos = userPhoto => {
 		const portraitThumbnailImage = [...document.querySelectorAll('.thumbnail img')]
 		portraitThumbnailImage.map(img => {
 			(img.clientHeight > img.clientWidth) ? img.classList.add('portrait') : img.classList.add('landscape')
-		})
-
-		portraitThumbnailImage.map(img => {
 			img.addEventListener('click', (event) => {
 				let imageId = img.dataset.id
 				fetchSpecificPhoto(imageId, event.target)
@@ -81,10 +78,7 @@ const toggleSpecificSetting = (setting) => {
 	})
 }
 
-// window.addEventListener('click', () => {
-// 	if(document.querySelector('.fullsize-photo-overlay-modal'))
-// 	document.querySelector('.fullsize-photo-overlay-modal').parentNode.removeChild(document.querySelector('.fullsize-photo-overlay-modal'))
-// })
+
 
 const fetchSpecificPhoto = (imageId, target) => {
 	let photoToShowFullsize = JSON.parse(localStorage.getItem('userPhotos')).filter(x => x.id === imageId)
@@ -92,10 +86,20 @@ const fetchSpecificPhoto = (imageId, target) => {
 	
 	const fullsizePhotoOverlayModal = `
 		<div class="fullsize-photo-overlay-modal">
-			<img src="${photoToShowFullsize[0].image}" class="fullsize-photo">
+			<div class="fullsize-image-holder">
+				<img src="${photoToShowFullsize[0].image}" class="fullsize-photo">
+			</div>
 		</div>
 	`
-	target.parentNode.parentNode.innerHTML += (fullsizePhotoOverlayModal)
+	target.parentNode.parentNode.insertAdjacentHTML('afterbegin', fullsizePhotoOverlayModal)
+	document.querySelector('.fullsize-photo-overlay-modal').addEventListener('click', viewBigVersionOfPhoto)
+}
+
+const viewBigVersionOfPhoto = () => {
+	if(document.querySelector('.fullsize-photo-overlay-modal')) {
+		document.querySelector('.fullsize-photo-overlay-modal').parentNode.removeChild(document.querySelector('.fullsize-photo-overlay-modal'))
+		
+	}
 }
 
 const fillUserInfo = user => {
