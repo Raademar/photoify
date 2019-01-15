@@ -91,7 +91,7 @@ const renderPhotos = (posts, user) => {
 		let userInfo = document.createElement("div")
 		photoDiv.dataset.id = item.id
 		userInfo.classList.add("user-info")
-		img.dataset.src = item.image
+		img.src = item.image
 		img.classList.add('lazy')
 		profileImageThumb.src = item.profile_image
 		h5.textContent = item.username
@@ -233,8 +233,10 @@ const renderPhotos = (posts, user) => {
 		// -----------------------------------------------------
 		img.addEventListener('load', () => {
 			++postsLoaded
-			if(postsLoaded === posts.length) finishedLoading = true
-			document.cookie = 'images_loaded'
+			if(postsLoaded === posts.length){
+				document.cookie = "active_visit=active"
+				finishedLoading = true
+			}	
 		})
 	})
 
@@ -283,36 +285,6 @@ const renderPhotos = (posts, user) => {
 					})
 				})
 		}))
-		document.addEventListener("DOMContentLoaded", function() {
-			let lazyloadImages = document.querySelectorAll("img.lazy");    
-			let lazyloadThrottleTimeout;
-			
-			function lazyload () {
-				if(lazyloadThrottleTimeout) {
-					clearTimeout(lazyloadThrottleTimeout);
-				}    
-				console.log('scrolling')
-				
-				lazyloadThrottleTimeout = setTimeout(function() {
-						let scrollTop = window.pageYOffset;
-						lazyloadImages.forEach(function(img) {
-								if(img.offsetTop < (window.innerHeight + scrollTop)) {
-									img.src = img.dataset.src;
-									img.classList.remove('lazy');
-								}
-						});
-						if(lazyloadImages.length == 0) { 
-							document.removeEventListener("scroll", lazyload);
-							window.removeEventListener("resize", lazyload);
-							window.removeEventListener("orientationChange", lazyload);
-						}
-				}, 20);
-			}
-			
-			document.addEventListener("scroll", lazyload);
-			window.addEventListener("resize", lazyload);
-			window.addEventListener("orientationChange", lazyload);
-		});
 }
 
 
@@ -369,3 +341,34 @@ window.onclick = function(event) {
 }
 
 getAllPosts()
+
+// document.addEventListener("DOMContentLoaded", function() {
+// 	let lazyloadImages = document.querySelectorAll("img.lazy");    
+// 	let lazyloadThrottleTimeout;
+	
+// 	function lazyload () {
+// 		if(lazyloadThrottleTimeout) {
+// 			clearTimeout(lazyloadThrottleTimeout);
+// 		}    
+// 		console.log('scrolling')
+		
+// 		lazyloadThrottleTimeout = setTimeout(function() {
+// 				let scrollTop = window.pageYOffset;
+// 				lazyloadImages.forEach(function(img) {
+// 						if(img.offsetTop < (window.innerHeight + scrollTop)) {
+// 							img.src = img.dataset.src;
+// 							img.classList.remove('lazy');
+// 						}
+// 				});
+// 				if(lazyloadImages.length == 0) { 
+// 					document.removeEventListener("scroll", lazyload);
+// 					window.removeEventListener("resize", lazyload);
+// 					window.removeEventListener("orientationChange", lazyload);
+// 				}
+// 		}, 20);
+// 	}
+	
+// 	document.addEventListener("scroll", lazyload);
+// 	window.addEventListener("resize", lazyload);
+// 	window.addEventListener("orientationChange", lazyload);
+// });

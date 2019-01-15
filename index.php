@@ -26,26 +26,32 @@ if(!isset($_SESSION['user_authenticated'])) {
 	<!-- outer-container ends in footer. -->
 
 <script>
-	function onReady(callback) {
-		var intervalId = window.setInterval(function() {
-			if (true) {
-				window.clearInterval(intervalId)
-				callback.call(this)
-			}
-		}, 2000)
-	}
-
 	function setVisible(selector, visible) {
 		document.querySelector(selector).style.display = visible ? 'flex' : 'none'
 	}
 
-	onReady(function() {
-		setVisible('.outer-container', true)
-		setVisible('#loading', false)
-	})
-	setTimeout(() => {
-		document.cookie = 'active_visit=true'
-	}, 10000);
+	let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)active_visit\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+	console.log(cookieValue);
+	
+
+	if(cookieValue !== 'active') {
+		function onReady(callback) {
+			var intervalId = window.setInterval(function() {
+				if (finishedLoading === true || cookieValue === 'active') {
+					window.clearInterval(intervalId)
+					callback.call(this)
+				}
+			}, 2000)
+		}
+
+		onReady(function() {
+			setVisible('.outer-container', true)
+			setVisible('#loading', false)
+		}) 
+	} else {
+			setVisible('.outer-container', true)
+			setVisible('#loading', false)
+	}
 </script>
 
 <?php 
