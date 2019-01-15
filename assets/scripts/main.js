@@ -147,7 +147,7 @@ const renderPhotos = (posts, user) => {
 			cancelComment.addEventListener("click", () => {
 				bottomNav.classList.remove("fadeOutDownBig")
 				bottomNav.classList.add("animated", "fadeInUpBig")
-				commentModal.innerHTML = ""
+				photoDiv.removeChild(commentModal)
 				//window.location.reload(false); 
 			})
 
@@ -156,23 +156,28 @@ const renderPhotos = (posts, user) => {
 					postId: item.id,
 					comment: commentText.value
 				}
-				fetch(storeURI, {
-					method: "POST",
-					body: JSON.stringify(comment),
-					headers: {
-						"Content-Type": "application/json"
-					}
-				})
-					.then(res => res.json())
-					.then(response => {
-						bottomNav.classList.remove("fadeOutDownBig")
-						bottomNav.classList.add("animated", "fadeInUpBig")
-						commentModal.innerHTML = ""
-						photoOverlay.classList.add("toggle-overlay")
-						console.log(response)
+				if(commentText.value !== '') {
+					fetch(storeURI, {
+						method: "POST",
+						body: JSON.stringify(comment),
+						headers: {
+							"Content-Type": "application/json"
+						}
 					})
-					.catch(error => console.error(error))
-					window.location.reload(true); 
+						.then(res => res.json())
+						.then(response => {
+							bottomNav.classList.remove("fadeOutDownBig")
+							bottomNav.classList.add("animated", "fadeInUpBig")
+							commentModal.innerHTML = ""
+							photoOverlay.classList.add("toggle-overlay")
+							console.log(response)
+							photoDiv.removeChild(commentModal)
+						})
+						.catch(error => console.error(error))
+						//window.location.reload(true); 
+				} else {
+					alert('please say something')
+				}
 			})
 		})
 
@@ -218,9 +223,9 @@ const renderPhotos = (posts, user) => {
 		})
 		// -------------------------------
 		// Assign a clickListener for each photo to toggle overlay.
-
+		const commentInputContainers = [...document.querySelectorAll('.comment-input-container')]
+		const targets = [likeIcon, commentIcon, dislikeIcon, document.querySelector('.dropbtn'), commentInputContainers]
 		photoDiv.addEventListener("click", event => {
-			const targets = [likeIcon, commentIcon, dislikeIcon, document.querySelector('.dropbtn')]
 			if (targets.includes(event.target)) {
 				console.log('woopido')
 				return
@@ -245,9 +250,10 @@ const renderPhotos = (posts, user) => {
 	const dropbtns = [...document.querySelectorAll('.dropbtn')]
 	dropbtns.forEach(dropbtn => {
 		dropbtn.addEventListener('click', () => {
-			togglePostSettingsDropdown()
+			togglePostSettingsDropdown(event)
 		})
 	})
+
 	const photos = [...document.querySelectorAll(".photo")]
 	photos.forEach(photo =>
 		photo.addEventListener("click", event => {
@@ -324,7 +330,7 @@ searchButton.addEventListener("click", () => {
 })
 
 const togglePostSettingsDropdown = (event) => {
-  document.querySelector('.dropdown-content').classList.toggle("show")
+  event.target.nextElementSibling.classList.toggle("show")
 }
 
 
