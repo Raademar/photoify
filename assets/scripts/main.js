@@ -116,7 +116,7 @@ const renderPhotos = (posts, user) => {
 		p.classList.add("comment-text")
 		comments.textContent = item.content
 		likesOfPhoto.textContent = `${item.likes || 0} ${(item.likes === 1) ? 'person' : 'people'} like this photo.` // FIX THIS
-		if(item.user_id === user) photoOverlay.innerHTML += dropDownMenu
+		if(item.user_id == user) photoOverlay.insertAdjacentHTML('beforeend', dropDownMenu)
 		iconHolder.appendChild(commentIcon)
 		iconHolder.appendChild(likeIcon)
 		iconHolder.appendChild(dislikeIcon)
