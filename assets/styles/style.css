@@ -25,6 +25,7 @@ body {
 	background-position: center;
 	background-size: 100%;
 }
+
 .icon::before {
 	display: inline-block;
 	font-style: normal;
@@ -46,6 +47,7 @@ a {
 .error-message {
 	color: #e22434;
 	text-align: center;
+	font-size: 14px;
 }
 .success-message {
 	color: green;
@@ -397,17 +399,27 @@ input {
 	outline: none;
 }
 .preview-image {
-	height: 200px;
-	width: 50%;
+	width: 75%; 
 }
-.preview-image + .photo {
+@media screen and (min-width: 900px) {
+	.preview-image {
+		width: 40%; 
+	}
+}
+.preview-image img {
 	height: 200px;
 	width: 100%;
 }
-.preview-image > .photo img {
+@media screen and (min-width: 400px) {
+	.preview-image img {
+		width: 100%;
+		height: auto;
+	}
+}
+/* .preview-image > .photo img {
 	width: 355px;
 	height: 500px;
-}
+} */
 .dropbtn {
 	border: none;
 	background: rgba(0, 0, 0, 0);
@@ -540,10 +552,6 @@ input[type='file'] {
 }
 .profile-form-field:active {
 	outline: none;
-}
-.preview-image img {
-	height: 200px;
-	width: 100%;
 }
 .profile-modal-holder {
 	display: flex;

@@ -8,11 +8,12 @@ const profileImage = document.querySelector(".profile-image")
 const name = document.querySelector(".active-user")
 const desc = document.querySelector(".active-user-description")
 const gallery = document.querySelector(".profile-photo-gallery")
-const settingsContainer = document.querySelector('.settings-container')
-const closeModal = [...document.querySelectorAll('.close-modal')]
-const toggleSpecificSettingsModal = [...document.querySelectorAll('.settings-list-item')]
-const profileImgeOverlay = document.querySelector('.profile-image-overlay')
-
+const settingsContainer = document.querySelector(".settings-container")
+const closeModal = [...document.querySelectorAll(".close-modal")]
+const toggleSpecificSettingsModal = [
+	...document.querySelectorAll(".settings-list-item")
+]
+const profileImgeOverlay = document.querySelector(".profile-image-overlay")
 
 const getUserInfo = () => {
 	fetch(profileURI)
@@ -20,7 +21,6 @@ const getUserInfo = () => {
 			return res.json()
 		})
 		.then(json => {
-			console.log(json)
 			renderInfo(json[0])
 			renderPhotos(json[1])
 		})
@@ -47,19 +47,22 @@ const renderPhotos = userPhoto => {
 				<img src="${photo.image}" data-id="${photo.id}">
 			</div>
 		`
-		gallery.insertAdjacentHTML('beforeend', thumbnailImage)
-
+		gallery.insertAdjacentHTML("beforeend", thumbnailImage)
 	})
-		const portraitThumbnailImage = [...document.querySelectorAll('.thumbnail img')]
-		portraitThumbnailImage.map(img => {
-			(img.clientHeight > img.clientWidth) ? img.classList.add('portrait') : img.classList.add('landscape')
-			img.addEventListener('click', (event) => {
-				let imageId = img.dataset.id
-				fetchSpecificPhoto(imageId, event.target)
-			})
+	const portraitThumbnailImage = [
+		...document.querySelectorAll(".thumbnail img")
+	]
+	portraitThumbnailImage.map(img => {
+		img.clientHeight > img.clientWidth
+			? img.classList.add("portrait")
+			: img.classList.add("landscape")
+		img.addEventListener("click", event => {
+			let imageId = img.dataset.id
+			fetchSpecificPhoto(imageId, event.target)
 		})
+	})
 
-		localStorage.setItem('userPhotos', JSON.stringify(userPhoto))
+	localStorage.setItem("userPhotos", JSON.stringify(userPhoto))
 }
 
 const toggleprofileSettingsModal = () => {
@@ -68,10 +71,10 @@ const toggleprofileSettingsModal = () => {
 	settingsContainer.style.zIndex = "9999"
 }
 
-const toggleSpecificSetting = (setting) => {
-	const settingForms = [...document.querySelectorAll('form')]
-	settingForms.forEach((form) => {
-		if(form.classList.contains(`${setting}-settings`)) {
+const toggleSpecificSetting = setting => {
+	const settingForms = [...document.querySelectorAll("form")]
+	settingForms.forEach(form => {
+		if (form.classList.contains(`${setting}-settings`)) {
 			form.classList.remove("is-hidden")
 			form.classList.remove("is-visuallyHidden")
 			form.style.zIndex = "99999"
@@ -79,12 +82,12 @@ const toggleSpecificSetting = (setting) => {
 	})
 }
 
-
-
 const fetchSpecificPhoto = (imageId, target) => {
-	let photoToShowFullsize = JSON.parse(localStorage.getItem('userPhotos')).filter(x => x.id === imageId)
+	let photoToShowFullsize = JSON.parse(
+		localStorage.getItem("userPhotos")
+	).filter(x => x.id === imageId)
 	console.log(photoToShowFullsize)
-	
+
 	const fullsizePhotoOverlayModal = `
 		<div class="fullsize-photo-overlay-modal">
 			<div class="fullsize-image-holder">
@@ -92,22 +95,30 @@ const fetchSpecificPhoto = (imageId, target) => {
 			</div>
 		</div>
 	`
-	target.parentNode.parentNode.insertAdjacentHTML('afterbegin', fullsizePhotoOverlayModal)
-	document.querySelector('.fullsize-photo-overlay-modal').addEventListener('click', viewBigVersionOfPhoto)
+	target.parentNode.parentNode.insertAdjacentHTML(
+		"afterbegin",
+		fullsizePhotoOverlayModal
+	)
+	document
+		.querySelector(".fullsize-photo-overlay-modal")
+		.addEventListener("click", viewBigVersionOfPhoto)
 }
 
 const viewBigVersionOfPhoto = () => {
-	if(document.querySelector('.fullsize-photo-overlay-modal')) {
-		document.querySelector('.fullsize-photo-overlay-modal').parentNode.removeChild(document.querySelector('.fullsize-photo-overlay-modal'))
-		
+	if (document.querySelector(".fullsize-photo-overlay-modal")) {
+		document
+			.querySelector(".fullsize-photo-overlay-modal")
+			.parentNode.removeChild(
+				document.querySelector(".fullsize-photo-overlay-modal")
+			)
 	}
 }
 
 const fillUserInfo = user => {
-	const name = document.querySelector('#name')
-	const username = document.querySelector('#username')
-	const email = document.querySelector('#email')
-	const description = document.querySelector('#description')
+	const name = document.querySelector("#name")
+	const username = document.querySelector("#username")
+	const email = document.querySelector("#email")
+	const description = document.querySelector("#description")
 
 	name.value = user.name
 	username.value = user.username
@@ -115,31 +126,33 @@ const fillUserInfo = user => {
 	description.value = user.description
 }
 
-toggleSpecificSettingsModal.forEach((setting) => {
-	setting.addEventListener('click', () => {
+toggleSpecificSettingsModal.forEach(setting => {
+	setting.addEventListener("click", () => {
 		let settingToToggle = setting.classList[1]
 		toggleSpecificSetting(settingToToggle)
 		fetch(profileURI)
-		.then(res => {
-			return res.json()
-		})
-		.then(json => {
-			fillUserInfo(json[0])
-		})
+			.then(res => {
+				return res.json()
+			})
+			.then(json => {
+				fillUserInfo(json[0])
+			})
 	})
 })
 
-closeModal.forEach(close => close.addEventListener('click', () => {
-	if(close.parentNode !== settingsContainer) {
-		close.parentNode.parentNode.classList.add("is-hidden")
-		close.parentNode.parentNode.classList.add("is-visuallyHidden")
-		close.parentNode.parentNode.style.zIndex = "0"
-	} else {
-		settingsContainer.classList.add("is-hidden")
-		settingsContainer.classList.add("is-visuallyHidden")
-		settingsContainer.style.zIndex = "0"
-	}
-}))
+closeModal.forEach(close =>
+	close.addEventListener("click", () => {
+		if (close.parentNode !== settingsContainer) {
+			close.parentNode.parentNode.classList.add("is-hidden")
+			close.parentNode.parentNode.classList.add("is-visuallyHidden")
+			close.parentNode.parentNode.style.zIndex = "0"
+		} else {
+			settingsContainer.classList.add("is-hidden")
+			settingsContainer.classList.add("is-visuallyHidden")
+			settingsContainer.style.zIndex = "0"
+		}
+	})
+)
 
 name.addEventListener("click", () => {
 	toggleprofileSettingsModal()
@@ -153,8 +166,9 @@ profileImage.addEventListener("mouseover", () => {
 document
 	.querySelector(".profile-image-overlay")
 	.addEventListener("mouseleave", () => {
-		document.querySelector(".profile-image-overlay").style.visibility = "hidden"
-})
+		document.querySelector(".profile-image-overlay").style.visibility =
+			"hidden"
+	})
 
 const toggleprofileModal = () => {
 	const tempProfileModal = `
@@ -176,33 +190,36 @@ const toggleprofileModal = () => {
 		</div>
 	`
 
-	profileContainer.insertAdjacentHTML('beforeend', tempProfileModal)
+	profileContainer.insertAdjacentHTML("beforeend", tempProfileModal)
 	const profileModal = document.querySelector(".profile-photo-modal-holder")
-	
+	const closeProfileModal = document.querySelector(".close-profile-modal")
+
 	window.onclick = function(event) {
-		if (event.target == profileModal) {
+		let targets = [profileModal, closeProfileModal]
+		if (targets.includes(event.target)) {
 			profileContainer.removeChild(profileModal)
 			//window.location.reload()
 		}
-	}	
+	}
 }
 profileImgeOverlay.addEventListener("click", () => {
-	console.log('toggled modal')
 	toggleprofileModal()
-	const profilePhotoInputFile = document.querySelector('.input-file')
-	const updateProfilePhotoForm = document.querySelector('.update-profile-photo-form')
-	profilePhotoInputFile.addEventListener('change', () => {
+	const profilePhotoInputFile = document.querySelector(".input-file")
+	const updateProfilePhotoForm = document.querySelector(
+		".update-profile-photo-form"
+	)
+	profilePhotoInputFile.addEventListener("change", () => {
 		updateProfilePhotoForm.submit()
 	})
 })
 
-const deleteAccount = document.querySelector('.delete-account-button')
-deleteAccount.addEventListener('click', () => {
+const deleteAccount = document.querySelector(".delete-account-button")
+deleteAccount.addEventListener("click", () => {
 	let data = {
-		delete: 'yes'
+		delete: "yes"
 	}
 	fetch(deleteAccountURI, {
-		method: 'POST',
+		method: "POST",
 		body: JSON.stringify(data),
 		headers: {
 			"Content-Type": "application/json"

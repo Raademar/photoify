@@ -12,7 +12,7 @@ declare(strict_types=1);
 			</button>
 		</a>
 		<a href="new-post.php"><button class="floating-action-button"><i class="fas fa-plus fa-2x"></i></button></a>
-		<button class="navigation-button search-button"><i class="fas fa-search fa-2x"></i></button>
+		<button class="navigation-button search-button" disabled><i class="fas fa-search fa-2x"></i></button>
 	</div>
 </div>
 <?php else: ?>

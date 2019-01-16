@@ -23,7 +23,7 @@ if(isset($_FILES['image'])) {
 	$destination = '/../uploads/' . $_SESSION['user_authenticated']['id']  . '/posts/' . time() . '-' . $image['name'];
 	
 	// Compress the images before we init the save.
-	//compress($image['tmp_name'], $image['tmp_name'], 75);
+  // compress($image['tmp_name'], $image['tmp_name'], 75); // Bugs out, skip until later.
 
 	move_uploaded_file($image['tmp_name'], __DIR__.$destination);
 

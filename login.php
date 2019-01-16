@@ -23,6 +23,6 @@ setcookie('active_visit', 'active', time() - 3600);
 	</div>
 	<!-- outer-container ends in footer. -->
 
-<?php 
+<?php
 require __DIR__.'/views/footer.php';
 ?>

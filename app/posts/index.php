@@ -20,15 +20,3 @@ $data['posts'] = $posts;
 $data['active_user'] = $_SESSION['user_authenticated']['id'];
 header('Content-Type: application/json');
 echo json_encode($data);
-
-
-
-// SELECT posts.id, posts.user_id, posts.description, posts.image, post_id, COUNT(post_id)
-//   FROM posts 
-//   LEFT JOIN likes ON likes.post_id = posts.id
-//   GROUP BY likes.post_id;
-
-// SELECT posts.id, posts.user_id, posts.description, posts.image, (SELECT COUNT(*) FROM likes WHERE likes.post_id = posts.id) posts.likes
-//   FROM posts
-//   GROUP BY likes.post_id
-//   ORDER BY posts.id DESC;

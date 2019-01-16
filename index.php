@@ -31,9 +31,7 @@ if(!isset($_SESSION['user_authenticated'])) {
 		document.querySelector(selector).style.display = visible ? 'flex' : 'none'
 	}
 
-	let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)active_visit\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-	console.log(cookieValue);
-	
+	let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)active_visit\s*\=\s*([^;]*).*$)|^.*$/, "$1")
 
 	if(cookieValue !== 'active') {
 		function onReady(callback) {

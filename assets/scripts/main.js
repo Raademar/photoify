@@ -124,6 +124,7 @@ const renderPhotos = (posts, user) => {
 		iconHolder.appendChild(likeIcon)
 		iconHolder.appendChild(dislikeIcon)
 		photoOverlay.appendChild(iconHolder)
+
 		// -------------------------------------------------------
 
 		const toggleCommentField = () => {
@@ -182,7 +183,6 @@ const renderPhotos = (posts, user) => {
 					alert("please say something")
 				}
 			})
-			
 		}
 
 		// Assign clickListener for commentIcon
@@ -238,16 +238,22 @@ const renderPhotos = (posts, user) => {
 		// Assign clickListener for dislikeIcon.
 		dislikeIcon.addEventListener("click", registerDislike, true)
 		// -------------------------------
+
+		const findItems = (needle, haystack) => {
+			return haystack.map(x => x === needle)
+		}
+
 		// Assign a clickListener for each photo to toggle overlay.
 		const commentInputContainers = [
 			...document.querySelectorAll(".comment-input-container")
 		]
+		console.log(commentInputContainers)
 
 		const targets = [
 			likeIcon,
 			commentIcon,
 			dislikeIcon,
-			document.querySelector(".dropbtn"),
+			//findItems(event.target, [...document.querySelectorAll(".dropbtn")]),
 			commentInputContainers
 		]
 		photoDiv.addEventListener("click", event => {
@@ -261,6 +267,7 @@ const renderPhotos = (posts, user) => {
 			}
 		})
 		// -----------------------------------------------------
+
 		img.addEventListener("load", () => {
 			++postsLoaded
 			if (postsLoaded === posts.length) {
@@ -269,7 +276,7 @@ const renderPhotos = (posts, user) => {
 			}
 		})
 	})
-
+	// ---- END OF POSTS.FOREACH ----
 	const dropbtns = [...document.querySelectorAll(".dropbtn")]
 	dropbtns.forEach(dropbtn => {
 		dropbtn.addEventListener("click", () => {
@@ -317,10 +324,6 @@ const renderPhotos = (posts, user) => {
 				})
 		})
 	)
-}
-
-const findCountOfItems = (needle, haystack) => {
-	return haystack.map(x => x.classList.contains(needle))
 }
 
 // CREATE USERNAME AS DOM ELEMENT TO MAKE IT BOLD

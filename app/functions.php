@@ -44,17 +44,6 @@ function reportSuccess(string $successMessage, string $path) {
         exit;
 }
 
-/**
- * Compress images before we save them to the database
- * 
- * @param 
- * 
- * 
- * 
- * 
- * @param int $quality
- * 
- */
 function compress($source, $compressedImage, $quality) {
 
 	$info = getimagesize($source);
