@@ -240,7 +240,7 @@ const renderPhotos = (posts, user) => {
 		// -------------------------------
 
 		const findItems = (needle, haystack) => {
-			let target = haystack.filter(x => x === needle)
+			let target = haystack.filter(x => x === needle) 
 			return target[0]
 			
 		}

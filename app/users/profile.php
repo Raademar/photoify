@@ -13,7 +13,10 @@ $user = $statement->fetch(PDO::FETCH_ASSOC);
 if (isset($_POST['password'], $_POST['password2'])) {
     $password = trim($_POST['password']);
     $password2 = trim($_POST['password2']);
-
+    
+    if(strlen($password) < 8) {
+		reportError('Passwords is too short, needs to be at least 8 characters!', '/profile.php');
+	}
 
     if ($password === $password2) {
         $password = password_hash($password, PASSWORD_DEFAULT);
