@@ -28,7 +28,7 @@ if(!isset($_SESSION['user_authenticated'])) {
 
 <script>
 	function setVisible(selector, visible) {
-		document.querySelector(selector).classList.add('fadeInDown')
+		document.querySelector(selector).classList.add('animated', 'fadeInDown')
 		document.querySelector(selector).style.display = visible ? 'flex' : 'none'
 	}
 
