@@ -46,7 +46,7 @@ const renderPhotos = userPhoto => {
 				<img src="${photo.image}" data-id="${photo.id}">
 			</div>
 		`
-		gallery.innerHTML += thumbnailImage
+		gallery.insertAdjacentHTML('beforeend', thumbnailImage)
 
 	})
 		const portraitThumbnailImage = [...document.querySelectorAll('.thumbnail img')]

@@ -762,4 +762,7 @@ input[type='file'] {
 .upload-new-profile-image {
 	color: #4c1bec;
 }
+.disabled-setting{
+	color: darkgrey;
+	text-decoration-line: line-through;
 /* *************** */

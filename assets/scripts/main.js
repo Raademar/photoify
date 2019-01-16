@@ -148,7 +148,6 @@ const renderPhotos = (posts, user) => {
 				bottomNav.classList.remove("fadeOutDownBig")
 				bottomNav.classList.add("animated", "fadeInUpBig")
 				photoDiv.removeChild(commentModal)
-				//window.location.reload(false); 
 			})
 
 			submitCommentButton.addEventListener("click", () => {
@@ -174,7 +173,6 @@ const renderPhotos = (posts, user) => {
 							photoDiv.removeChild(commentModal)
 						})
 						.catch(error => console.error(error))
-						//window.location.reload(true); 
 				} else {
 					alert('please say something')
 				}
@@ -224,6 +222,8 @@ const renderPhotos = (posts, user) => {
 		// -------------------------------
 		// Assign a clickListener for each photo to toggle overlay.
 		const commentInputContainers = [...document.querySelectorAll('.comment-input-container')]
+		console.log(document.querySelectorAll('.dropbtn'))
+		
 		const targets = [likeIcon, commentIcon, dislikeIcon, document.querySelector('.dropbtn'), commentInputContainers]
 		photoDiv.addEventListener("click", event => {
 			if (targets.includes(event.target)) {
