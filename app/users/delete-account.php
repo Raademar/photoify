@@ -5,7 +5,6 @@ require __DIR__.'/../autoload.php';
 $request = json_decode(file_get_contents('php://input'));
 if(isset($request->delete)) {
 	$id = $_SESSION['user_authenticated']['id'];
-	// fetches user information from db if username exists
 	$statement = $pdo->prepare('SELECT * FROM users WHERE id = :user_id');
 	$statement->bindParam(':user_id', $id, PDO::PARAM_STR);
 	$statement->execute();
@@ -27,9 +26,11 @@ if(isset($request->delete)) {
 			$statement->bindParam(':user_id', $id, PDO::PARAM_INT);
 			$statement->execute();
 
-			reportSuccess('Account deleted.', '/logout.php');
+			// remove all of the users uploaded data.
+			rrmdir(__DIR__ .'/../uploads/' . $_SESSION['user_authenticated']['id']);
+
+			redirect('/app/users/logout.php');
 	}
-	redirect('/app/users/logout.php');
-} else {
-	reportError('Something went wrong when trying to delete account.', '/profile.php');
-}
+} else {	
+	reportError('Something went wrong when trying to delete your account.', '/profile.php');
+	}

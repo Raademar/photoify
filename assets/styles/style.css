@@ -457,6 +457,7 @@ input {
 	font-size: 18px;
 	font-weight: 600;
 	color: #e22434 !important;
+
 }
 .delete-icon {
 	color: #e22434 !important;
@@ -593,6 +594,10 @@ input[type='file'] {
 	justify-content: center;
 	align-items: center;
 }
+.active-user {
+	cursor: pointer;
+	user-select: none;
+}
 .active-user::after {
 	font-family: 'Font Awesome 5 Free';
 	font-weight: 600;
@@ -643,6 +648,10 @@ input[type='file'] {
 	display: flex;
 	justify-content: space-between;
 }
+.settings-list-item {
+	cursor: pointer;
+	user-select: none;
+}
 .settings-list-item::after {
 	font-family: 'Font Awesome 5 Free';
 	font-weight: 600;
@@ -675,11 +684,15 @@ input[type='file'] {
 	align-self: center;
 	position: absolute;
 	top: 48px;
+	cursor: pointer;
+	user-select: none;
 }
 .close-modal {
 	position: absolute;
 	left: 48px;
 	top: 55px;
+	cursor: pointer;
+	user-select: none;
 }
 .settings-container {
 	display: flex;
@@ -773,5 +786,6 @@ input[type='file'] {
 .delete-account-button {
 	color: #e22434;
 	margin-top: 96px;
+	cursor: pointer;
 }
 /* *************** */

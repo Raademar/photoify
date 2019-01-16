@@ -208,24 +208,9 @@ deleteAccount.addEventListener('click', () => {
 			"Content-Type": "application/json"
 		}
 	})
-	.then(res => res.json())
-	.then(response => console.log("Success:", JSON.stringify(response)))
-	.catch(error => console.error("Error:", error))
+	setTimeout(() => {
+		window.location.reload()
+	}, 1500)
 })
-
-// let like = {
-// 	id: item.id
-// }
-// fetch(deleteURI, {
-// 	method: "POST",
-// 	body: JSON.stringify(like),
-// 	headers: {
-// 		"Content-Type": "application/json"
-// 	}
-// })
-// 	.then(res => res.json())
-// 	.then(response => console.log("Success:", JSON.stringify(response)))
-// 	.catch(error => console.error("Error:", error))
-// })
 
 getUserInfo()

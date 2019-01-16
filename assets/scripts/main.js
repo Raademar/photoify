@@ -67,8 +67,7 @@ const renderPhotos = (posts, user) => {
 			"dislike-icon"
 		)
 		editButton.href = `/edit-post.php?id=${item.id}`
-		
-		
+
 		const dropDownMenu = `
 		<div class="dropdown">
 			<button class="dropbtn"></button>
@@ -92,7 +91,7 @@ const renderPhotos = (posts, user) => {
 		photoDiv.dataset.id = item.id
 		userInfo.classList.add("user-info")
 		img.src = item.image
-		img.classList.add('lazy')
+		img.classList.add("lazy")
 		profileImageThumb.src = item.profile_image
 		h5.textContent = item.username
 
@@ -101,7 +100,7 @@ const renderPhotos = (posts, user) => {
 		photoDiv.appendChild(userInfo)
 		imageHolderDiv.appendChild(img)
 		photoDiv.appendChild(imageHolderDiv)
-		photoHolder.insertAdjacentElement('beforeend', photoDiv)
+		photoHolder.insertAdjacentElement("beforeend", photoDiv)
 		//photoHolder.appendChild(photoDiv)
 
 		// Get the image data and set it to the image overlay.
@@ -116,15 +115,19 @@ const renderPhotos = (posts, user) => {
 		p.textContent = `${item.description}`
 		p.classList.add("comment-text")
 		comments.textContent = item.content
-		likesOfPhoto.textContent = `${item.likes || 0} ${(item.likes === 1) ? 'person' : 'people'} like this photo.` // FIX THIS
-		if(item.user_id == user) photoOverlay.insertAdjacentHTML('beforeend', dropDownMenu)
+		likesOfPhoto.textContent = `${item.likes || 0} ${
+			item.likes === 1 ? "person" : "people"
+		} like this photo.` // FIX THIS
+		if (item.user_id == user)
+			photoOverlay.insertAdjacentHTML("beforeend", dropDownMenu)
 		iconHolder.appendChild(commentIcon)
 		iconHolder.appendChild(likeIcon)
 		iconHolder.appendChild(dislikeIcon)
 		photoOverlay.appendChild(iconHolder)
 		// -------------------------------------------------------
-		// Assign clickListener for commentIcon
-		commentIcon.addEventListener("click", () => {
+
+		const toggleCommentField = () => {
+			commentIcon.removeEventListener("click", toggleCommentField, true)
 			bottomNav.classList.add("animated", "fadeOutDownBig")
 			const commentInputModal = `
 				<div class="comment-modal-holder animated fadeInDown">
@@ -137,7 +140,7 @@ const renderPhotos = (posts, user) => {
 					</div>
 				</div>
 			`
-			photoDiv.insertAdjacentHTML('beforeend', commentInputModal)
+			photoDiv.insertAdjacentHTML("beforeend", commentInputModal)
 			const submitCommentButton = document.querySelector(
 				".submit-comment-button"
 			)
@@ -148,6 +151,7 @@ const renderPhotos = (posts, user) => {
 				bottomNav.classList.remove("fadeOutDownBig")
 				bottomNav.classList.add("animated", "fadeInUpBig")
 				photoDiv.removeChild(commentModal)
+				commentIcon.addEventListener("click", toggleCommentField, true)
 			})
 
 			submitCommentButton.addEventListener("click", () => {
@@ -155,7 +159,7 @@ const renderPhotos = (posts, user) => {
 					postId: item.id,
 					comment: commentText.value
 				}
-				if(commentText.value !== '') {
+				if (commentText.value !== "") {
 					fetch(storeURI, {
 						method: "POST",
 						body: JSON.stringify(comment),
@@ -171,17 +175,22 @@ const renderPhotos = (posts, user) => {
 							photoOverlay.classList.add("toggle-overlay")
 							console.log(response)
 							photoDiv.removeChild(commentModal)
+							commentIcon.addEventListener("click", toggleCommentField, true)
 						})
 						.catch(error => console.error(error))
 				} else {
-					alert('please say something')
+					alert("please say something")
 				}
 			})
-		})
+			
+		}
+
+		// Assign clickListener for commentIcon
+		commentIcon.addEventListener("click", toggleCommentField, true)
 
 		// ------------------------------------
-		// Assign clickListener for likeIcon.
-		likeIcon.addEventListener("click", () => {
+
+		const registerLike = () => {
 			likeIcon.classList.remove("far")
 			likeIcon.classList.add("fas")
 			likesOfPhoto.textContent = `${++item.likes} people like this photo.`
@@ -198,10 +207,15 @@ const renderPhotos = (posts, user) => {
 				.then(res => res.json())
 				.then(response => console.log("Success:", JSON.stringify(response)))
 				.catch(error => console.error("Error:", error))
-		})
+			likeIcon.removeEventListener("click", registerLike, true)
+		}
+
+		// Assign clickListener for likeIcon.
+		likeIcon.addEventListener("click", registerLike, true)
+
 		// -------------------------------
-		// Assign clickListener for dislikeIcon.
-		dislikeIcon.addEventListener("click", () => {
+
+		const registerDislike = () => {
 			dislikeIcon.classList.remove("far")
 			dislikeIcon.classList.add("fas")
 			likesOfPhoto.textContent = `${--item.likes} people like this photo.`
@@ -218,36 +232,47 @@ const renderPhotos = (posts, user) => {
 				.then(res => res.json())
 				.then(response => console.log("Success:", JSON.stringify(response)))
 				.catch(error => console.error("Error:", error))
-		})
+			dislikeIcon.removeEventListener("click", registerDislike, true)
+		}
+
+		// Assign clickListener for dislikeIcon.
+		dislikeIcon.addEventListener("click", registerDislike, true)
 		// -------------------------------
 		// Assign a clickListener for each photo to toggle overlay.
-		const commentInputContainers = [...document.querySelectorAll('.comment-input-container')]
-		
-		const targets = [likeIcon, commentIcon, dislikeIcon, document.querySelector('.dropbtn'), commentInputContainers]
+		const commentInputContainers = [
+			...document.querySelectorAll(".comment-input-container")
+		]
+
+		const targets = [
+			likeIcon,
+			commentIcon,
+			dislikeIcon,
+			document.querySelector(".dropbtn"),
+			commentInputContainers
+		]
 		photoDiv.addEventListener("click", event => {
 			if (targets.includes(event.target)) {
 				return
 			}
-			if(photoOverlay.classList.contains("toggle-overlay")){	
+			if (photoOverlay.classList.contains("toggle-overlay")) {
 				photoOverlay.classList.remove("toggle-overlay")
 			} else {
-					photoOverlay.classList.add("toggle-overlay")
-				}
+				photoOverlay.classList.add("toggle-overlay")
+			}
 		})
 		// -----------------------------------------------------
-		img.addEventListener('load', () => {
+		img.addEventListener("load", () => {
 			++postsLoaded
-			if(postsLoaded === posts.length){
+			if (postsLoaded === posts.length) {
 				document.cookie = "active_visit=active"
 				finishedLoading = true
-			}	
+			}
 		})
 	})
 
-
-	const dropbtns = [...document.querySelectorAll('.dropbtn')]
+	const dropbtns = [...document.querySelectorAll(".dropbtn")]
 	dropbtns.forEach(dropbtn => {
-		dropbtn.addEventListener('click', () => {
+		dropbtn.addEventListener("click", () => {
 			togglePostSettingsDropdown(event)
 		})
 	})
@@ -262,8 +287,9 @@ const renderPhotos = (posts, user) => {
 				})
 				.then(data => {
 					const commentHolder =
-						event.target.parentNode.querySelector(".comments-and-like-holder") || 
-						document.querySelector(".comments-and-like-holder")
+						event.target.parentNode.querySelector(
+							".comments-and-like-holder"
+						) || document.querySelector(".comments-and-like-holder")
 					const outerInnerCommentDiv = document.createElement("div")
 					outerInnerCommentDiv.classList.add("outer-inner-comment-holder")
 					if (
@@ -289,10 +315,9 @@ const renderPhotos = (posts, user) => {
 						innerCommentDiv.innerHTML += `<div class="clear"></div>`
 					})
 				})
-		}))
+		})
+	)
 }
-
-
 
 const findCountOfItems = (needle, haystack) => {
 	return haystack.map(x => x.classList.contains(needle))
@@ -327,53 +352,56 @@ searchButton.addEventListener("click", () => {
 	toggleSearchModal()
 })
 
-const togglePostSettingsDropdown = (event) => {
-  event.target.nextElementSibling.classList.toggle("show")
+const togglePostSettingsDropdown = event => {
+	event.target.nextElementSibling.classList.toggle("show")
 }
-
 
 // Close the dropdown if the user clicks outside of it
 window.onclick = function(event) {
-  if (!event.target.matches('.dropbtn')) {
-    let dropdowns = document.querySelector('.dropdown-content')
-    for (let i = 0; i < dropdowns.length; i++) {
-      let openDropdown = dropdowns[i]
-      if (openDropdown.classList.contains('show')) {
-        openDropdown.classList.remove('show')
-      }
-    }
-  }
+	if (!event.target.matches(".dropbtn")) {
+		let dropdowns = document.querySelector(".dropdown-content")
+		if (dropdowns) {
+			for (let i = 0; i < dropdowns.length; i++) {
+				let openDropdown = dropdowns[i]
+				if (openDropdown.classList.contains("show")) {
+					openDropdown.classList.remove("show")
+				}
+			}
+		} else {
+			return
+		}
+	}
 }
 
 getAllPosts()
 
 // document.addEventListener("DOMContentLoaded", function() {
-// 	let lazyloadImages = document.querySelectorAll("img.lazy");    
-// 	let lazyloadThrottleTimeout;
-	
+// 	let lazyloadImages = document.querySelectorAll("img.lazy")
+// 	let lazyloadThrottleTimeout
+
 // 	function lazyload () {
 // 		if(lazyloadThrottleTimeout) {
-// 			clearTimeout(lazyloadThrottleTimeout);
-// 		}    
+// 			clearTimeout(lazyloadThrottleTimeout)
+// 		}
 // 		console.log('scrolling')
-		
+
 // 		lazyloadThrottleTimeout = setTimeout(function() {
-// 				let scrollTop = window.pageYOffset;
+// 				let scrollTop = window.pageYOffset
 // 				lazyloadImages.forEach(function(img) {
 // 						if(img.offsetTop < (window.innerHeight + scrollTop)) {
-// 							img.src = img.dataset.src;
-// 							img.classList.remove('lazy');
+// 							img.src = img.dataset.src
+// 							img.classList.remove('lazy')
 // 						}
-// 				});
-// 				if(lazyloadImages.length == 0) { 
-// 					document.removeEventListener("scroll", lazyload);
-// 					window.removeEventListener("resize", lazyload);
-// 					window.removeEventListener("orientationChange", lazyload);
+// 				})
+// 				if(lazyloadImages.length == 0) {
+// 					document.removeEventListener("scroll", lazyload)
+// 					window.removeEventListener("resize", lazyload)
+// 					window.removeEventListener("orientationChange", lazyload)
 // 				}
-// 		}, 20);
+// 		}, 20)
 // 	}
-	
-// 	document.addEventListener("scroll", lazyload);
-// 	window.addEventListener("resize", lazyload);
-// 	window.addEventListener("orientationChange", lazyload);
-// });
+
+// 	document.addEventListener("scroll", lazyload)
+// 	window.addEventListener("resize", lazyload)
+// 	window.addEventListener("orientationChange", lazyload)
+// })

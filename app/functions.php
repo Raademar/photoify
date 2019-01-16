@@ -84,3 +84,21 @@ if (!function_exists('saved_to_database')) {
     redirect($path);
   }
 }
+
+/**
+ * Recursively removes a folder along with all its files and directories
+ * 
+ * @param String $path 
+ */
+function rrmdir($path) {
+  // Open the source directory to read in files
+     $i = new DirectoryIterator($path);
+     foreach($i as $f) {
+         if($f->isFile()) {
+             unlink($f->getRealPath());
+         } else if(!$f->isDot() && $f->isDir()) {
+             rrmdir($f->getRealPath());
+         }
+     }
+     rmdir($path);
+}
