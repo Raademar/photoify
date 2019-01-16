@@ -240,23 +240,20 @@ const renderPhotos = (posts, user) => {
 		// -------------------------------
 
 		const findItems = (needle, haystack) => {
-			return haystack.map(x => x === needle)
+			let target = haystack.filter(x => x === needle)
+			return target[0]
+			
 		}
 
 		// Assign a clickListener for each photo to toggle overlay.
-		const commentInputContainers = [
-			...document.querySelectorAll(".comment-input-container")
-		]
-		console.log(commentInputContainers)
-
-		const targets = [
-			likeIcon,
-			commentIcon,
-			dislikeIcon,
-			//findItems(event.target, [...document.querySelectorAll(".dropbtn")]),
-			commentInputContainers
-		]
 		photoDiv.addEventListener("click", event => {
+			const targets = [
+				likeIcon,
+				commentIcon,
+				dislikeIcon,
+				findItems(event.target, [...document.querySelectorAll(".dropbtn")]),
+				findItems(event.target, [...document.querySelectorAll(".comment-text-input")]),
+			]		
 			if (targets.includes(event.target)) {
 				return
 			}

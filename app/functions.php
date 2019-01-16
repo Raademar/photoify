@@ -70,7 +70,7 @@ if (!function_exists('saved_to_database')) {
    */
   function saved_to_database(string $path) {
 		$_SESSION['errors'] = '';
-    redirect($path);
+		redirect($path);
   }
 }
 
