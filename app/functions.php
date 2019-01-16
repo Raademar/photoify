@@ -32,6 +32,19 @@ function reportError(string $errorMessage, string $path) {
 }
 
 /**
+ * Report success message to the client.
+ * 
+ * @param string $successMessage
+ * 
+ * @return void
+ */
+function reportSuccess(string $successMessage, string $path) {
+    $_SESSION['success'] = $successMessage;
+        redirect($path);
+        exit;
+}
+
+/**
  * Compress images before we save them to the database
  * 
  * @param 

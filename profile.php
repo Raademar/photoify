@@ -53,6 +53,7 @@ if(!isset($_SESSION['user_authenticated'])) {
 			<input type="password" name="password" id="password" class="profile-form-field" placeholder="Enter your new password..">
 			<input type="password" name="password2" id="password2" class="profile-form-field" placeholder="Enter your new password again..">
 			<button type="submit" disabled class="fullsize-button submit-profile-button">Update profile</button>
+			<span class="delete-account-button">Delete account</span>
 		</div>
 	</form>
 	<!-- --------------- -->

@@ -1,5 +1,6 @@
 const profileURI = "/app/users/index.php"
 const profileUpdateImageURI = "/app/users/profile.php"
+const deleteAccountURI = "/app/users/delete-account.php"
 const profileContainer = document.querySelector(".profile-container")
 const searchButton = document.querySelector(".search-button")
 const profileSettingsModal = document.querySelector(".profile-modal-holder")
@@ -194,4 +195,37 @@ profileImgeOverlay.addEventListener("click", () => {
 		updateProfilePhotoForm.submit()
 	})
 })
+
+const deleteAccount = document.querySelector('.delete-account-button')
+deleteAccount.addEventListener('click', () => {
+	let data = {
+		delete: 'yes'
+	}
+	fetch(deleteAccountURI, {
+		method: 'POST',
+		body: JSON.stringify(data),
+		headers: {
+			"Content-Type": "application/json"
+		}
+	})
+	.then(res => res.json())
+	.then(response => console.log("Success:", JSON.stringify(response)))
+	.catch(error => console.error("Error:", error))
+})
+
+// let like = {
+// 	id: item.id
+// }
+// fetch(deleteURI, {
+// 	method: "POST",
+// 	body: JSON.stringify(like),
+// 	headers: {
+// 		"Content-Type": "application/json"
+// 	}
+// })
+// 	.then(res => res.json())
+// 	.then(response => console.log("Success:", JSON.stringify(response)))
+// 	.catch(error => console.error("Error:", error))
+// })
+
 getUserInfo()

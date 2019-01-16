@@ -9,6 +9,10 @@ if(isset($_POST['name'], $_POST['username'], $_POST['email'], $_POST['password']
 	$password = trim($_POST['password']);
 	$repeatPassword = trim($_POST['repeat-password']);
 
+	if(strlen($password) < 8) {
+		reportError('Passwords is too short, needs to be at least 8 characters!', '/register.php');
+	}
+	
 	if($password === $repeatPassword) {
 		$password = password_hash($password, PASSWORD_DEFAULT);
 	} else {

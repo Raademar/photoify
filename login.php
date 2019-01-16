@@ -8,6 +8,9 @@ setcookie('active_visit', 'active', time() - 3600);
 <?php if (isset($_SESSION['errors'])): ?>
 	<h5 class="error-message"> <?=$_SESSION['errors']; ?> </h5> 
 <?php endif; ?>
+<?php if (isset($_SESSION['success'])): ?>
+	<h5 class="success-message"> <?=$_SESSION['success']; ?> </h5> 
+<?php endif; ?>
 	<form action="/app/users/login.php" method="POST">
 		<div class="login-input-container">
 			<input type="text" name="username" id="username" class="login-form-field" placeholder="Username or email">

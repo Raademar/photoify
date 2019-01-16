@@ -47,6 +47,10 @@ a {
 	color: #e22434;
 	text-align: center;
 }
+.success-message {
+	color: green;
+	text-align: center;
+}
 /* INDEX STYLES */
 .outer-container {
 	width: 100vw;
@@ -762,7 +766,12 @@ input[type='file'] {
 .upload-new-profile-image {
 	color: #4c1bec;
 }
-.disabled-setting{
+.disabled-setting {
 	color: darkgrey;
 	text-decoration-line: line-through;
+}
+.delete-account-button {
+	color: #e22434;
+	margin-top: 96px;
+}
 /* *************** */

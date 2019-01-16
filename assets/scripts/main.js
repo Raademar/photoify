@@ -222,12 +222,10 @@ const renderPhotos = (posts, user) => {
 		// -------------------------------
 		// Assign a clickListener for each photo to toggle overlay.
 		const commentInputContainers = [...document.querySelectorAll('.comment-input-container')]
-		console.log(document.querySelectorAll('.dropbtn'))
 		
 		const targets = [likeIcon, commentIcon, dislikeIcon, document.querySelector('.dropbtn'), commentInputContainers]
 		photoDiv.addEventListener("click", event => {
 			if (targets.includes(event.target)) {
-				console.log('woopido')
 				return
 			}
 			if(photoOverlay.classList.contains("toggle-overlay")){	
