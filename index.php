@@ -28,7 +28,6 @@ if(!isset($_SESSION['user_authenticated'])) {
 
 <script>
 	function setVisible(selector, visible) {
-		selector === '.outer-container' ? document.querySelector(selector).classList.add('animated', 'fadeIn')
 		document.querySelector(selector).style.display = visible ? 'flex' : 'none'
 	}
 
