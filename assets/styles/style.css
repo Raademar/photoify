@@ -482,12 +482,15 @@ input {
 }
 .like-icon {
 	color: #e22434;
+	cursor: pointer;
 }
 .dislike-icon {
 	color: #4c1bec;
+	cursor: pointer;
 }
 .comment-icon {
 	color: #ffbe0b;
+	cursor: pointer;
 }
 .comment-modal-content {
 	display: flex;
