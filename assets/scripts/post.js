@@ -4,29 +4,33 @@ const editPhotoURI = `/app/posts/update.php${window.location.search}`
 const previewImage = document.querySelector(".preview-image")
 const deleteButton = document.querySelector(".delete-posts-button")
 
-const previewUploadedFiles = files => {
-	// Remove the images from preview if there is any.
-	// We do this so when the user wants to choose another image they dont stack.
-	for (let i = 0; i < files.length; i++) {
-		let file = files[i]
-		let img = document.createElement("img")
-		img.classList.add("obj")
-		img.file = file
-		previewImage.appendChild(img)
 
-		let reader = new FileReader()
-		reader.onload = (function(aImg) {
-			return function(e) {
-				aImg.src = e.target.result
-			}
-		})(img)
-		reader.readAsDataURL(file)
+if (window.location.pathname === "/new-post.php"){
+	const previewUploadedFiles = files => {
+		// Remove the images from preview if there is any.
+		// We do this so when the user wants to choose another image they dont stack.
+		for (let i = 0; i < files.length; i++) {
+			let file = files[i]
+			let img = document.createElement("img")
+			img.classList.add("obj")
+			img.file = file
+			previewImage.appendChild(img)
+	
+			let reader = new FileReader()
+			reader.onload = (function(aImg) {
+				return function(e) {
+					aImg.src = e.target.result
+				}
+			})(img)
+			reader.readAsDataURL(file)
+		}
 	}
+	
+	fileUpload.addEventListener("input", () => {
+		previewUploadedFiles(fileUpload.files)
+	})
 }
 
-// fileUpload.addEventListener("input", () => {
-// 	previewUploadedFiles(fileUpload.files)
-// })
 
 const fetchPostForEdit = () => {
 	fetch(editPhotoURI)

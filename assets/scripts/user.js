@@ -215,19 +215,24 @@ profileImgeOverlay.addEventListener("click", () => {
 
 const deleteAccount = document.querySelector(".delete-account-button")
 deleteAccount.addEventListener("click", () => {
+	let result = window.confirm(
+		`Are you sure you want to delete your account? This will also delete all of your posts, comments and likes.`
+	)
 	let data = {
 		delete: "yes"
 	}
-	fetch(deleteAccountURI, {
-		method: "POST",
-		body: JSON.stringify(data),
-		headers: {
-			"Content-Type": "application/json"
-		}
-	})
-	setTimeout(() => {
-		window.location.reload()
-	}, 1500)
+	if(result === true) {
+		fetch(deleteAccountURI, {
+			method: "POST",
+			body: JSON.stringify(data),
+			headers: {
+				"Content-Type": "application/json"
+			}
+		})
+		setTimeout(() => {
+			window.location = '/app/users/logout.php'
+		}, 1500)
+	}
 })
 
 getUserInfo()
