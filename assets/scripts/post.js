@@ -24,9 +24,9 @@ const previewUploadedFiles = files => {
 	}
 }
 
-fileUpload.addEventListener("input", () => {
-	previewUploadedFiles(fileUpload.files)
-})
+// fileUpload.addEventListener("input", () => {
+// 	previewUploadedFiles(fileUpload.files)
+// })
 
 const fetchPostForEdit = () => {
 	fetch(editPhotoURI)

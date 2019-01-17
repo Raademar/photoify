@@ -1,34 +1,47 @@
-# photoify
+# Photoify
+
 Instagram clone, school project @ Yrgo
 
-## TODO
+## Getting Started
 
-* lazy loading images.
-* compress images on backend before saving them.
+### Installing
 
-### IF TIME
+* Clone or Fork
 
-* Cient error of overlays not wanting to be removed.
+* Init local MAMP, WAMP, LAMP or XAMPP instance.
+
+* SQLite3 needs to be installed for this to work.
+	If you're on Mac or Linux run
+	```
+	sudo apt-get install sqlite3
+	```
+* Visit localhost:80
+
+#### If everything is working you should see something like the picture below
+
+![preview image](https://i.imgur.com/eULGxnb.jpg)
+
+## Built With
+
+* [PHP](https://secure.php.net/) - Main language used for the backend.
+* [JavaScript](https:javascript.com) - Gotta love that vanilla.
+* [SQLite3](https://www.sqlite.org/index.html) - The database used.
 
 
-## DOING
-* Styling profile
+## Authors
 
-## DONE
-* ~~Register~~
-* ~~Login~~
-* ~~Logout~~
-* ~~Create posts~~
-* ~~Upload files to user profile~~
-* ~~Set profile image~~
-* ~~Set profile description~~
-* ~~Update posts~~
-* ~~Delete posts~~
-* ~~Like posts~~
-* ~~Toggle info of images(posts) when tapping on them~~
-* ~~Comment on posts~~
-* ~~Toggle navbar when tapping on image(post) or on icon on right side~~
-* ~~Separate the setting of profile image from other profile setting (or come up with solution).~~
-* ~~Limit edit / delete action on posts the user created.~~
-* ~~Set cookie when user visits landing page, so the loading screen doesnt load every time we go to index.php~~
-* ~~Toggling selected post on users profile.~~
+* **Mattias Rådemar** - [Raademar](https://github.com/Raademar)
+
+## This site has been tested by.
+
+* [Erik Arvidsson](https://github.com/erikarvidsson)
+* [Adrian Jung](https://github.com/AdrianJung)
+* [Hanna White](https://hannawhite.se)
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
+
+## Acknowledgments
+
+* Hat tip to all the open source heroes out there.
